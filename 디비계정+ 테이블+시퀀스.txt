@@ -276,3 +276,4 @@ INSERT INTO push
 VALUES (TB_COMMENT_SEQ.nextval, 1, 'admin');
 
 test 수정+ 이클립스 수정 후 등록해보기 
+수정된 파일 이클립스로 pull 하기
