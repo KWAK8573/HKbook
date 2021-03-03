@@ -275,3 +275,4 @@ VALUES (TB_COMMENT_SEQ.nextval, 1, 'admin', '영화감상 후기에 대한 댓�
 INSERT INTO push
 VALUES (TB_COMMENT_SEQ.nextval, 1, 'admin');
 
+test 수정
