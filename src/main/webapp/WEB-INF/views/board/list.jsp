@@ -22,12 +22,14 @@
   <c:forEach items="${list}" var="list">
 	<tr>
 
-				<td>${list.bId}</td>
-				<td>${list.bName}</td>
-				<td>${list.bIndent}</td>
-				<td>${list.bTitle}</td>
-				<td>${list.bDate}</td>
-				<td>${list.bHit}</td>
+				<td>${list.review_id}</td>
+				<td>${list.movie_id}</td>
+				<td>${list.user_id}</td>
+				<td>${list.review_title}</td>
+				<td>${list.review_content}</td>
+				<td>${list.review_date}</td>
+				<td>${list.review_views}</td>
+				<td>${list.total_push}</td>
 			</tr>
 </c:forEach>
 		
