@@ -2,6 +2,8 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
+<!-- 스타일 시트 추가 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <head>
 	<title>Home</title>
 </head>
