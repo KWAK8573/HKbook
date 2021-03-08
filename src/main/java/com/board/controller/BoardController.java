@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.board.dao.BoardDAO;
-import com.board.domain.BoardVO;
+import com.board.domain.RboardVO;
 import com.board.service.BoardService;
 
 @Controller
