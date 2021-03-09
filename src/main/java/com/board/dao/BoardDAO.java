@@ -6,6 +6,7 @@ import com.board.domain.RboardVO;
 
 public interface BoardDAO {
  
-	public List list() throws Exception; 
-
+	public List<RboardVO> list() throws Exception; 
+	
+	public RboardVO read(int review_id) throws Exception;
 }
