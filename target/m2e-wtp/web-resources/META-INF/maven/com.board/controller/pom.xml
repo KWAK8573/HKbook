@@ -126,6 +126,7 @@
             <scope>test</scope>
         </dependency>
      
+
         <!-- log4jdbc-log4j2-jdbc4 -->
         <dependency>
             <groupId>org.bgee.log4jdbc-log4j2</groupId>
@@ -148,6 +149,16 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency> 
+		
+		<!-- 트랜젝션 START -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>3.1.1.RELEASE</version>
+		</dependency>
+		<!-- 트랜젝션 END -->	
+	
 	</dependencies>
     <build>
         <plugins>
