@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.board.dao.BoardDAO;
 import com.board.domain.RboardVO;
+import com.board.domain.ReplyVO;
 import com.board.service.BoardService;
+import com.board.service.ReplyService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -23,6 +25,8 @@ public class BoardController {
 
 	 @Inject
 	 BoardService service;
+//	 @Inject
+//	 ReplyService replyService;
 	
 	// 게시판 목록 조회
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -41,6 +45,9 @@ public class BoardController {
 		logger.info("read");
 			
 		model.addAttribute("read", service.read(boardVO.getReview_id()));
+		
+//		List<ReplyVO> replyList = replyService.readReply(boardVO.getReview_id());
+//		model.addAttribute("replyList", replyList);
 			
 		return "board/readView";
 		}
