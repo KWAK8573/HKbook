@@ -15,13 +15,19 @@ public class BoardDAOImpl implements BoardDAO {
 	 @Inject
 	 private SqlSession sql;
 	 
-	 private static String namespace = "com.board.mappers.board";
 	
 	 // 게시물 목록
 	 @Override
-	 public List list() throws Exception { 
+	 public List<RboardVO> list() throws Exception { 
 	  
-	  return sql.selectList(namespace + ".list");
+	  return sql.selectList("boardMapper.list");
+	  
+	  }
+	  
+	  @Override
+	  public RboardVO read(int review_id) throws Exception {
+	  		
+	  	return sql.selectOne("boardMapper.read", review_id);
  }
 
 }

@@ -13,12 +13,16 @@ import com.board.domain.RboardVO;
 public class BoardServiceImpl implements BoardService {
 
 	 @Inject
-	 private BoardDAO dao;
+	 BoardDAO dao;
 	 
 	 @Override
-	 public List list() throws Exception {
+	 public List<RboardVO> list() throws Exception {
 	
 	  return dao.list();
 	 }
+	 @Override
+	 public RboardVO read(int review_id) throws Exception {
 
+	 	return dao.read(review_id);
+	 }
 }
