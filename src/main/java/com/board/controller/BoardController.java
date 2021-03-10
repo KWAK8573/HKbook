@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.board.domain.RboardVO;
 import com.board.domain.ReplyVO;
@@ -102,5 +102,65 @@ public class BoardController {
 			service.delete(boardVO.getReview_id());
 			
 			return "redirect:/board/list";
+		}
+		
+		//댓글 작성
+		@RequestMapping(value="/replyWrite", method = RequestMethod.POST)
+		public String replyWrite(ReplyVO vo, RedirectAttributes rttr) throws Exception {
+			logger.info("reply Write");
+			
+			replyService.writeReply(vo);
+			
+			rttr.addAttribute("review_id", vo.getReview_id());
+			
+			
+			return "redirect:/board/readView";
+		}
+		
+		//댓글 수정 GET
+		@RequestMapping(value="/replyUpdateView", method = RequestMethod.GET)
+		public String replyUpdateView(ReplyVO vo, Model model) throws Exception {
+			logger.info("reply Write");
+			
+			model.addAttribute("replyUpdate", replyService.selectReply(vo.getComment_id()));
+		
+			
+			return "board/replyUpdateView";
+		}
+		
+		//댓글 수정 POST
+		@RequestMapping(value="/replyUpdate", method = RequestMethod.POST)
+		public String replyUpdate(ReplyVO vo, RedirectAttributes rttr) throws Exception {
+			logger.info("reply Write");
+			
+			replyService.updateReply(vo);
+			
+			rttr.addAttribute("Review_id", vo.getReview_id());
+			
+			
+			return "redirect:/board/readView";
+		}
+		
+		//댓글 삭제 GET
+		@RequestMapping(value="/replyDeleteView", method = RequestMethod.GET)
+		public String replyDeleteView(ReplyVO vo, Model model) throws Exception {
+			logger.info("reply Write");
+			
+			model.addAttribute("replyDelete", replyService.selectReply(vo.getComment_id()));
+
+			return "board/replyDeleteView";
+		}
+		
+		//댓글 삭제
+		@RequestMapping(value="/replyDelete", method = RequestMethod.POST)
+		public String replyDelete(ReplyVO vo, RedirectAttributes rttr) throws Exception {
+			logger.info("reply Write");
+			
+			replyService.deleteReply(vo);
+			
+			rttr.addAttribute("Review_id", vo.getReview_id());
+			
+			
+			return "redirect:/board/readView";
 		}
 }
