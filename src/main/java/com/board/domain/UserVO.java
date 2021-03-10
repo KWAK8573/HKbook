@@ -2,11 +2,12 @@ package com.board.domain;
 
 import java.sql.Timestamp;
 
-public class MemberVO {
+public class UserVO {
 	private String userId;
 	private String pw;
 	private String email;
 	private Timestamp memberDate;
+	
 	public String getUserId() {
 		return userId;
 	}
