@@ -24,7 +24,6 @@
 	<c:if test="${empty login}">
 		<div>비회원 상태입니다</div>
 		<p><a href="/member/login">로그인</a></p>
-		
 	</c:if>
 </div>
 </body>
