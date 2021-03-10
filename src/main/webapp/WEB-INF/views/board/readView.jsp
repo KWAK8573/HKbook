@@ -57,11 +57,11 @@
 					    <c:forEach items="${replyList}" var="replyList">
 					      <li>
 					        <p>
-					        작성자 : ${replyList.writer}<br />
-					        작성 날짜 :  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" />
+					        작성자 : ${replyList.user_id}<br />
+					        작성 날짜 :  <fmt:formatDate value="${replyList.comment_date}" pattern="yy-MM-dd hh:mm" />
 					        </p>
 					
-					        <p>${replyList.content}</p>
+					        <p>${replyList.comment_content}</p>
 					      </li>
 					    </c:forEach>   
 					  </ol>
