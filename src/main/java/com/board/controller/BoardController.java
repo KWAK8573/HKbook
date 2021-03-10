@@ -11,11 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.board.dao.BoardDAO;
+
 import com.board.domain.RboardVO;
 import com.board.domain.ReplyVO;
 import com.board.service.BoardService;
 import com.board.service.ReplyService;
+import com.board.service.UserService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -25,8 +26,12 @@ public class BoardController {
 
 	 @Inject
 	 BoardService service;
-//	 @Inject
-//	 ReplyService replyService;
+	 
+	 @Inject
+	 ReplyService replyService;
+	 
+	 @Inject
+	 UserService userService;
 	
 	// 게시판 목록 조회
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -46,9 +51,56 @@ public class BoardController {
 			
 		model.addAttribute("read", service.read(boardVO.getReview_id()));
 		
-//		List<ReplyVO> replyList = replyService.readReply(boardVO.getReview_id());
-//		model.addAttribute("replyList", replyList);
+		List<ReplyVO> replyList = replyService.readReply(boardVO.getReview_id());
+		model.addAttribute("replyList", replyList);
 			
 		return "board/readView";
+		}
+	
+	// 게시판 글 작성 화면
+		@RequestMapping(value = "/board/writeView", method = RequestMethod.GET)
+		public void writeView() throws Exception{
+			logger.info("writeView");
+			
+		}
+		
+		// 게시판 글 작성
+		@RequestMapping(value = "/board/write", method = RequestMethod.POST)
+		public String write(RboardVO boardVO) throws Exception{
+			logger.info("write");
+			
+			service.write(boardVO);
+			
+			return "redirect:/board/list";
+		}
+		
+		// 게시판 수정뷰
+		@RequestMapping(value = "/updateView", method = RequestMethod.GET)
+		public String updateView(RboardVO boardVO, Model model) throws Exception{
+			logger.info("updateView");
+			
+			model.addAttribute("update", service.read(boardVO.getReview_id()));
+			
+			return "board/updateView";
+		}
+		
+		// 게시판 수정
+		@RequestMapping(value = "/update", method = RequestMethod.POST)
+		public String update(RboardVO boardVO) throws Exception{
+			logger.info("update");
+			
+			service.update(boardVO);
+			
+			return "redirect:/board/list";
+		}
+
+		// 게시판 삭제
+		@RequestMapping(value = "/delete", method = RequestMethod.POST)
+		public String delete(RboardVO boardVO) throws Exception{
+			logger.info("delete");
+			
+			service.delete(boardVO.getReview_id());
+			
+			return "redirect:/board/list";
 		}
 }

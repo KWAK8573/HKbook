@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import com.board.domain.ReplyVO;
 
+@Repository
 public class ReplyDAOImpl implements ReplyDAO {
 
 	@Inject SqlSession sql;
+	
 	@Override
 	public List<ReplyVO> readReply(int review_id) throws Exception {
 		return sql.selectList("replyMapper.readReply", review_id);

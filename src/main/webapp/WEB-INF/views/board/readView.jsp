@@ -3,8 +3,36 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 	<head>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	 	<title>게시판</title>
 	</head>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var formObj = $("form[name='readForm']");
+			
+			// 수정 
+			$(".update_btn").on("click", function(){
+				formObj.attr("action", "/board/updateView");
+				formObj.attr("method", "get");
+				formObj.submit();				
+			})
+			
+			// 삭제
+			$(".delete_btn").on("click", function(){
+				formObj.attr("action", "/board/delete");
+				formObj.attr("method", "post");
+				formObj.submit();
+			})
+			
+			// 취소
+			$(".list_btn").on("click", function(){
+				
+				location.href = "/board/list";
+			})
+		})
+	</script>
+	
 	<body>
 	
 		<div id="root">
@@ -19,14 +47,11 @@
 			<hr />
 			
 			<section id="container">
-				<form role="form" method="post">
+				<form name="readForm" role="form" method="post">
+					<input type="hidden" id="review_id" name="review_id" value="${read.review_id}" />
+				</form>
 					<table>
 						<tbody>
-							<tr>
-								<td>
-									<label for="review_id">글 번호</label><input type="text" id="review_id" name="review_id" value="${read.review_id}"/>
-								</td>
-							</tr>	
 							<tr>
 								<td>
 									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" value="${read.review_title}"/>
@@ -50,18 +75,23 @@
 							</tr>		
 						</tbody>			
 					</table>
-				</form>
+					<div>
+					<button type="submit" class="update_btn">수정</button>
+					<button type="submit" class="delete_btn">삭제</button>
+					<button type="submit" class="list_btn">목록</button>	
+				</div>
+				
 				<!-- 댓글 -->
 					<div id="reply">
 					  <ol class="replyList">
 					    <c:forEach items="${replyList}" var="replyList">
 					      <li>
 					        <p>
-					        작성자 : ${replyList.writer}<br />
-					        작성 날짜 :  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" />
+					        작성자 : ${replyList.user_id}<br />
+					        작성 날짜 :  <fmt:formatDate value="${replyList.comment_date}" pattern="yy-MM-dd hh:mm" />
 					        </p>
 					
-					        <p>${replyList.content}</p>
+					        <p>${replyList.comment_content}</p>
 					      </li>
 					    </c:forEach>   
 					  </ol>
