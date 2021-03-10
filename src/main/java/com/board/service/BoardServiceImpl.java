@@ -25,4 +25,21 @@ public class BoardServiceImpl implements BoardService {
 
 	 	return dao.read(review_id);
 	 }
+	 
+	 @Override
+		public void write(RboardVO boardVO) throws Exception {
+			dao.write(boardVO);
+	 }
+	 
+	 @Override
+		public void update(RboardVO boardVO) throws Exception {
+
+			dao.update(boardVO);
+		}
+
+		@Override
+		public void delete(int review_id) throws Exception {
+			
+			dao.delete(review_id);
+		}
 }

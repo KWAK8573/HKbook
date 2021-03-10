@@ -13,4 +13,29 @@
 			FROM review_board
 		 WHERE review_id = #{review_id}
 	</select>
+	
+	   <insert id="insert">
+	   INSERT INTO review_board(  review_id
+	   					      , review_title
+	   					      , review_content 
+	   					      , user_id )
+	                 VALUES(    REVIEW_BOARD_SEQ.NEXTVAL 
+	                 		  , #{review_title}
+	                 		  , #{review_content}
+	                 		  , #{user_id}  )
+   
+   </insert>
+   
+   <update id="update" parameterType="com.board.domain.RboardVO">
+		UPDATE review_board
+		   SET review_title    =   #{review_title},
+		   	   review_content  =   #{review_content}
+		 WHERE review_id = #{review_id} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE 
+		  FROM review_board
+		 WHERE review_id = #{review_id}
+	</delete>
 </mapper>
