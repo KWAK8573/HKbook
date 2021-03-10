@@ -25,8 +25,9 @@ public class BoardController {
 
 	 @Inject
 	 BoardService service;
-//	 @Inject
-//	 ReplyService replyService;
+	 
+	 @Inject
+	 ReplyService replyService;
 	
 	// 게시판 목록 조회
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -46,8 +47,8 @@ public class BoardController {
 			
 		model.addAttribute("read", service.read(boardVO.getReview_id()));
 		
-//		List<ReplyVO> replyList = replyService.readReply(boardVO.getReview_id());
-//		model.addAttribute("replyList", replyList);
+		List<ReplyVO> replyList = replyService.readReply(boardVO.getReview_id());
+		model.addAttribute("replyList", replyList);
 			
 		return "board/readView";
 		}
