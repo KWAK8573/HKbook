@@ -30,6 +30,23 @@
 				
 				location.href = "/board/list";
 			})
+			$(".replyWriteBtn").on("click", function(){
+				  var formObj = $("form[name='replyForm']");
+				  formObj.attr("action", "/board/replyWrite");
+				  formObj.submit();
+			});
+
+			//댓글 수정 View
+			$(".replyUpdateBtn").on("click", function(){
+				location.href = "/board/replyUpdateView?review_id=${read.review_id}"
+								+ "&comment_id="+$(this).attr("data-comment_id");
+			});
+					
+		//댓글 삭제 View
+			$(".replyDeleteBtn").on("click", function(){
+				location.href = "/board/replyDeleteView?review_id=${read.review_id}"
+					+ "&comment_id="+$(this).attr("data-comment_id");
+			});
 		})
 	</script>
 	
@@ -92,10 +109,26 @@
 					        </p>
 					
 					        <p>${replyList.comment_content}</p>
+					        <div>
+							  <button type="button" class="replyUpdateBtn" data-comment_id="${replyList.comment_id}">수정</button>
+							  <button type="button" class="replyDeleteBtn" data-comment_id="${replyList.comment_id}">삭제</button>
+							</div>
 					      </li>
 					    </c:forEach>   
 					  </ol>
 					</div>
+					<form name="replyForm" method="post">
+					  <input type="hidden" id="review_id" name="review_id" value="${read.review_id}" />
+					
+					  <div>
+					    <label for="user_id">댓글 작성자</label><input type="text" id="user_id" name="user_id" value="${login.userId}" readonly/>
+					    <br/>
+					    <label for="comment_content">댓글 내용</label><input type="text" id="comment_content" name="comment_content" />
+					  </div>
+					  <div>
+					 	 <button type="button" class="replyWriteBtn">작성</button>
+					  </div>
+				</form>
 			</section>
 			<hr />
 		</div>
