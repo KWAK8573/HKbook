@@ -93,9 +93,12 @@
 						</tbody>			
 					</table>
 					<div>
+				<c:if test="${login.userId == read.user_id}">
 					<button type="submit" class="update_btn">수정</button>
 					<button type="submit" class="delete_btn">삭제</button>
+				</c:if>
 					<button type="submit" class="list_btn">목록</button>	
+				
 				</div>
 				
 				<!-- 댓글 -->
@@ -110,8 +113,10 @@
 					
 					        <p>${replyList.comment_content}</p>
 					        <div>
+					        <c:if test="${login.userId == read.user_id}">
 							  <button type="button" class="replyUpdateBtn" data-comment_id="${replyList.comment_id}">수정</button>
 							  <button type="button" class="replyDeleteBtn" data-comment_id="${replyList.comment_id}">삭제</button>
+							</c:if>
 							</div>
 					      </li>
 					    </c:forEach>   

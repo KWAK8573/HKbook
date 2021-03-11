@@ -69,6 +69,7 @@ public class BoardController {
 		public String write(RboardVO boardVO) throws Exception{
 			logger.info("write");
 			
+			
 			service.write(boardVO);
 			
 			return "redirect:/board/list";
