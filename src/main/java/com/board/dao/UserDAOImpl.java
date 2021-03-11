@@ -30,4 +30,10 @@ public class UserDAOImpl implements UserDAO {
 	public UserVO login(LoginDTO loginDTO)  throws Exception {
 		return sql.selectOne(namespace + ".login", loginDTO);
 	}
+	
+	//회원정보 수정
+	@Override
+	public void userUpdate(UserVO userVO) throws Exception {
+		sql.update(namespace + ".userUpdate", userVO);
+	}
 }

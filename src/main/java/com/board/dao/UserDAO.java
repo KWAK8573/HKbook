@@ -10,4 +10,7 @@ public interface UserDAO {
 	
 	//로그인 처리
 	UserVO login(LoginDTO loginDTO) throws Exception;
+	
+	//회원정보 수정
+	public void userUpdate(UserVO userVO) throws Exception;
 }
