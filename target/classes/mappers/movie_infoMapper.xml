@@ -8,7 +8,7 @@
 			select MOVIE_INFO_SEQ.nextval FROM DUAL
 		</selectKey>
 		insert into movie_info (movie_id ,category_id, user_id, movie_title, movie_content, movie_img, movie_date, total_rating)
-		values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, #{total_rating}, sysdate)
+			values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, sysdate, #{total_rating})
 	</insert>
 
 	<select id="listPage" resultType="com.board.domain.Movie_InfoVO" parameterType="com.board.domain.SearchCriteria">

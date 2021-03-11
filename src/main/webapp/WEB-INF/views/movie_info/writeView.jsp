@@ -48,8 +48,8 @@
 				<table>
 					<tbody>
 						<tr>
-							<td><label for="category_id">영화 카테고리</label><input
-								type="text" id="category_id" name="catecory_id" /></td>
+							<td><label for="movie_category">영화 카테고리</label><input
+								type="number" id="movie_category" name="movie_category" /></td>
 						</tr>
 						<tr>
 							<td><label for="movie_title">영화 제목</label><input type="text"

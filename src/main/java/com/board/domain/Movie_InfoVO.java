@@ -12,13 +12,19 @@ public class Movie_InfoVO {
 	private Timestamp movie_date;
 	private int movie_views;
 	private float total_rating;
+	
 	public int getMovie_id() {
 		return movie_id;
 	}
 	public void setMovie_id(int movie_id) {
 		this.movie_id = movie_id;
 	}
-
+	public int getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -61,12 +67,7 @@ public class Movie_InfoVO {
 	public void setTotal_rating(float total_rating) {
 		this.total_rating = total_rating;
 	}
-	public int getCategory_id() {
-		return category_id;
-	}
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
-	}
+	
 	@Override
 	public String toString() {
 		return "Movie_InfoVO [movie_id=" + movie_id + ", category_id=" + category_id + ", user_id=" + user_id
@@ -75,6 +76,5 @@ public class Movie_InfoVO {
 				+ "]";
 	}
 	
-
 	
 }

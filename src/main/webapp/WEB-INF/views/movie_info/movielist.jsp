@@ -35,7 +35,7 @@
 				</thead>
 
 			
-				<c:forEach items="${moviemovielist}" var="moviemovielist">
+				<c:forEach items="${movielist}" var="movielist">
 
 					<tr>
 						<td><c:out value="${movielist.movie_id}" /></td>
