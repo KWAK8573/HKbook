@@ -12,18 +12,18 @@
 </head>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			var formObj = $("form[name='writeForm']");
+			var formObj = $("form[name='write']");
 			$(".write_btn").on("click", function(){
 				if(fn_valiChk()){
 					return false;
 				}
-				formObj.attr("action", "/board/write");
+				formObj.attr("action", "/movie_info/write");
 				formObj.attr("method", "post");
 				formObj.submit();
 			});
 		})
 		function fn_valiChk(){
-			var regForm = $("form[name='writeForm'] .chk").length;
+			var regForm = $("form[name='write'] .chk").length;
 			for(var i = 0; i<regForm; i++){
 				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
 					alert($(".chk").eq(i).attr("title"));
@@ -47,32 +47,37 @@
 			<form action="write" method="post" action="/movie_info/write">
 				<table>
 					<tbody>
+						<c:if test="${member.userId != null}">
 						<tr>
-							<td><label for="movie_category">영화 카테고리</label><input
-								type="number" id="movie_category" name="movie_category" /></td>
+							<td><label for="category_id">영화 카테고리</label><input
+								type="number" id="category_id" class="chk" name="category_id" /></td>
 						</tr>
 						<tr>
 							<td><label for="movie_title">영화 제목</label><input type="text"
-								id="movie_title" name="movie_title" /></td>
+								id="movie_title" name="movie_title" class="chk"/></td>
 						</tr>
 						<tr>
 							<td><label for="user_id">작성자</label><input type="text"
-								id="user_id" name="user_id" /></td>
+								id="user_id" name="user_id" class="chk" value="${member.userId}"/></td>
 						</tr>
 						<tr>
 							<td><label for="movie_content">영화 소개</label> <textarea id="movie_content"
-									name="movie_content"></textarea></td>
+									name="movie_content" class="chk"></textarea></td>
 						</tr>
 
 						<tr>
 							<td><label for="movie_img">파일경로</label><input type="text"
-								id="movie_img" name="movie_img" /></td>
+								id="movie_img" name="movie_img" class="chk"/></td>
 						</tr>
 						<tr>
 							<td>
 								<button class="write_btn" type="submit">작성</button>
 							</td>
 						</tr>
+						</c:if>
+						<c:if test="${member.userId == null}">
+								<p>로그인 후에 작성하실 수 있습니다.</p>
+							</c:if>
 
 					</tbody>
 				</table>

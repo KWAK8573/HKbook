@@ -56,22 +56,22 @@ public class Movie_InfoController {
 	
 	// 게시판 글 작성
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(Movie_InfoVO movie_InfoVO) throws Exception{
+	public String write(Movie_InfoVO movie_InfoVO, MultipartHttpServletRequest mpRequest) throws Exception{
 		logger.info("write");
-		service.write(movie_InfoVO);
+		service.write(movie_InfoVO, mpRequest);
 		
 		return "redirect:/movie_info/movielist";
 	}
 	
 	// 게시판 조회
-	@RequestMapping(value = "/contentView", method = RequestMethod.GET)
+	@RequestMapping(value = "/readView", method = RequestMethod.GET)
 	public String read(Movie_InfoVO movie_InfoVO, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
 		logger.info("read");
 		
 		model.addAttribute("read", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
 		
-		return "movie_info/contentView";
+		return "movie_info/readView";
 	}
 	
 	// 게시판 수정뷰

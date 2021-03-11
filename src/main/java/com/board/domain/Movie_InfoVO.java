@@ -12,7 +12,6 @@ public class Movie_InfoVO {
 	private Timestamp movie_date;
 	private int movie_views;
 	private float total_rating;
-	
 	public int getMovie_id() {
 		return movie_id;
 	}
@@ -67,7 +66,6 @@ public class Movie_InfoVO {
 	public void setTotal_rating(float total_rating) {
 		this.total_rating = total_rating;
 	}
-	
 	@Override
 	public String toString() {
 		return "Movie_InfoVO [movie_id=" + movie_id + ", category_id=" + category_id + ", user_id=" + user_id
@@ -75,6 +73,5 @@ public class Movie_InfoVO {
 				+ ", movie_date=" + movie_date + ", movie_views=" + movie_views + ", total_rating=" + total_rating
 				+ "]";
 	}
-	
 	
 }

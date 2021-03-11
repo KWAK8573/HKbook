@@ -42,7 +42,7 @@
 						<td><c:out value="${movielist.category_id}" /></td>
 						<td><c:out value="${movielist.user_id}" /></td>
 						<td>
-							<a href="/movie_info/contentView?movie_id=${movielist.movie_id}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${movielist.movie_title}" /></a>
+							<a href="/movie_info/readView?movie_id=${movielist.movie_id}"><c:out value="${movielist.movie_title}" /></a>
 						</td>
 						<td><c:out value="${movielist.movie_content}" /></td>
 						<td><c:out value="${movielist.movie_img}" /></td>

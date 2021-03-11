@@ -35,12 +35,11 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 	}
 
 	@Override
-	public void write(Movie_InfoVO movie_InfoVO) throws Exception {
+	public void write(Movie_InfoVO movie_InfoVO, MultipartHttpServletRequest mpRequest) throws Exception {
 		dao.write(movie_InfoVO);
 		
 	}
 	
-	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public Movie_InfoVO read(int movie_id) throws Exception {
 		return dao.read(movie_id);

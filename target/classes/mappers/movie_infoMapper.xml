@@ -39,8 +39,16 @@
 	</sql>
 	
 	
-	<select id= "read" resultType="com.board.domain.Movie_InfoVO" parameterType = "int">
-		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, total_rating from movie_info where movie_id = #{movie_id}
+	<select id= "read" parameterType = "int" resultType="com.board.domain.Movie_InfoVO">
+		select 	movie_id, 
+				category_id, 
+				user_id, 
+				movie_title, 
+				movie_content, 
+				movie_img, 
+				movie_date 
+				from movie_info 
+				where movie_id = #{movie_id}
 	</select>
 	
 	<select id = "delete" parameterType = "int">
