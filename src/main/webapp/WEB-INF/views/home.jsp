@@ -13,18 +13,24 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<<<<<<< HEAD
 
 <p><a href="/movie_info/movielist">게시물 목록</a></p>
+=======
+<br/><br/>
+<p><a href="/board/list">게시물 목록</a></p>
+>>>>>>> seongjin/master
 
+<br/><br/>
 <div>
 	<c:if test="${not empty login}">
 		<div>${login.userId} 님 안녕하세요</div>
 		<div>로그인 되었습니다</div>
+		<p><a href="/member/logout">로그아웃</a></p>
 	</c:if>
 	<c:if test="${empty login}">
 		<div>비회원 상태입니다</div>
 		<p><a href="/member/login">로그인</a></p>
-		
 	</c:if>
 </div>
 </body>

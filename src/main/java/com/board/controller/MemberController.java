@@ -38,11 +38,21 @@ public class MemberController {
 		logger.info("post register");
 		
 		//비밀번호 암호화 처리 
+		//BCrypt.hashpw() 메서드는 첫번째 파라미터에는 암호화할 비밀번호
+		//두번째 파라미터는 BCrypt.gensalt() 받고 암호화된 비밀번호를 리턴한다
 		String hashedPW = BCrypt.hashpw(userVO.getPw(), BCrypt.gensalt());
+		
+		//암호화된 비밀번호를 다시 회원 객체에 저장
 		userVO.setPw(hashedPW);
+		
+		//서비스 회원가입 메서드 호출
 		userService.register(userVO);
+		
+		//String을 전달
+		//post 형식으로 전달, 한 번만 사용되면 사라진다
 		redirectAttributes.addFlashAttribute("msg", "REGISTERED");
 		
+		//회원 가입 완료 후 로그인 페이지로 이동
 		return "redirect:/member/login";
 	}
 }

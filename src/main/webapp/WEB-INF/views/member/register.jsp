@@ -7,31 +7,26 @@
 	<title>회원가입</title>
 </head>
 <script type="text/javascript">
-	$(document).ready(function(){
-		//로그인으로 가기
-		$(".cencle").on("click", function(){
-			location.href = "/member/login";
-		})
-		
-		//유효성체크
-		$("#submit").on("click", function(){
-			if($("#userId").val()==""){
-				alert("아이디를 입력해주세요.");
-				$("#userId").focus();
-				return false;
-			}
-			if($("#pw").val()==""){
-				alert("비밀번호를 입력해주세요.");
-				$("#pw").focus();
-				return false;
-			}
-			if($("#email").val()==""){
-				alert("이메일 입력해주세요.");
-				$("#email").focus();
-				return false;
-			}
-		});
-	})
+$(document).ready(function(){
+	//유효성체크 (공백입력 방지)
+	$("#submit").on("click", function(){
+		if($("#userId").val()==""){
+			alert("아이디를 입력해주세요.");
+			$("#userId").focus();
+			return false;
+		}
+		if($("#pw").val()==""){
+			alert("비밀번호를 입력해주세요.");
+			$("#pw").focus();
+			return false;
+		}
+		if($("#email").val()==""){
+			alert("이메일 입력해주세요.");
+			$("#email").focus();
+			return false;
+		}
+	});
+})
 </script>
 <body>
 	<section id="container">
@@ -61,7 +56,6 @@
 	</section>
 
 <script type="text/javascript">
-//약관의 동의
 $(function () {
 	$('input').iCheck({
 		checkboxClass:'icheckbox_square-blue',

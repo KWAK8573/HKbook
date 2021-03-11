@@ -26,7 +26,6 @@
 	
 	<!-- 로그인 관련 -->
 	<beans:bean id="loginInterceptor" class="com.board.controller.commons.interceptor.LoginInterceptor" />
-	
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/member/loginPost"/>
@@ -34,6 +33,14 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
-	
+	<!-- 접근권한 페이지 -->
+	<beans:bean id="authInterceptor" class="com.board.controller.commons.interceptor.AuthInterceptor"></beans:bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 로그인 했을 때만 접근 가능한 페이지 경로 -->
+			<mvc:mapping path="/board/list"/>
+			<beans:ref bean = "authInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 </beans:beans>

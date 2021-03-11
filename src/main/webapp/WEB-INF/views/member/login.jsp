@@ -29,6 +29,7 @@
 	
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+	//registerPOST에서 날린 값으로 문구를 출력할 수 있다
 	var msg = "${msg}";
 	if (msg === "REGISTERED") {
 		alert ("회원가입이 완료되었습니다. 로그인해주세요~")
