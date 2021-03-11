@@ -14,7 +14,7 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<p><a href="/board/list">게시물 목록</a></p>
+<p><a href="/movie_info/movielist">게시물 목록</a></p>
 
 <div>
 	<c:if test="${not empty login}">
