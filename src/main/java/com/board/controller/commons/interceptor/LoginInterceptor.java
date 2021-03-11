@@ -34,7 +34,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			logger.info("로그인 성공");
 			//LOGIN으로 session을 바인딩 한다
 			httpSession.setAttribute(LOGIN, userVO);
-			response.sendRedirect("/");
+			
+			//AuthInterceptor에서 저장된 destination 주소값 가져와 객체에 저장
+			Object destination = httpSession.getAttribute("destination");
+			
+			//삼항 연산자 사용
+			//destination이 null(저장된 세션값이 없을 경우)이면 "/" 값이 있으면 destination
+			response.sendRedirect(destination !=null ? (String) destination : "/");
 		}
 	}
 	
