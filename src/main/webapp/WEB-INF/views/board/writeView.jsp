@@ -34,7 +34,7 @@
 							<tr>
 								<td>
 									<label for="user_id">작성자</label><input type="text" id="user_id" name="user_id" value="${login.userId}" readonly />
-								</td>
+								</td> 
 							<tr>
 								<td>						
 									<button type="submit">작성</button>
