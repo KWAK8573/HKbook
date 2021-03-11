@@ -10,4 +10,7 @@ public interface UserService {
 	
 	//로그인 처리
 	UserVO login(LoginDTO loginDTO) throws Exception;
+	
+	//회원 수정
+	public void userUpdate(UserVO userVO) throws Exception;
 }
