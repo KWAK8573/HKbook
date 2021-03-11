@@ -13,9 +13,10 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-
+<br/><br/>
 <p><a href="/board/list">게시물 목록</a></p>
 
+<br/><br/>
 <div>
 	<c:if test="${not empty login}">
 		<div>${login.userId} 님 안녕하세요</div>
