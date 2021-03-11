@@ -48,7 +48,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		if (httpSession.getAttribute("login") == null) {
 			logger.info("로그인하지 않았습니다");
 			
-			//saveDestination 클래스를 실행
+			//saveDestination 메서드를 실행
 			saveDestination(request);
 			
 			//로그인 페이지로 리다이렉트
