@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.mappers.UserMapper">
+
+	<!-- member테이블과 UserVO클래스 필드명을 매칭 시켜주는 resultMap 작성 -->
+	<resultMap id="UserMap" type="com.board.domain.UserVO">
+		<id property="userId" column="USER_ID"/>
+		<result property="pw" column="PW"/>
+		<result property="email" column="EMAIL"/>
+		<result property="memberDate" column="MEMBER_DATE"/>
+	</resultMap>
+
+	<!-- 회원가입 -->
+	<insert id="register">
+		INSERT INTO MEMBER_BOARD(USER_ID , PW , EMAIL, MEMBER_DATE )
+		VALUES( #{userId} , #{pw}, #{email}, SYSDATE)
+	</insert>
+	
+	<!-- 로그인: 회원 정보를 검색 -->
+	<!-- 비밀번호는 컨트롤러에서 검증하기 때문에 아이디만 검색한다 -->
+	<select id="login" resultMap="UserMap">
+		SELECT *
+		FROM MEMBER_BOARD
+		WHERE USER_ID = #{userId}
+	</select>
+</mapper>

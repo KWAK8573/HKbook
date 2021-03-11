@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	<select id="list" resultType="com.board.domain.RboardVO">
+			SELECT review_id, movie_id, user_id, review_title, review_content, review_date, review_views, total_push
+			FROM review_board
+	</select>
+
+	<select id="read" parameterType="int" resultType="com.board.domain.RboardVO">
+			SELECT review_id, user_id, review_title, review_content, review_date
+			FROM review_board
+		 WHERE review_id = #{review_id}
+	</select>
+	
+	   <insert id="insert">
+	   INSERT INTO review_board(  review_id
+	   					      , review_title
+	   					      , review_content 
+	   					      , user_id )
+	                 VALUES(    REVIEW_BOARD_SEQ.NEXTVAL 
+	                 		  , #{review_title}
+	                 		  , #{review_content}
+	                 		  , #{user_id}  )
+   
+   </insert>
+   
+   <update id="update" parameterType="com.board.domain.RboardVO">
+		UPDATE review_board
+		   SET review_title    =   #{review_title},
+		   	   review_content  =   #{review_content}
+		 WHERE review_id = #{review_id} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE 
+		  FROM review_board
+		 WHERE review_id = #{review_id}
+	</delete>
+</mapper>

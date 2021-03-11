@@ -1,0 +1,61 @@
+package com.board.controller;
+
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.board.domain.UserVO;
+import com.board.service.UserService;
+
+@Controller
+@RequestMapping("/member/*")
+public class MemberController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private final UserService userService;
+	
+	@Inject
+	public MemberController(UserService userService) {
+		this.userService = userService;
+	}
+	
+	// 회원가입 페이지
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String registerGET() throws Exception {
+		logger.info("get register");
+		return "/member/register";
+	}
+	
+	// 회원가입 처리
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String registerPOST(UserVO userVO, RedirectAttributes redirectAttributes) throws Exception {
+		logger.info("post register");
+		
+		//비밀번호 암호화 처리 
+		//BCrypt.hashpw() 메서드는 첫번째 파라미터에는 암호화할 비밀번호
+		//두번째 파라미터는 BCrypt.gensalt() 받고 암호화된 비밀번호를 리턴한다
+		String hashedPW = BCrypt.hashpw(userVO.getPw(), BCrypt.gensalt());
+		
+		//암호화된 비밀번호를 다시 회원 객체에 저장
+		userVO.setPw(hashedPW);
+		
+		//서비스 회원가입 메서드 호출
+		userService.register(userVO);
+		
+		//String을 전달
+		//post 형식으로 전달, 한 번만 사용되면 사라진다
+		redirectAttributes.addFlashAttribute("msg", "REGISTERED");
+		
+		//회원 가입 완료 후 로그인 페이지로 이동
+		return "redirect:/member/login";
+	}
+}
+
+
+
