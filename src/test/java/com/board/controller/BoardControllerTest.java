@@ -58,18 +58,18 @@ public class BoardControllerTest {
 
     @Test
     public void testRead() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/board/read").param("bno", "999"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/board/read").param("review_id", "999"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("boardVO"));
+                .andExpect(model().attributeExists("RboardVO"));
     }
 
     @Test
     public void testModifyGET() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/board/modify").param("bno", "999"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/board/modify").param("review_id", "999"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("boardVO"));
+                .andExpect(model().attributeExists("RboardVO"));
     }
 
     @Test
