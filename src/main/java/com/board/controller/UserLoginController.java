@@ -57,26 +57,23 @@ public class UserLoginController {
 	}
 	
 	//로그아웃 처리
-//	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-//	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception{
-//		logger.info("get logout");
-//		
-//		Object object = httpSession.getAttribute("login");
-//		if (object != null) {
-//			UserVO userVO = (userVO) object;
-//			httpSession.removeAttribute("login");
-//			httpSession.invalidate();
-//			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-//			if (loginCookie != null) {
-//				loginCookie.setPath("/");
-//				loginCookie.setMaxAge(0);
-//				response.addCookie(loginCookie);
-//				userService.keepLogin(userVO.getUserId(), "none", new Date());
-//			}
-//		}
-//		
-//		return "/member/logout";
-//	}
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception{
+		logger.info("get logout");
+		
+		//로그인 세션값을 object에 넣는다
+		Object object = httpSession.getAttribute("login");
+		
+		//로그인 값이 있을 경우
+		if (object != null) {
+			//로그인 세션을 삭제
+			httpSession.removeAttribute("login");
+			//화면 새로고침
+			httpSession.invalidate();
+		}
+		
+		return "/member/logout";
+	}
 	
 	
 }
