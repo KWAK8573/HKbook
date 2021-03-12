@@ -56,9 +56,9 @@ public class Movie_InfoController {
 	
 	// 게시판 글 작성
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(Movie_InfoVO movie_InfoVO, MultipartHttpServletRequest mpRequest) throws Exception{
+	public String write(Movie_InfoVO movie_InfoVO) throws Exception{
 		logger.info("write");
-		service.write(movie_InfoVO, mpRequest);
+		service.write(movie_InfoVO);
 		
 		return "redirect:/movie_info/movielist";
 	}

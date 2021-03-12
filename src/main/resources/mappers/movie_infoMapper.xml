@@ -13,8 +13,17 @@
 
 	<select id="listPage" resultType="com.board.domain.Movie_InfoVO" parameterType="com.board.domain.SearchCriteria">
 		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, total_rating
-		from (select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, total_rating,
-				row_number() over(order by movie_id desc) as rnum from movie_info where 1=1 
+		from 
+			(select movie_id, 
+			category_id, 
+			user_id, 
+			movie_title, 
+			movie_content, 
+			movie_img, 
+			movie_date, 
+			movie_views,
+			total_rating,
+		row_number() over(order by movie_id desc) as rnum from movie_info where 1=1 
 				<include refid="search"></include> 
 								) movie 
 				where rnum between #{rowStart} and #{rowEnd}
@@ -56,11 +65,14 @@
 	</select>
 	
 	<select id = "update" parameterType = "com.board.domain.Movie_InfoVO">
-		update movie_info set category_id = #{catecory_id} movie_title = #{movie_title}, movie_content = #{movie_content}, movie_img = #{movie_img} where movie_id = #{movie_id}
+		update movie_info set category_id = #{category_id},
+							  movie_title = #{movie_title}, 
+							  movie_content = #{movie_content}
+		 where movie_id = #{movie_id}
 	</select>
 	
 
-    <update id="movie_views" parameterType="int">
+    <update id="movieviews" parameterType="int">
     	UPDATE movie_info SET
     	movie_views = movie_views+1
     	WHERE movie_id = #{movie_id}

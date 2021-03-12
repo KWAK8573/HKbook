@@ -11,12 +11,12 @@
 			
 			$(".cancel_btn").on("click", function(){
 				event.preventDefault();
-				location.href = "/board/list";
+				location.href = "/movie_info/movielist";
 			})
 		})
 			$(".cancel_btn").on("click", function(){
 					event.preventDefault();
-					location.href = "/board/readView?bno=${update.bno}"
+					location.href = "/movie_info/readView?movie_id=${update.movie_id}"
 			   + "&page=${scri.page}"
 			   + "&perPageNum=${scri.perPageNum}"
 			   + "&searchType=${scri.searchType}"
@@ -37,29 +37,34 @@
 
 			
 			<section id="container">
-				<form name="updateForm" role="form" method="post" action="/board/update">
-					<input type="hidden" name="bno" value="${update.bno}" readonly="readonly"/>
+				<form name="updateForm" role="form" method="post" action="/movie_info/update">
+					<input type="hidden" name="movie_id" value="${update.movie_id}" readonly="readonly"/>
 					<table>
 						<tbody>
 							<tr>
 								<td>
-									<label for="title">제목</label><input type="text" id="title" name="title" value="${update.title}"/>
+									<label for="category_id">카테고리 번호</label><input type="number" id="category_id" name="category_id" value="${update.category_id}"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="movie_title">제목</label><input type="text" id="movie_title" name="movie_title" value="${update.movie_title}"/>
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="content">내용</label><textarea id="content" name="content"><c:out value="${update.content}" /></textarea>
+									<label for="movie_content">내용</label><textarea id="movie_content" name="movie_content"><c:out value="${update.movie_content}" /></textarea>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="writer">작성자</label><input type="text" id="writer" name="writer" value="${update.writer}" readonly="readonly"/>
+									<label for="user_id">작성자</label><input type="text" id="user_id" name="user_id" value="${update.user_id}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="regdate">작성날짜</label>
-									<fmt:formatDate value="${update.regdate}" pattern="yyyy-MM-dd"/>					
+									<label for="movie_date">작성날짜</label>
+									<fmt:formatDate value="${update.movie_date}" pattern="yyyy-MM-dd"/>					
 								</td>
 							</tr>		
 						</tbody>			

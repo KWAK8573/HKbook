@@ -27,6 +27,12 @@
 		 <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml" />
 	</bean>
 	
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	 <tx:annotation-driven transaction-manager="transactionManager" />
+	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 	 	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
@@ -34,4 +40,6 @@
 	<context:component-scan base-package="com.board.domain" />
 	<context:component-scan base-package="com.board.dao" />
 	<context:component-scan base-package="com.board.service" />
+	
+	
 </beans>

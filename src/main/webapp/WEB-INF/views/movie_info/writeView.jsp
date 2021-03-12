@@ -47,7 +47,7 @@
 			<form action="write" method="post" action="/movie_info/write">
 				<table>
 					<tbody>
-						<c:if test="${member.userId != null}">
+						<c:if test="${login.userId != null}">
 						<tr>
 							<td><label for="category_id">영화 카테고리</label><input
 								type="number" id="category_id" class="chk" name="category_id" /></td>
@@ -58,7 +58,7 @@
 						</tr>
 						<tr>
 							<td><label for="user_id">작성자</label><input type="text"
-								id="user_id" name="user_id" class="chk" value="${member.userId}"/></td>
+								id="user_id" name="user_id" class="chk" value="${login.userId}"/></td>
 						</tr>
 						<tr>
 							<td><label for="movie_content">영화 소개</label> <textarea id="movie_content"
@@ -75,7 +75,7 @@
 							</td>
 						</tr>
 						</c:if>
-						<c:if test="${member.userId == null}">
+						<c:if test="${login.userId == null}">
 								<p>로그인 후에 작성하실 수 있습니다.</p>
 							</c:if>
 

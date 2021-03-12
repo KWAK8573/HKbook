@@ -16,12 +16,13 @@ public interface Movie_InfoService {
 	
 	public int listCount(SearchCriteria scri) throws Exception;
 	
-	public void write(Movie_InfoVO movie_InfoVO, MultipartHttpServletRequest mpRequest) throws Exception;
+	public void write(Movie_InfoVO movie_InfoVO) throws Exception;
 	
 	public Movie_InfoVO read(int movie_id) throws Exception;
 	
 	public void delete(int movie_id) throws Exception;
 	
 	public void update(Movie_InfoVO movie_InfoVO) throws Exception;
+	
 }
 
