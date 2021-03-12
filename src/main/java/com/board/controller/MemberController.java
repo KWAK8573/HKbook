@@ -1,11 +1,14 @@
 package com.board.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -55,6 +58,30 @@ public class MemberController {
 		//회원 가입 완료 후 로그인 페이지로 이동
 		return "redirect:/member/login";
 	}
+	
+	//회원 수정 페이지 이동
+	@RequestMapping(value = "/userModifyView", method = RequestMethod.GET)
+	public String userModifyGET() throws Exception {
+		return "/member/userModifyView";
+	}
+	
+	//회원 수정처리
+	@RequestMapping(value = "/userModify", method = RequestMethod.POST) 
+	public String userModifyPOST(UserVO userVO, HttpSession httpsession) throws Exception { 
+		logger.info("회원 수정처리");
+		
+		//비밀번호 암호화 처리 
+		String hashedPW = BCrypt.hashpw(userVO.getPw(), BCrypt.gensalt());
+		userVO.setPw(hashedPW);
+
+		//서비스 회원정보 수정 메서드 호출
+		userService.userUpdate(userVO);
+		
+		//정보를 수정했으니 다시 로그인 하기위해 세션값을 날린다
+		httpsession.invalidate();
+		return "redirect:/"; 
+	}
+
 }
 
 

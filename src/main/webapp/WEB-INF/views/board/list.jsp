@@ -8,6 +8,7 @@
 <title>insert title here</title>
 </head>
 <body>
+<p><a href="/board/writeView">게시물 쓰기</a></p>
 <table>
  <thead>
   <tr>

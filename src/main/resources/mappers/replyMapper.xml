@@ -19,11 +19,13 @@
 			, COMMENT_ID
 			, COMMENT_CONTENT
 			, USER_ID
+			, COMMENT_DATE
 		)
 		VALUES(    #{review_id}
 			, TB_COMMENT_SEQ.NEXTVAL
 			, #{comment_content}
-			, #{user_id}	)
+			, #{user_id}
+			, SYSDATE	)
 	</insert>
 	
 	<!-- 댓글 수정 -->

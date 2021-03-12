@@ -3,11 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 
 <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -37,6 +36,7 @@
 		
 	</mvc:interceptors>
 
+
 <beans:bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">
 		<beans:property name="dataSource" ref="dataSource"/>
 	</beans:bean>
@@ -45,4 +45,20 @@
 	</beans:bean>
 
 
-	</beans:beans>
+	
+
+	
+	<!-- 접근권한 페이지 -->
+	<beans:bean id="authInterceptor" class="com.board.controller.commons.interceptor.AuthInterceptor"></beans:bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 로그인 했을 때만 접근 가능한 페이지 경로 -->
+			<mvc:mapping path="/board/list"/>
+			<beans:ref bean = "authInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
+	
+</beans:beans>
+

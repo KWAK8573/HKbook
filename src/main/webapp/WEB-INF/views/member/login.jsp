@@ -7,7 +7,7 @@
 <title>로그인</title>
 </head>
 <body>
-	<form action="/member/loginPost" method="post">
+	<form action="/member/loginPost" method="post" >
 		<div>
 			<input type="text" id="userId" name="userId" placeholder="아이디"/>
 		</div>

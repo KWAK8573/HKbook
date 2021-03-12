@@ -25,4 +25,20 @@
 		FROM MEMBER_BOARD
 		WHERE USER_ID = #{userId}
 	</select>
+	
+	<!-- 회원정보 조회 -->
+	<select id="userRead" resultMap="UserMap">
+		SELECT *
+		FROM MEMBER_BOARD
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="userUpdate">
+		UPDATE MEMBER_BOARD
+		SET 
+			PW = #{pw},
+			EMAIL = #{email}
+		WHERE USER_ID = #{userId}
+	</update>
 </mapper>

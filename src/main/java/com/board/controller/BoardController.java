@@ -3,6 +3,7 @@ package com.board.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.board.domain.RboardVO;
 import com.board.domain.ReplyVO;
+import com.board.domain.UserVO;
 import com.board.service.BoardService;
 import com.board.service.ReplyService;
 import com.board.service.UserService;
@@ -66,8 +68,11 @@ public class BoardController {
 		
 		// 게시판 글 작성
 		@RequestMapping(value = "/board/write", method = RequestMethod.POST)
-		public String write(RboardVO boardVO) throws Exception{
+		public String write(RboardVO boardVO, HttpSession session) throws Exception{
 			logger.info("write");
+			
+			UserVO login = (UserVO)session.getAttribute("login");
+			boardVO.setUser_id(login.getUserId());
 			
 			service.write(boardVO);
 			

@@ -23,6 +23,7 @@ import com.board.dao.IDao;
 	 * Handles requests for the application home page.
 	 */
 	@Controller
+	@RequestMapping("/category_id/*")
 	public class CategoryController {
 		
 		private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
