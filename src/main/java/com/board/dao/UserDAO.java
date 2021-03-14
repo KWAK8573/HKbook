@@ -13,4 +13,7 @@ public interface UserDAO {
 	
 	//회원정보 수정
 	public void userUpdate(UserVO userVO) throws Exception;
+	
+	//회원정보 조회
+	UserVO userInfo(String userId) throws Exception;
 }

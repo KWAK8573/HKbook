@@ -36,4 +36,10 @@ public class UserDAOImpl implements UserDAO {
 	public void userUpdate(UserVO userVO) throws Exception {
 		sql.update(namespace + ".userUpdate", userVO);
 	}
+	
+	//회원정보 조회
+	@Override
+	public UserVO userInfo(String userId) throws Exception {
+		return sql.selectOne(namespace + ".userInfo", userId);
+	}
 }

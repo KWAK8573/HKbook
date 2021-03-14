@@ -21,7 +21,7 @@
 	<c:if test="${not empty login}">
 		<div>${login.userId} 님 안녕하세요</div>
 		<div>로그인 되었습니다</div>
-		<p><a href="/member/userModifyView">회원정보수정</a></p>
+		<p><a href="/member/userInfo">회원정보 보기</a></p>
 		<p><a href="/member/logout">로그아웃</a></p>
 	</c:if>
 	<c:if test="${empty login}">
