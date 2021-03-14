@@ -43,4 +43,10 @@ public class UserServiceImpl implements UserService {
 		userDAO.userUpdate(userVO);
 	}
 	
+	//회원정보 조회
+	@Override
+	public UserVO userInfo(String userId)  throws Exception {
+		return userDAO.userInfo(userId);
+	}
+	
 }
