@@ -30,11 +30,5 @@ public class UserDAOTest {
 		userDAO.userUpdate(user);
 	}
 	
-	//회원정보 조회 테스트
-	@Test
-	public void testSelect() throws Exception {
-		logger.info(userDAO.userInfo("admin").toString());
-	}
-	
 	
 }
