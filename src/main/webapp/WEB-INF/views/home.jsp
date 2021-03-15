@@ -22,6 +22,7 @@
 		<div>${login.userId} 님 안녕하세요</div>
 		<div>로그인 되었습니다</div>
 		<p><a href="/member/logout">로그아웃</a></p>
+		<p><a href="/member/userDeleteView">회원탈퇴</a></p>
 	</c:if>
 	<c:if test="${empty login}">
 		<div>비회원 상태입니다</div>

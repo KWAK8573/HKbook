@@ -36,5 +36,10 @@ public class UserDAOImpl implements UserDAO {
 	public void userUpdate(UserVO userVO) throws Exception {
 		sql.update(namespace + ".userUpdate", userVO);
 	}
-
+	
+	//회원탈퇴 
+	@Override
+	public void userDelete(UserVO userVO) throws Exception {
+		sql.update(namespace + ".userDelete", userVO);
+	}
 }

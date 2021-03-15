@@ -42,6 +42,12 @@ public class UserServiceImpl implements UserService {
 		//받은 userVO를 DAO로 보내준다
 		userDAO.userUpdate(userVO);
 	}
-
+	
+	//회원탈퇴 
+	@Override
+	public void userDelete(UserVO userVO)  throws Exception {
+		//받은 userVO를 DAO로 보내준다
+		userDAO.userDelete(userVO);
+	}
 	
 }

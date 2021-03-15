@@ -25,9 +25,18 @@ public class UserDAOTest {
 	public void testUpdate() throws Exception {
 		UserVO user = new UserVO();
 		user.setUserId("test");
-		user.setPw("수정패스워드");
-		user.setEmail("수정이메일");
+		user.setPw("test");
+		user.setEmail("test");
 		userDAO.userUpdate(user);
+	}
+	
+	//회원탈퇴 테스트
+	@Test
+	public void testDelete() throws Exception {
+		UserVO user = new UserVO();
+		user.setUserId("test");
+		user.setPw("test");
+		userDAO.userDelete(user);
 	}
 	
 	
