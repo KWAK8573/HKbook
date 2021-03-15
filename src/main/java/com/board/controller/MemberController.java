@@ -102,7 +102,7 @@ public class MemberController {
 		String voPw = userVO.getPw();
 		
 		//해시맵으로 변환한 비밀번호 비교 checkpw를 사용 (입력받은 값, 해시변환값)
-		if (userId ==null & !BCrypt.checkpw(voPw, sessionPw)) {
+		if (userId == null || !BCrypt.checkpw(voPw, sessionPw)) {
 			logger.info("비밀번호 불일치");
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:/member/userDeleteView";
