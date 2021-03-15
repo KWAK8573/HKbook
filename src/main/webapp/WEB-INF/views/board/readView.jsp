@@ -126,8 +126,8 @@
 					  <input type="hidden" id="review_id" name="review_id" value="${read.review_id}" />
 					
 					  <div>
-					    <label for="user_id">댓글 작성자</label><input type="text" id="user_id" name="user_id" value="${login.userId}" readonly/>
-					    <br/>
+					    <!--<label for="user_id">댓글 작성자</label><input type="text" id="user_id" name="user_id" value="${login.userId}" readonly/>
+					    <br/>-->
 					    <label for="comment_content">댓글 내용</label><input type="text" id="comment_content" name="comment_content" />
 					  </div>
 					  <div>

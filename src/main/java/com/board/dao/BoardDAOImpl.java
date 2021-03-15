@@ -48,4 +48,10 @@ public class BoardDAOImpl implements BoardDAO {
 			
 			sql.delete("boardMapper.delete", review_id);
 		}
+		
+		@Override
+		public void boardHit(int review_id) throws Exception {
+			// TODO Auto-generated method stub
+			sql.update("boardMapper.boardHit", review_id);
+		}
 }

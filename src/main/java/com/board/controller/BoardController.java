@@ -48,11 +48,11 @@ public class BoardController {
 	 
 	// 게시판 조회
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(RboardVO boardVO, Model model) throws Exception{
+	public String read(RboardVO boardVO, Model model,int review_id, HttpSession session) throws Exception{
 		logger.info("read");
-			
 		model.addAttribute("read", service.read(boardVO.getReview_id()));
 		
+		service.boardHit(review_id, session);
 		List<ReplyVO> replyList = replyService.readReply(boardVO.getReview_id());
 		model.addAttribute("replyList", replyList);
 			
@@ -96,7 +96,7 @@ public class BoardController {
 			
 			service.update(boardVO);
 			
-			return "redirect:/board/list";
+			return "redirect:/board/readView?review_id=" + boardVO.getReview_id();
 		}
 
 		// 게시판 삭제
@@ -111,8 +111,11 @@ public class BoardController {
 		
 		//댓글 작성
 		@RequestMapping(value="/replyWrite", method = RequestMethod.POST)
-		public String replyWrite(ReplyVO vo, RedirectAttributes rttr) throws Exception {
+		public String replyWrite(ReplyVO vo, RedirectAttributes rttr, HttpSession session) throws Exception {
 			logger.info("reply Write");
+			
+			UserVO login = (UserVO)session.getAttribute("login");
+			vo.setUser_id(login.getUserId());
 			
 			replyService.writeReply(vo);
 			
