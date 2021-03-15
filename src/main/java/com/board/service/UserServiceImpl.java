@@ -42,11 +42,6 @@ public class UserServiceImpl implements UserService {
 		//받은 userVO를 DAO로 보내준다
 		userDAO.userUpdate(userVO);
 	}
-	
-	//회원정보 조회
-	@Override
-	public UserVO userInfo(String userId)  throws Exception {
-		return userDAO.userInfo(userId);
-	}
+
 	
 }
