@@ -35,10 +35,10 @@
 		WHERE USER_ID = #{userId}
 	</update>
 	
-	<!-- 회원정보 조회 -->
-	<select id="userInfo" resultMap="UserMap">
-		SELECT *
-		FROM MEMBER_BOARD
-		WHERE USER_ID = 'admin'
-	</select>
+	<!-- 회원 탈퇴 -->
+	<delete id="userDelete">
+		DELETE FROM MEMBER_BOARD
+		WHERE USER_ID = #{userId}
+		AND PW = #{pw} 
+	</delete>
 </mapper>
