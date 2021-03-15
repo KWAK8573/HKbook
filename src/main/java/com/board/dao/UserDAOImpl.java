@@ -42,4 +42,11 @@ public class UserDAOImpl implements UserDAO {
 	public void userDelete(UserVO userVO) throws Exception {
 		sql.update(namespace + ".userDelete", userVO);
 	}
+	
+	//아이디 중복체크 
+	@Override
+	public int idChk(String userId) throws Exception {
+		int result = sql.selectOne(namespace + ".idChk", userId);
+		return result;
+	}
 }

@@ -41,4 +41,11 @@
 		WHERE USER_ID = #{userId}
 		AND PW = #{pw} 
 	</delete>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) 
+		FROM MEMBER_BOARD
+		WHERE USER_ID = #{userId}
+	</select>
 </mapper>
