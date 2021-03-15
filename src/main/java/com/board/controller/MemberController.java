@@ -39,9 +39,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/idChk", method = RequestMethod.POST)
 	public int idChk(UserVO userVO) throws Exception {
-		logger.info("아이디 값 = " + userVO.getUserId());
+
 		int result = userService.idChk(userVO.getUserId());
-		logger.info("결과 값 = " +result);
 
 		return result;
 	}
