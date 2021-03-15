@@ -16,4 +16,8 @@ public interface UserDAO {
 	
 	//회원탈퇴
 	public void userDelete(UserVO userVO) throws Exception;
+	
+	//아이디 중복체크
+	public int idChk(String userId) throws Exception;
+	
 }

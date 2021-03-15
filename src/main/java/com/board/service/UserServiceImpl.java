@@ -15,7 +15,6 @@ import com.board.domain.UserVO;
 public class UserServiceImpl implements UserService {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	
 	private final UserDAO userDAO;
 	
 	@Inject 
@@ -46,8 +45,13 @@ public class UserServiceImpl implements UserService {
 	//회원탈퇴 
 	@Override
 	public void userDelete(UserVO userVO)  throws Exception {
-		//받은 userVO를 DAO로 보내준다
 		userDAO.userDelete(userVO);
 	}
 	
+	//아이디 중복체크 
+	@Override
+	public int idChk(String userId)  throws Exception {
+		int result = userDAO.idChk(userId);
+		return result;
+	}
 }
