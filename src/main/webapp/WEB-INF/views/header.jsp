@@ -29,9 +29,9 @@
 	
 	<div id="nav">
 		<ul>
-			<li><a href="">영화 소개 게시판</a></li>
+			<li><a href="#">영화 소개 게시판</a></li>
 			<li><a href="/board/list">리뷰 게시판</a></li>
-			<li><a href="">마이페이지</a></li>
+			<li><a href="#">마이페이지</a></li>
 		</ul>
 	</div>
 </div>
