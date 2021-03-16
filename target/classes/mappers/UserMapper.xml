@@ -35,6 +35,13 @@
 		WHERE USER_ID = #{userId}
 	</update>
 	
+	<!-- 아이디 중복체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) 
+		FROM MEMBER_BOARD
+		WHERE USER_ID = #{userId}
+	</select>
+
 	<!-- 회원 탈퇴 -->
 	<delete id="userDelete">
 		DELETE FROM MEMBER_BOARD
@@ -42,10 +49,12 @@
 		AND PW = #{pw} 
 	</delete>
 	
-	<!-- 아이디 중복체크 -->
-	<select id="idChk" resultType="int">
-		SELECT COUNT(*) 
-		FROM MEMBER_BOARD
+	<!-- 회원탈퇴 표시 넣기 -->
+	<update id="userBlock">
+		UPDATE MEMBER_BOARD
+		SET M_STATE = 'Xjoin'
 		WHERE USER_ID = #{userId}
-	</select>
+		AND PW = #{pw} 
+	</update>
+	
 </mapper>

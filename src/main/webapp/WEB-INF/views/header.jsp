@@ -17,7 +17,7 @@
 				<li><span class="f_point">${login.userId}님 로그인</span></li>
 				<li><a href="/member/userModifyView">회원정보수정</a></li>
 				<li><a href="/member/logout">로그아웃</a></li>
-				<li><a href="/member/userDeleteView">회원탈퇴</a></li>
+				<li><a href="/member/userBlockView">회원탈퇴</a></li>
 				</c:if>
 				<c:if test="${empty login}">
 				<li><a href="/member/login">로그인</a></li>
