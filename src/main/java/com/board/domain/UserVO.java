@@ -8,6 +8,7 @@ public class UserVO {
 	private String email;
 	private Timestamp memberDate;
 	private String mState;
+	
 	public String getUserId() {
 		return userId;
 	}
