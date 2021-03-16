@@ -42,13 +42,6 @@
 		FROM MEMBER_BOARD
 		WHERE USER_ID = #{userId}
 	</select>
-
-	<!-- 회원 탈퇴 -->
-	<delete id="userDelete">
-		DELETE FROM MEMBER_BOARD
-		WHERE USER_ID = #{userId}
-		AND PW = #{pw} 
-	</delete>
 	
 	<!-- 회원탈퇴 표시 넣기 -->
 	<update id="userBlock">

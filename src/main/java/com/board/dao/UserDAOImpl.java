@@ -44,12 +44,6 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 	
-	//회원탈퇴 
-	@Override
-	public void userDelete(UserVO userVO) throws Exception {
-		sql.delete(namespace + ".userDelete", userVO);
-	}
-	
 	//회원탈퇴 표시
 	@Override
 	public void userBlock(UserVO userVO) throws Exception {
