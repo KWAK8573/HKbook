@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인이 안될 때</title>
+<title>로그인 실패</title>
 </head>
 <body>
 	<script type="text/javascript">

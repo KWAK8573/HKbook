@@ -30,7 +30,6 @@ public class MemberController {
 	// 회원가입 페이지
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerGET() throws Exception {
-		logger.info("get register");
 		return "/member/register";
 	}
 
@@ -39,24 +38,18 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/idChk", method = RequestMethod.POST)
 	public int idChk(UserVO userVO) throws Exception {
-
 		int result = userService.idChk(userVO.getUserId());
-
 		return result;
 	}
 
 	// 회원가입 처리
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerPOST(UserVO userVO, RedirectAttributes rttr) throws Exception {
-		logger.info("post register");
-		
 		int result = userService.idChk(userVO.getUserId());
 		try {
 			if(result == 1) {
-				logger.info("중복된 아이디입니다");
 				return "redirect:/member/register";
 			}else if (result == 0){
-
 				//비밀번호 암호화 처리 
 				//BCrypt.hashpw() 메서드는 첫번째 파라미터에는 암호화할 비밀번호
 				//두번째 파라미터는 BCrypt.gensalt() 받고 암호화된 비밀번호를 리턴한다
@@ -89,8 +82,6 @@ public class MemberController {
 	//회원 수정처리
 	@RequestMapping(value = "/userModify", method = RequestMethod.POST) 
 	public String userModifyPOST(UserVO userVO, HttpSession httpsession) throws Exception { 
-		logger.info("회원 수정처리");
-		
 		//비밀번호 암호화 처리 
 		String hashedPW = BCrypt.hashpw(userVO.getPw(), BCrypt.gensalt());
 		userVO.setPw(hashedPW);
@@ -112,8 +103,6 @@ public class MemberController {
 	//회원 블락 처리
 	@RequestMapping(value = "/userBlock", method = RequestMethod.POST) 
 	public String userBlockPOST(UserVO userVO, HttpSession httpsession, RedirectAttributes rttr) throws Exception { 
-		logger.info("회원 블락처리");
-		
 		//로그인 세션정보를 가져오기
 		UserVO login = (UserVO) httpsession.getAttribute("login");
 		
@@ -133,7 +122,6 @@ public class MemberController {
 
 		userService.userBlock(userVO);
 		
-		logger.info("회원 블락처리 완료");
 		//정보를 수정했으니 다시 로그인 하기위해 세션값을 날린다
 		httpsession.invalidate();
 		return "redirect:/"; 

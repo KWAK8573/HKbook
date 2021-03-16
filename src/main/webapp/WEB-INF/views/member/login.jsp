@@ -8,6 +8,7 @@
 </head>
 <body>
 	<%@include file="../header.jsp"%>
+	<h3 class="title">로그인</h3>
 	<form action="/member/loginPost" method="post">
 		<div>
 			<input type="text" id="userId" name="userId" placeholder="아이디"/>

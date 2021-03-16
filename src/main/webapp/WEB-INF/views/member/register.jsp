@@ -99,6 +99,7 @@ function keyebent(){
 </script>
 <body>
 	<%@include file="../header.jsp"%>
+	<h3 class="title">회원가입</h3>
 	<section id="container">
 		<form action="/member/register" method="post" id="regForm">
 			<div>
