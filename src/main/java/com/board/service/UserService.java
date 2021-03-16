@@ -5,6 +5,7 @@ import com.board.domain.UserVO;
 
 public interface UserService {
 	
+
 	//회원가입처리
 	public void register(UserVO userVO) throws Exception;
 	
@@ -19,4 +20,6 @@ public interface UserService {
 	
 	//아이디 중복 체크
 	public int idChk(String userId) throws Exception;
+
+	
 }

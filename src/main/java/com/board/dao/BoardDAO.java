@@ -20,4 +20,7 @@ public interface BoardDAO {
 	
 	// 게시판 조회수
 	public void boardHit(int review_id) throws Exception;
+	
+
+    
 }
