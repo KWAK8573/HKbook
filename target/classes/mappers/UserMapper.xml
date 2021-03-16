@@ -10,6 +10,7 @@
 		<result property="pw" column="PW"/>
 		<result property="email" column="EMAIL"/>
 		<result property="memberDate" column="MEMBER_DATE"/>
+		<result property="mState" column="M_STATE"/>
 	</resultMap>
 
 	<!-- 회원가입 -->
@@ -54,7 +55,6 @@
 		UPDATE MEMBER_BOARD
 		SET M_STATE = 'Xjoin'
 		WHERE USER_ID = #{userId}
-		AND PW = #{pw} 
 	</update>
 	
 </mapper>

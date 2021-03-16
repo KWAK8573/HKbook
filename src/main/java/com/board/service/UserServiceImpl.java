@@ -58,7 +58,6 @@ public class UserServiceImpl implements UserService {
 	//회원탈퇴 표기 
 	@Override
 	public void userBlock(UserVO userVO) throws Exception {
-		//받은 userVO를 DAO로 보내준다
 		userDAO.userBlock(userVO);
 	}
 }

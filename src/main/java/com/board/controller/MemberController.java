@@ -160,12 +160,13 @@ public class MemberController {
 		
 		//비밀번호 확인 불일치시 처음으로 돌아가기
 		if (login == null || !BCrypt.checkpw(voPw, sessionPw)) {
-			logger.info("비밀번호 불일치");
+			logger.info("비밀번호 불일치!!");
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:/member/userBlockView";
 		}
 
 		userService.userBlock(userVO);
+		
 		logger.info("회원 블락처리 완료");
 		//정보를 수정했으니 다시 로그인 하기위해 세션값을 날린다
 		httpsession.invalidate();

@@ -36,6 +36,10 @@ $(document).ready(function(){
 			<input type="password" id="pw" name="pw" placeholder="패스워드" />
 		</div>
 		<div>
+			<label for="pw">회원가입상태: ${login.mState}</label>
+			<input type="hidden" id="mState" name="mState" placeholder="패스워드" value="${login.mState}" />
+		</div>
+		<div>
 			<button type="submit" id="submit">회원탈퇴</button>
 			<a href="/" >메인으로</a>
 		</div>
