@@ -53,3 +53,21 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+
+
+
+
+/*header*/
+#header {
+	clear:both;
+	overflow:hidden;
+}
+
+#header #logo {
+	float:left;
+}
+
+#header .top_menu {
+	float:right;
+}
