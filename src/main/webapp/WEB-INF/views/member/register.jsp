@@ -8,11 +8,7 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
-	// 취소
-	$(".cencle").on("click", function(){
-		location.href = "/";
-	})
-	
+	//공백문자 방지
 	$("#submit").on("click", function(){
 		if($("#userId").val()==""){
 			alert("아이디를 입력해주세요.");
@@ -61,11 +57,12 @@ function fn_idChk(){
 	})
 }
 //input 클릭시 회원가입 비활성화
-$("#userId").onkeypress=function(event){
-	$(".result .msg").text("아이디를 확인해주십시오.");
-	$(".result .msg").attr("style", "color:#000");
-	$("#submit").attr("disabled", "disabled");
-};
+function keyebent(){
+	const target = document.getElementById('submit');
+	target.disabled = true;
+	$(".result .msg").text("아이디 중복확인을 해주세요");
+	$(".result .msg").attr("style", "color:#f00");
+}
 </script>
 <body>
 	<%@include file="../header.jsp"%>
@@ -73,7 +70,7 @@ $("#userId").onkeypress=function(event){
 		<form action="/member/register" method="post" id="regForm">
 			<div>
 				<label for="userId">아이디</label>
-				<input type="text" id="userId"  name="userId" placeholder="아이디"/>
+				<input type="text" id="userId"  name="userId" placeholder="아이디" onchange="keyebent()"/>
 				<button class="idChk" type="button" id="idChk" onclick="fn_idChk()" value="N">중복확인</button>
 			</div>
 			<div class="result">
@@ -88,7 +85,7 @@ $("#userId").onkeypress=function(event){
 				<input type="text" id="email" name="email" placeholder="이메일"/>
 			</div>
 			<div>
-				<button type="submit" id="submit" disabled="disabled">회원가입</button>
+				<button type="submit" id="submit" >회원가입</button>
 				<a href="/member/login" >로그인</a>
 			</div>
 		</form>

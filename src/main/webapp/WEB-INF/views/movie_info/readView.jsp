@@ -41,7 +41,6 @@ $(document).ready(function(){
 				      +"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 	})
 	
-	
 })
 
 </script>
@@ -93,7 +92,7 @@ $(document).ready(function(){
 				<button type="submit" class="update_btn">수정</button>
 				<button type="submit" class="delete_btn">삭제</button>
 				<button type="submit" class="list_btn">목록</button>
-			</div>
+			</div>		
 		</section>
 		<hr />
 	</div>

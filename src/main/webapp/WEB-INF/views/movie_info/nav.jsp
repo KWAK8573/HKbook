@@ -6,7 +6,7 @@
 <ul>
 	<li><a href="/movie_info/movielist">목록</a></li>
 	<li><a href="/movie_info/writeView">글 작성</a></li>
-	<c:if test="${member != null}"><a href="/member/logout">로그아웃</a></c:if>
+	<li><div id="logo"><a href="/">로고(메인으로)</a></div></li>
 </ul>
 
 	

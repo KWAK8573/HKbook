@@ -42,13 +42,6 @@
 		FROM MEMBER_BOARD
 		WHERE USER_ID = #{userId}
 	</select>
-
-	<!-- 회원 탈퇴 -->
-	<delete id="userDelete">
-		DELETE FROM MEMBER_BOARD
-		WHERE USER_ID = #{userId}
-		AND PW = #{pw} 
-	</delete>
 	
 	<!-- 회원탈퇴 표시 넣기 -->
 	<update id="userBlock">
@@ -56,5 +49,13 @@
 		SET M_STATE = 'Xjoin'
 		WHERE USER_ID = #{userId}
 	</update>
+	
+	<!-- Xjoin 계정 로그인 금지 -->
+	<select id="Xid" resultType="int">
+		SELECT COUNT(*) 
+		FROM MEMBER_BOARD
+		WHERE USER_ID = #{userId}
+		AND M_STATE = 'Xjoin'
+	</select>
 	
 </mapper>

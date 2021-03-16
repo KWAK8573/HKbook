@@ -103,40 +103,6 @@ public class MemberController {
 		return "redirect:/"; 
 	}
 	
-	//회원탈퇴 페이지 이동
-	@RequestMapping(value = "/userDeleteView", method = RequestMethod.GET)
-	public String userDeleteGET() throws Exception {
-		logger.info("회원 탈퇴 페이지 이동");
-		return "/member/userDeleteView";
-	}
-	
-	//회원탈퇴처리
-	@RequestMapping(value = "/userDelete", method = RequestMethod.POST) 
-	public String userDelete(UserVO userVO, HttpSession httpsession, RedirectAttributes rttr) throws Exception { 
-		logger.info("회원 탈퇴처리");
-
-		// 세션에 있는 login를 가져와 userId변수에 넣어줍니다.
-		// 이 상태는 맵 상태라 원하는 세션값을 가져오려면 userId.get 으로 가져와야한다
-		UserVO userId = (UserVO) httpsession.getAttribute("login");
-		
-		// 세션에있는 비밀번호
-		String sessionPw = userId.getPw();
-		
-		// vo로 들어오는 비밀번호
-		String voPw = userVO.getPw();
-		
-		//해시맵으로 변환한 비밀번호 비교 checkpw를 사용 (입력받은 값, 해시변환값)
-		if (userId == null || !BCrypt.checkpw(voPw, sessionPw)) {
-			logger.info("비밀번호 불일치");
-			rttr.addFlashAttribute("msg", false);
-			return "redirect:/member/userDeleteView";
-		}
-		
-		userService.userDelete(userId);
-		httpsession.invalidate();
-		return "redirect:/"; 
-	}
-	
 	//회원 블락 페이지 이동
 	@RequestMapping(value = "/userBlockView", method = RequestMethod.GET)
 	public String userBlockGET() throws Exception {
