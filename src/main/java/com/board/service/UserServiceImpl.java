@@ -42,16 +42,23 @@ public class UserServiceImpl implements UserService {
 		userDAO.userUpdate(userVO);
 	}
 	
+	//아이디 중복체크 
+	@Override
+	public int idChk(String userId)  throws Exception {
+		int result = userDAO.idChk(userId);
+		return result;
+	}
+	
 	//회원탈퇴 
 	@Override
 	public void userDelete(UserVO userVO)  throws Exception {
 		userDAO.userDelete(userVO);
 	}
 	
-	//아이디 중복체크 
+	//회원탈퇴 표기 
 	@Override
-	public int idChk(String userId)  throws Exception {
-		int result = userDAO.idChk(userId);
-		return result;
+	public void userBlock(UserVO userVO) throws Exception {
+		//받은 userVO를 DAO로 보내준다
+		userDAO.userBlock(userVO);
 	}
 }
