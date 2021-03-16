@@ -22,4 +22,7 @@ public interface UserDAO {
 	
 	//회원탈퇴 표시
 	public void userBlock(UserVO userVO) throws Exception;
+	
+	//Xjoin 계정 로그인 금지
+	public int Xid(String userId) throws Exception;
 }

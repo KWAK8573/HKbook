@@ -60,4 +60,11 @@ public class UserServiceImpl implements UserService {
 	public void userBlock(UserVO userVO) throws Exception {
 		userDAO.userBlock(userVO);
 	}
+	
+	//Xid 로그인 막기
+	@Override
+	public int Xid(String userId)  throws Exception {
+		int result =userDAO.Xid(userId);
+		return result;
+	}
 }

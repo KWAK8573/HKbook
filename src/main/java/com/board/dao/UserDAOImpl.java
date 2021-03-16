@@ -55,4 +55,11 @@ public class UserDAOImpl implements UserDAO {
 	public void userBlock(UserVO userVO) throws Exception {
 		sql.update(namespace + ".userBlock", userVO);
 	}
+	
+	//Xid 로그인 막기
+	@Override
+	public int Xid(String userId)   throws Exception {
+		int result = sql.selectOne(namespace + ".Xid", userId);
+		return result;
+	}
 }
