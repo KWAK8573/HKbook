@@ -7,6 +7,7 @@ public class UserVO {
 	private String pw;
 	private String email;
 	private Timestamp memberDate;
+	private String mState;
 	
 	public String getUserId() {
 		return userId;
@@ -32,9 +33,16 @@ public class UserVO {
 	public void setMemberDate(Timestamp memberDate) {
 		this.memberDate = memberDate;
 	}
+	public String getmState() {
+		return mState;
+	}
+	public void setmState(String mState) {
+		this.mState = mState;
+	}
 	@Override
 	public String toString() {
-		return "MemberVO [userId=" + userId + ", pw=" + pw + ", email=" + email + ", memberDate=" + memberDate + "]";
+		return "UserVO [userId=" + userId + ", pw=" + pw + ", email=" + email + ", memberDate=" + memberDate
+				+ ", mState=" + mState + "]";
 	}
 	
 	

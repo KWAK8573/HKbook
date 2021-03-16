@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="../header.jsp"%>
-
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -18,8 +17,15 @@ $(document).ready(function(){
 	});
 })
 </script>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 탈퇴 (블락처리)</title>
+
+</head>
 <body>
-	<form action="/member/userDelete" method="post">
+	<form action="/member/userBlock" method="post">
 		<div>
 			<label for="userId">아이디</label>
 			<input type="hidden" id="userId" name="userId" placeholder="아이디" value="${login.userId}"/>
@@ -30,13 +36,19 @@ $(document).ready(function(){
 			<input type="password" id="pw" name="pw" placeholder="패스워드" />
 		</div>
 		<div>
+			<label for="pw">회원가입상태: ${login.mState}</label>
+			<input type="hidden" id="mState" name="mState" placeholder="패스워드" value="${login.mState}" />
+		</div>
+		<div>
 			<button type="submit" id="submit">회원탈퇴</button>
 			<a href="/" >메인으로</a>
 		</div>
 	</form>
 	<div>
 		<c:if test="${msg == false}">
-			비밀번호가 맞지 않습니다.
+			<script type="text/javascript">
+				alert("비밀번호가 틀렸습니다");
+			</script>
 		</c:if>
 	</div>
 </body>

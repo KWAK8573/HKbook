@@ -110,12 +110,6 @@ public class MemberController {
 		return "/member/userDeleteView";
 	}
 	
-	
-	
-	
-	
-	
-	
 	//회원탈퇴처리
 	@RequestMapping(value = "/userDelete", method = RequestMethod.POST) 
 	public String userDelete(UserVO userVO, HttpSession httpsession, RedirectAttributes rttr) throws Exception { 
@@ -139,6 +133,42 @@ public class MemberController {
 		}
 		
 		userService.userDelete(userId);
+		httpsession.invalidate();
+		return "redirect:/"; 
+	}
+	
+	//회원 블락 페이지 이동
+	@RequestMapping(value = "/userBlockView", method = RequestMethod.GET)
+	public String userBlockGET() throws Exception {
+		return "/member/userBlockView";
+	}
+	
+	//회원 블락 처리
+	@RequestMapping(value = "/userBlock", method = RequestMethod.POST) 
+	public String userBlockPOST(UserVO userVO, HttpSession httpsession, RedirectAttributes rttr) throws Exception { 
+		logger.info("회원 블락처리");
+		
+		//로그인 세션정보를 가져오기
+		UserVO login = (UserVO) httpsession.getAttribute("login");
+		
+		// 세션에있는 비밀번호, 아이디 가져오기
+		String sessionId = login.getUserId();
+		String sessionPw = login.getPw();
+		
+		// input으로 들어오는 비밀번호
+		String voPw = userVO.getPw();
+		
+		//비밀번호 확인 불일치시 처음으로 돌아가기
+		if (login == null || !BCrypt.checkpw(voPw, sessionPw)) {
+			logger.info("비밀번호 불일치!!");
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/member/userBlockView";
+		}
+
+		userService.userBlock(userVO);
+		
+		logger.info("회원 블락처리 완료");
+		//정보를 수정했으니 다시 로그인 하기위해 세션값을 날린다
 		httpsession.invalidate();
 		return "redirect:/"; 
 	}
