@@ -15,16 +15,12 @@
 		<div>
 			<input type="password" id="pw" name="pw" placeholder="패스워드"/>
 		</div>
-		
-		<div class="checkbox iCheck">
-			<label>
-				<input type="checkbox" name="useCookie"> 로그인 유지
-			</label>
-		</div>
-		
 		<div>
 			<button type="submit">로그인</button>
+		</div>
+		<div>
 			<a href="/member/register">회원가입</a>
+			<a href="#">아이디찾기</a>
 		</div>
 	</form>
 	
@@ -37,14 +33,6 @@
 	}else if (msg ==="FAILURE") {
 		alert ("아이디와 비밀번호를 확인해주세요")
 	}
-	
-	$(function () {
-		$('input').iCheck({
-			checkboxClass:'icheckbox_square-blue',
-			radioClass: 'iradio_square-blue',
-			increaseArea:'20%' //optional
-		})
-	})
 </script>
 </body>
 </html>
