@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
- 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+ 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<title>회원가입</title>
 </head>
 <script type="text/javascript">
@@ -61,13 +61,14 @@ function fn_idChk(){
 	})
 }
 //input 클릭시 회원가입 비활성화
-$("#userId2").keypress(function(event){
+$("#userId").onkeypress=function(event){
 	$(".result .msg").text("아이디를 확인해주십시오.");
 	$(".result .msg").attr("style", "color:#000");
 	$("#submit").attr("disabled", "disabled");
-});
+};
 </script>
 <body>
+	<%@include file="../header.jsp"%>
 	<section id="container">
 		<form action="/member/register" method="post" id="regForm">
 			<div>
