@@ -113,7 +113,7 @@
 					
 					        <p>${replyList.comment_content}</p>
 					        <div>
-					        <c:if test="${login.userId == read.user_id}">
+					        <c:if test="${login.userId == replyList.user_id}">
 							  <button type="button" class="replyUpdateBtn" data-comment_id="${replyList.comment_id}">수정</button>
 							  <button type="button" class="replyDeleteBtn" data-comment_id="${replyList.comment_id}">삭제</button>
 							</c:if>

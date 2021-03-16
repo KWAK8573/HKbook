@@ -47,17 +47,18 @@ public class BoardController {
 	 }
 	 
 	// 게시판 조회
-	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(RboardVO boardVO, Model model,int review_id, HttpSession session) throws Exception{
-		logger.info("read");
-		model.addAttribute("read", service.read(boardVO.getReview_id()));
-		
-		service.boardHit(review_id, session);
-		List<ReplyVO> replyList = replyService.readReply(boardVO.getReview_id());
-		model.addAttribute("replyList", replyList);
+		@RequestMapping(value = "/readView", method = RequestMethod.GET)
+		public String read(RboardVO boardVO, Model model, HttpSession session) throws Exception{
+			logger.info("read");
+			model.addAttribute("read", service.read(boardVO.getReview_id()));
 			
-		return "board/readView";
-		}
+			List<ReplyVO> replyList = replyService.readReply(boardVO.getReview_id());
+			model.addAttribute("replyList", replyList);
+			
+			service.boardHit(boardVO.getReview_id(), session);
+				
+			return "board/readView";
+			}
 	
 	// 게시판 글 작성 화면
 		@RequestMapping(value = "/board/writeView", method = RequestMethod.GET)
