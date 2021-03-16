@@ -58,7 +58,10 @@ a:link { color: red; text-decoration: none;}
 a:visited { color: black; text-decoration: none;}
 a:hover { color: blue; text-decoration: underline;}
 
-
+/*기본 값*/
+.pdt30{
+	padding-top:30px;
+}
 
 /*header*/
 #head {
