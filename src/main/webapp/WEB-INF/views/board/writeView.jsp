@@ -1,9 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 	<head>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	 	<title>게시판</title>
 	</head>
+	
+		<script type="text/javascript">
+		$(document).ready(function(){
+			var formObj = $("form[name='writeForm']");
+			$(".write_btn").on("click", function(){
+				if(fn_valiChk()){
+					return false;
+				}
+				formObj.attr("action", "/board/write");
+				formObj.attr("method", "post");
+				formObj.submit();
+			});
+		})
+		function fn_valiChk(){
+			var regForm = $("form[name='writeForm'] .chk").length;
+			for(var i = 0; i<regForm; i++){
+				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
+					alert($(".chk").eq(i).attr("title"));
+					return true;
+				}
+			}
+		}
+	</script>
 	<body>
 	
 		<div id="root">
@@ -18,17 +43,17 @@
 			<hr />
 			
 			<section id="container">
-				<form role="form" method="post" action="/board/write">
+				<form name="writeForm" method="post" action="/board/write">
 					<table>
 						<tbody>
 							<tr>
 								<td>
-									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" />
+									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" class="chk" title="제목을 입력하세요." />
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="review_content">내용</label><textarea id="review_content" name="review_content" ></textarea>
+									<label for="review_content">내용</label><textarea id="review_content" name="review_content" class="chk" title="내용을 입력하세요." ></textarea>
 								</td>
 							</tr>
 							<tr>
@@ -37,7 +62,7 @@
 								</td>--> 
 							<tr>
 								<td>						
-									<button type="submit">작성</button>
+									<button class="write_btn" type="submit">작성</button>
 								</td>
 							</tr>			
 						</tbody>			

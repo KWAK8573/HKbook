@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.board.dao.BoardDAO;
 import com.board.domain.RboardVO;
+import com.board.domain.SearchCriteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -17,10 +18,16 @@ public class BoardServiceImpl implements BoardService {
 	 BoardDAO dao;
 	 
 	 @Override
-	 public List<RboardVO> list() throws Exception {
+	 public List<RboardVO> list(SearchCriteria scri) throws Exception {
 	
-	  return dao.list();
+	  return dao.list(scri);
 	 }
+	 
+	 @Override
+	 public int listCount(SearchCriteria scri) throws Exception{
+		 return dao.listCount(scri);
+	 }
+	 
 	 @Override
 	 public RboardVO read(int review_id) throws Exception {
 		 
@@ -46,6 +53,7 @@ public class BoardServiceImpl implements BoardService {
 		
 	@Override
 	public void boardHit(int review_id, HttpSession session) throws Exception{
+		
 		long update_time = 0;
 		if(session.getAttribute("update_time_"+review_id) != null) {
 			update_time = (long)session.getAttribute("update_time_"+review_id);

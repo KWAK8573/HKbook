@@ -2,11 +2,15 @@ package com.board.dao;
 
 import java.util.List;
 
+
 import com.board.domain.RboardVO;
+import com.board.domain.SearchCriteria;
 
 public interface BoardDAO {
  
-	public List<RboardVO> list() throws Exception; 
+	public List<RboardVO> list(SearchCriteria scri) throws Exception; 
+	
+	public int listCount(SearchCriteria scri) throws Exception;
 	
 	public RboardVO read(int review_id) throws Exception;
 	
