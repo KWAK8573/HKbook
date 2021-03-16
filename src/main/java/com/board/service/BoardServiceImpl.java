@@ -38,11 +38,11 @@ public class BoardServiceImpl implements BoardService {
 			dao.update(boardVO);
 		}
 
-		@Override
-		public void delete(int review_id) throws Exception {
+	@Override
+	public void delete(int review_id) throws Exception {
 			
-			dao.delete(review_id);
-		}
+		dao.delete(review_id);
+	}
 		
 	@Override
 	public void boardHit(int review_id, HttpSession session) throws Exception{

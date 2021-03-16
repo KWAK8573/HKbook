@@ -39,6 +39,7 @@
 							<tr>
 								<td>
 									<label for="comment_content">댓글 내용</label><input type="text" id="comment_content" name="comment_content" value="${replyUpdate.comment_content}"/>
+									<label for="review_id">댓글 내용</label><input type="text" id="review_id" name="review_id" value="${replyUpdate.review_id}"/>
 								</td>
 							</tr>	
 							
