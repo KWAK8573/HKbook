@@ -7,6 +7,7 @@
 <title>로그인</title>
 </head>
 <body>
+	<%@include file="../header.jsp"%>
 	<form action="/member/loginPost" method="post">
 		<div>
 			<input type="text" id="userId" name="userId" placeholder="아이디"/>

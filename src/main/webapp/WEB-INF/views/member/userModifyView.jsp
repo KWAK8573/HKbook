@@ -20,6 +20,7 @@ $(document).ready(function(){
 })
 </script>
 <body>
+	<%@include file="../header.jsp"%>
 	<form action="/member/userModify" method="post">
 		<div>
 			<label for="userId">아이디</label>
