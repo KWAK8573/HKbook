@@ -58,10 +58,10 @@ public class BoardDAOTest {
     }
 
     // 게시글 목록 테스트
-    @Test
-    public void testList() throws Exception {
-        boardDAO.list();
-    }
+//    @Test
+//    public void testList() throws Exception {
+//        boardDAO.list();
+//    }
 
 //    // 게시글 목록 페이징 테스트
 //    @Test

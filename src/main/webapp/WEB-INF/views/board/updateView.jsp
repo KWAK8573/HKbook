@@ -8,14 +8,39 @@
 	</head>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			var formObj = $("form[name='updateForm']");
 			
 			$(".cancel_btn").on("click", function(){
 				event.preventDefault();
-				location.href = "/board/list";
+				location.href = "/board/readView?review_id=${update.review_id}"
+					   + "&page=${scri.page}"
+					   + "&perPageNum=${scri.perPageNum}"
+					   + "&searchType=${scri.searchType}"
+					   + "&keyword=${scri.keyword}";
+			})
+			
+			$(".update_btn").on("click", function(){
+				if(fn_valiChk()){
+					return false;
+				}
+				formObj.attr("action", "/board/update");
+				formObj.attr("method", "post");
+				formObj.submit();
 			})
 		})
-	
+			
+		function fn_valiChk(){
+			var updateForm = $("form[name='updateForm'] .chk").length;
+			for(var i = 0; i<updateForm; i++){
+				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
+					alert($(".chk").eq(i).attr("title"));
+					return true;
+				}
+			}
+		}
+		
 	</script>
+
 	<body>
 	
 		<div id="root">
@@ -36,12 +61,12 @@
 						<tbody>
 							<tr>
 								<td>
-									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" value="${update.review_title}"/>
+									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" value="${update.review_title}" class="chk" title="제목을 입력하세요."/>
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="review_content">내용</label><textarea id="review_content" name="review_content"><c:out value="${update.review_content}" /></textarea>
+									<label for="review_content">내용</label><textarea id="review_content" name="review_content" class="chk" title="내용을 입력하세요."><c:out value="${update.review_content}" /></textarea>
 								</td>
 							</tr>
 							<tr>

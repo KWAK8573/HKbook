@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-
 import com.board.domain.RboardVO;
+import com.board.domain.SearchCriteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -18,9 +18,16 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	 // 게시물 목록
 	 @Override
-	 public List<RboardVO> list() throws Exception { 
+	 public List<RboardVO> list(SearchCriteria scri) throws Exception { 
 	  
-	  return sql.selectList("boardMapper.list");
+	  return sql.selectList("boardMapper.listPage", scri);
+	  
+	  }
+	 
+	 @Override
+	 public int listCount(SearchCriteria scri) throws Exception { 
+	  
+	  return sql.selectOne("boardMapper.listCount", scri);
 	  
 	  }
 	  
