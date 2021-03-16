@@ -31,13 +31,13 @@ public class UserDAOTest {
 	}
 	
 	//회원탈퇴 테스트
-	@Test
-	public void testDelete() throws Exception {
-		UserVO user = new UserVO();
-		user.setUserId("test");
-		user.setPw("test");
-		userDAO.userDelete(user);
-	}
+//	@Test
+//	public void testDelete() throws Exception {
+//		UserVO user = new UserVO();
+//		user.setUserId("test");
+//		user.setPw("test");
+//		userDAO.userDelete(user);
+//	}
 	
 	
 	

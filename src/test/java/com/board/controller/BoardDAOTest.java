@@ -26,7 +26,7 @@ public class BoardDAOTest {
     // 게시글 입력 테스트, 더미데이터 입력
     @Test
     public void testCreate() throws Exception {
-        for (int i = 1; i <= 1000; i++) {
+        for (int i = 1; i <= 1; i++) {
             RboardVO boardVO = new RboardVO();
             boardVO.setReview_title(i + "번째 글제");
             boardVO.setReview_content(i + "번째용입.");

@@ -103,42 +103,38 @@ public class MemberController {
 		return "redirect:/"; 
 	}
 	
-	//회원탈퇴 페이지 이동
-	@RequestMapping(value = "/userDeleteView", method = RequestMethod.GET)
-	public String userDeleteGET() throws Exception {
-		logger.info("회원 탈퇴 페이지 이동");
-		return "/member/userDeleteView";
+	//회원 블락 페이지 이동
+	@RequestMapping(value = "/userBlockView", method = RequestMethod.GET)
+	public String userBlockGET() throws Exception {
+		return "/member/userBlockView";
 	}
 	
-	
-	
-	
-	
-	
-	
-	//회원탈퇴처리
-	@RequestMapping(value = "/userDelete", method = RequestMethod.POST) 
-	public String userDelete(UserVO userVO, HttpSession httpsession, RedirectAttributes rttr) throws Exception { 
-		logger.info("회원 탈퇴처리");
-
-		// 세션에 있는 login를 가져와 userId변수에 넣어줍니다.
-		// 이 상태는 맵 상태라 원하는 세션값을 가져오려면 userId.get 으로 가져와야한다
-		UserVO userId = (UserVO) httpsession.getAttribute("login");
+	//회원 블락 처리
+	@RequestMapping(value = "/userBlock", method = RequestMethod.POST) 
+	public String userBlockPOST(UserVO userVO, HttpSession httpsession, RedirectAttributes rttr) throws Exception { 
+		logger.info("회원 블락처리");
 		
-		// 세션에있는 비밀번호
-		String sessionPw = userId.getPw();
+		//로그인 세션정보를 가져오기
+		UserVO login = (UserVO) httpsession.getAttribute("login");
 		
-		// vo로 들어오는 비밀번호
+		// 세션에있는 비밀번호, 아이디 가져오기
+		String sessionId = login.getUserId();
+		String sessionPw = login.getPw();
+		
+		// input으로 들어오는 비밀번호
 		String voPw = userVO.getPw();
 		
-		//해시맵으로 변환한 비밀번호 비교 checkpw를 사용 (입력받은 값, 해시변환값)
-		if (userId == null || !BCrypt.checkpw(voPw, sessionPw)) {
-			logger.info("비밀번호 불일치");
+		//비밀번호 확인 불일치시 처음으로 돌아가기
+		if (login == null || !BCrypt.checkpw(voPw, sessionPw)) {
+			logger.info("비밀번호 불일치!!");
 			rttr.addFlashAttribute("msg", false);
-			return "redirect:/member/userDeleteView";
+			return "redirect:/member/userBlockView";
 		}
+
+		userService.userBlock(userVO);
 		
-		userService.userDelete(userId);
+		logger.info("회원 블락처리 완료");
+		//정보를 수정했으니 다시 로그인 하기위해 세션값을 날린다
 		httpsession.invalidate();
 		return "redirect:/"; 
 	}

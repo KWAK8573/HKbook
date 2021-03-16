@@ -10,6 +10,7 @@
 		<result property="pw" column="PW"/>
 		<result property="email" column="EMAIL"/>
 		<result property="memberDate" column="MEMBER_DATE"/>
+		<result property="mState" column="M_STATE"/>
 	</resultMap>
 
 	<!-- 회원가입 -->
@@ -35,17 +36,26 @@
 		WHERE USER_ID = #{userId}
 	</update>
 	
-	<!-- 회원 탈퇴 -->
-	<delete id="userDelete">
-		DELETE FROM MEMBER_BOARD
-		WHERE USER_ID = #{userId}
-		AND PW = #{pw} 
-	</delete>
-	
 	<!-- 아이디 중복체크 -->
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*) 
 		FROM MEMBER_BOARD
 		WHERE USER_ID = #{userId}
 	</select>
+	
+	<!-- 회원탈퇴 표시 넣기 -->
+	<update id="userBlock">
+		UPDATE MEMBER_BOARD
+		SET M_STATE = 'Xjoin'
+		WHERE USER_ID = #{userId}
+	</update>
+	
+	<!-- Xjoin 계정 로그인 금지 -->
+	<select id="Xid" resultType="int">
+		SELECT COUNT(*) 
+		FROM MEMBER_BOARD
+		WHERE USER_ID = #{userId}
+		AND M_STATE = 'Xjoin'
+	</select>
+	
 </mapper>

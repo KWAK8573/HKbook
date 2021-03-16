@@ -37,16 +37,23 @@ public class UserDAOImpl implements UserDAO {
 		sql.update(namespace + ".userUpdate", userVO);
 	}
 	
-	//회원탈퇴 
-	@Override
-	public void userDelete(UserVO userVO) throws Exception {
-		sql.update(namespace + ".userDelete", userVO);
-	}
-	
 	//아이디 중복체크 
 	@Override
 	public int idChk(String userId) throws Exception {
 		int result = sql.selectOne(namespace + ".idChk", userId);
+		return result;
+	}
+	
+	//회원탈퇴 표시
+	@Override
+	public void userBlock(UserVO userVO) throws Exception {
+		sql.update(namespace + ".userBlock", userVO);
+	}
+	
+	//Xid 로그인 막기
+	@Override
+	public int Xid(String userId)   throws Exception {
+		int result = sql.selectOne(namespace + ".Xid", userId);
 		return result;
 	}
 }

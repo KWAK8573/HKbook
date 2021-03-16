@@ -15,11 +15,16 @@ public interface UserService {
 	//회원 수정
 	public void userUpdate(UserVO userVO) throws Exception;
 	
-	//회원 탈퇴
-	public void userDelete(UserVO userVO) throws Exception;
-	
 	//아이디 중복 체크
 	public int idChk(String userId) throws Exception;
 
+<<<<<<< HEAD
 	
+=======
+	//회원 탈퇴표시
+	public void userBlock(UserVO userVO) throws Exception;
+	
+	//Xid 로그인 막기
+	public int Xid(String userId) throws Exception;
+>>>>>>> 2c96aa0bc26c2b50accb80832496bc18d3572358
 }

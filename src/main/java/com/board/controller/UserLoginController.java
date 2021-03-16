@@ -39,19 +39,25 @@ public class UserLoginController {
 	
 	//로그인처리
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public void loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception{
+	public void loginPost(UserVO userVO, LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception{
 		logger.info("post login");
+		
+		//탈퇴회원 검사
+		int result = userService.Xid(userVO.getUserId());
+		if (result == 1) {
+			return;
+		}
 		
 		//login에서 받은 데이터(아이디, 비밀번호) 중에서 
 		//아이디를 통해 select한 회원 정보를 변수 userVO에 담는다
-		UserVO userVO = userService.login(loginDTO);
+		UserVO userLoginVO = userService.login(loginDTO);
 		
 		//만역 userVO가 null 또는 BCrypt.checkpw()를 통해 맞지 않으면 메서드 종료
-		if (userVO ==null || !BCrypt.checkpw(loginDTO.getPw(), userVO.getPw())) {
+		if (userLoginVO ==null || !BCrypt.checkpw(loginDTO.getPw(), userLoginVO.getPw())) {
 			return;
 		}
 		//비밀번호가 일치하면 model에 userVO를 user란 변수로 저장한다
-		model.addAttribute("user", userVO);
+		model.addAttribute("user", userLoginVO);
 	}
 	
 	//로그아웃 처리
