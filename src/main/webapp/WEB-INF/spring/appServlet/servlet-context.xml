@@ -44,8 +44,10 @@
 		<beans:property name="template" ref="template"></beans:property>
 	</beans:bean>
 
+<beans:bean name="dao2" class="com.board.dao.ScrapDAOImpl">
+		<beans:property name="template" ref="template"></beans:property>
+	</beans:bean>
 
-	
 
 	
 	<!-- 접근권한 페이지 -->
