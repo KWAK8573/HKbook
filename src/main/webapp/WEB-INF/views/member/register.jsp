@@ -8,8 +8,34 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
-	//공백문자 방지
+	//회원가입 버튼 클릭시 이벤트 발생
 	$("#submit").on("click", function(){
+		//아이디 정규식
+		var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+		if( !idReg.test( $("input[name=userId]").val() ) ) {
+			 alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+			return false;
+		}
+		//비밀번호 정규식
+		var pwExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/; //  8 ~ 10자 영문, 숫자 조합
+		if( !pwExp.test( $("input[name=pw]").val() ) ) {
+			 alert("비밀번호는 8 ~ 10자 이상 영문, 숫자를 조합해야 합니다");
+			return false;
+		}
+		//비밀번호 확인
+		var p1 = document.getElementById('pw').value;
+		var p2 = document.getElementById('pw2').value;
+		if (p1 != p2) {
+			alert("비밀번호가 일치 하지 않습니다");
+			return false;
+		}
+		//이메일 정규식
+		var emailExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		if( !emailExp.test( $("input[name=email]").val() ) ) {
+			 alert("이메일 형식이 맞지 않습니다");
+			return false;
+		}
+		//공백문자 방지
 		if($("#userId").val()==""){
 			alert("아이디를 입력해주세요.");
 			$("#userId").focus();
@@ -21,7 +47,7 @@ $(document).ready(function(){
 			return false;
 		}
 		if($("#email").val()==""){
-			alert("성명을 입력해주세요.");
+			alert("이메일을 입력해주세요.");
 			$("#email").focus();
 			return false;
 		}
@@ -37,6 +63,13 @@ $(document).ready(function(){
 
 //아이디 중복체크
 function fn_idChk(){
+	//아이디 정규식
+	var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+	if( !idReg.test( $("input[name=userId]").val() ) ) {
+		 alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+		return false;
+	}
+	//아이디 중복체크
 	$.ajax({
 		url : "/member/idChk",
 		type : "post",
@@ -56,7 +89,7 @@ function fn_idChk(){
 		}
 	})
 }
-//input 클릭시 회원가입 비활성화
+//중복확인 없이 아이디 변경시 회원가입 비활성화
 function keyebent(){
 	const target = document.getElementById('submit');
 	target.disabled = true;
@@ -69,22 +102,20 @@ function keyebent(){
 	<section id="container">
 		<form action="/member/register" method="post" id="regForm">
 			<div>
-				<label for="userId">아이디</label>
 				<input type="text" id="userId"  name="userId" placeholder="아이디" onchange="keyebent()"/>
 				<button class="idChk" type="button" id="idChk" onclick="fn_idChk()" value="N">중복확인</button>
 			</div>
 			<div class="result">
 				<span class="msg">아이디를 확인해주세요</span>
 			</div>
-			<div>
-				<label for="pw">패스워드</label>
+			<div class="pdt30">
 				<input type="password" id="pw" name="pw" placeholder="패스워드"/>
+				<input type="password" id="pw2" name="pw2" placeholder="패스워드 확인"/>
 			</div>
-			<div>
-				<label for="email">이메일</label>
+			<div class="pdt30">
 				<input type="text" id="email" name="email" placeholder="이메일"/>
 			</div>
-			<div>
+			<div class="pdt30">
 				<button type="submit" id="submit" >회원가입</button>
 				<a href="/member/login" >로그인</a>
 			</div>
