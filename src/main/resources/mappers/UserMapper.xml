@@ -58,4 +58,12 @@
 		AND M_STATE = 'Xjoin'
 	</select>
 	
+	<!-- 아이디찾기 -->
+	<select id="findId" resultType="String">
+		SELECT USER_ID
+		FROM MEMBER_BOARD
+		WHERE EMAIL = #{email}
+	</select>
+	
+	
 </mapper>

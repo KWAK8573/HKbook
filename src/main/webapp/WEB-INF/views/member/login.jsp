@@ -21,7 +21,7 @@
 		</div>
 		<div>
 			<a href="/member/register">회원가입</a>
-			<a href="#">아이디찾기</a>
+			<a href="/member/findIdView">아이디찾기</a>
 		</div>
 	</form>
 	
