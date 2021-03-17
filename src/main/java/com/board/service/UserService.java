@@ -18,7 +18,6 @@ public interface UserService {
 	//아이디 중복 체크
 	public int idChk(String userId) throws Exception;
 
-
 	//회원 탈퇴표시
 	public void userBlock(UserVO userVO) throws Exception;
 	
@@ -27,4 +26,8 @@ public interface UserService {
 	
 	//아이디 찾기
 	public String findId(String email) throws Exception;
+	
+	//이메일 중복체크 
+	public int findEmail(String email) throws Exception;
+
 }

@@ -68,4 +68,11 @@ public class UserServiceImpl implements UserService {
 		String result =userDAO.findId(email);
 		return result;
 	}
+	
+	//이메일중복체크
+	@Override
+	public int findEmail(String email)  throws Exception {
+		int result = userDAO.findEmail(email);
+		return result;
+	}
 }
