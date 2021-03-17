@@ -25,4 +25,7 @@ public interface UserDAO {
 	
 	//아이디 찾기
 	public String findId(String email) throws Exception;
+	
+	//이메일 중복체크
+	public int findEmail(String email) throws Exception;
 }

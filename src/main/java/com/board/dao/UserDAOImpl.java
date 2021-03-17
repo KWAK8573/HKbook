@@ -63,4 +63,12 @@ public class UserDAOImpl implements UserDAO {
 		String result = sql.selectOne(namespace + ".findId", email);
 		return result;
 	}
+	
+	//이메일 중복체크
+	@Override
+	public int findEmail(String email) throws Exception {
+		int result = sql.selectOne(namespace + ".findEmail", email);
+		return result;
+	}
+	
 }
