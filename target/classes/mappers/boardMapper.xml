@@ -14,7 +14,6 @@
 		        review_content,
 		        user_id, 
 		        review_date,
-		        review_views,
 		        total_push
 		 FROM ( 
 		        SELECT review_id, 
@@ -22,7 +21,6 @@
 		               review_content, 
 		               user_id, 
 		               review_date,
-		               review_views,
 		               total_push,
 		               ROW_NUMBER() OVER(ORDER BY review_id DESC) AS RNUM
 		         FROM RE_BOARD 
