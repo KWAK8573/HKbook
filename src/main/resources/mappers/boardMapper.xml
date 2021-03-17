@@ -75,7 +75,10 @@
    <update id="update" parameterType="com.board.domain.RboardVO">
 		UPDATE re_board
 		   SET review_title    =   #{review_title},
-		   	   review_content  =   #{review_content}
+		   	   review_content  =   #{review_content},
+		   	   
+		   	   review_img = #{review_img},
+		   	   thumbimg = #{thumbimg}
 		 WHERE review_id = #{review_id} 
 	</update>
 	
