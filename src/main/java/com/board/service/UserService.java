@@ -18,9 +18,10 @@ public interface UserService {
 	//아이디 중복 체크
 	public int idChk(String userId) throws Exception;
 
+
 	//회원 탈퇴표시
 	public void userBlock(UserVO userVO) throws Exception;
 	
 	//Xid 로그인 막기
 	public int Xid(String userId) throws Exception;
-
+}
