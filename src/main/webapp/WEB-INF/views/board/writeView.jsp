@@ -4,6 +4,15 @@
 <html>
 	<head>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+		<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 	 	<title>게시판</title>
 	</head>
 	
@@ -53,7 +62,18 @@
 							</tr>	
 							<tr>
 								<td>
-									<label for="review_content">내용</label><textarea id="review_content" name="review_content" class="chk" title="내용을 입력하세요." ></textarea>
+									<label for="review_content">내용</label>
+									<textarea rows="5" cols="50" id="review_content" name="review_content" ></textarea>
+									<script>
+									 var ckeditor_config = {
+									   resize_enaleb : false,
+									   enterMode : CKEDITOR.ENTER_BR,
+									   shiftEnterMode : CKEDITOR.ENTER_P,
+									   filebrowserUploadUrl : "/admin/board/ckUpload"
+									 };
+									 
+									 CKEDITOR.replace("review_content", ckeditor_config);
+									</script>
 								</td>
 							</tr>
 							<tr>
