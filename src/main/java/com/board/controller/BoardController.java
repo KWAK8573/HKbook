@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -132,8 +133,29 @@ public class BoardController {
 		
 		// 게시판 수정
 		@RequestMapping(value = "/update", method = RequestMethod.POST)
-		public String update(RboardVO boardVO,@ModelAttribute("scri") SearchCriteria scri,RedirectAttributes rttr) throws Exception{
+		public String update(RboardVO boardVO,@ModelAttribute("scri") SearchCriteria scri,RedirectAttributes rttr, MultipartFile file, HttpServletRequest req) throws Exception{
 			logger.info("update");
+			
+			 // 새로운 파일이 등록되었는지 확인
+			 if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			  // 기존 파일을 삭제
+			  new File(uploadPath + req.getParameter("review_img")).delete();
+			  new File(uploadPath + req.getParameter("thumbimg")).delete();
+			  
+			  // 새로 첨부한 파일을 등록
+			  String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			  String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			  String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+			  
+			  boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			  boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+			  
+			 } else {  // 새로운 파일이 등록되지 않았다면
+			  // 기존 이미지를 그대로 사용
+			  boardVO.setReview_img(req.getParameter("review_img"));
+			  boardVO.setThumbimg(req.getParameter("thumbimg"));
+			  
+			 }
 			
 			service.update(boardVO);
 			
