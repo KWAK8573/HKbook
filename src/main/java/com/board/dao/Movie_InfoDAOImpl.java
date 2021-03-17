@@ -63,5 +63,11 @@ public class Movie_InfoDAOImpl implements Movie_InfoDAO {
 		
 	}
 
+	@Override
+	public void recommend(int movie_id) throws Exception {
+		sql.update( namespace + ".recommend", movie_id);
+		
+	}
+
 
 }

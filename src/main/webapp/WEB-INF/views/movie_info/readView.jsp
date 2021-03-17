@@ -8,8 +8,8 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>게시판</title>
 </head>
-<script type="text/javascript">
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
 $(document).ready(function(){
 	var formObj = $("form[name='readForm']");
 	
@@ -40,7 +40,17 @@ $(document).ready(function(){
 				      +"&perPageNum=${scri.perPageNum}"
 				      +"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 	})
-	
+	//추천하기 버튼
+
+	$("#btnRecommend").click(function(){
+	    if(confirm("해당 글을 추천하시겠습니까?")){
+	        document.form1.action="recommend.do";
+	        document.form1.submit();
+	        
+	        alert("해당 글을 추천하였습니다.")
+	        
+	        }
+	    });
 })
 
 </script>
@@ -92,6 +102,13 @@ $(document).ready(function(){
 				<button type="submit" class="update_btn">수정</button>
 				<button type="submit" class="delete_btn">삭제</button>
 				<button type="submit" class="list_btn">목록</button>
+				  <!-- 로그인이 되어있고, 본인 글이 아닐경우에만 추천할 수 있도록 버튼을 출력 -->
+ 
+				    <c:if test = "${login.userId != null and login.userId != UserVO.userId}">    
+						<button type = "button" id = "btnRecommend">추천하기</button>
+    				</c:if>
+
+			    
 			</div>		
 		</section>
 		<hr />

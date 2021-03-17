@@ -59,6 +59,13 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 		dao.update(movie_InfoVO);
 		
 	}
+	
+
+	@Override
+	public void recommend(int movie_id) throws Exception {
+		dao.recommend(movie_id);
+		
+	}
 
 
 }

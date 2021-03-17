@@ -34,6 +34,8 @@ public interface Movie_InfoDAO {
 	// 게시물 조회수
 	public void movieviews(int movie_id) throws Exception;
 	
+	public void recommend(int movie_id) throws Exception;
+	
 }
 
 

@@ -134,6 +134,15 @@ public class Movie_InfoController {
 		return "redirect:/movie_info/movielist";
 	}
 	
+	// 게시물 추천 관련 메소드
+	@RequestMapping(value = "/movie_info/recommend.do", method = RequestMethod.GET)
+	public String recommend (@RequestParam int movie_id) throws Exception{
+		logger.info("recommend");
+		
+		service.recommend(movie_id);
+		
+		return "forward:/movie_info/movielist.do";
+	}
 
 
 }
