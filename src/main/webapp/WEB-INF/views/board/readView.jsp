@@ -21,7 +21,7 @@
 			// 삭제
 			$(".delete_btn").on("click", function(){
 				
-				var deleteYN = confirm("삭제하시겠습니가?");
+				var deleteYN = confirm("삭제하시겠습니까?");
 				if(deleteYN == true){
 					
 				formObj.attr("action", "/board/delete");
@@ -61,6 +61,17 @@
 			+"&perPageNum=${scri.perPageNum}"
 			+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 			})
+
+			$(".btnRecommend").on("click", function(){
+			    if(confirm("해당 글을 추천하시겠습니까?")){
+			        formObj.attr("action", "/board/recommend");
+					formObj.attr("method", "post");
+					formObj.submit();
+					
+			        alert("해당 글을 추천하였습니다.")
+			        
+			        }
+			    });
 		})
 	</script>
 	
@@ -104,6 +115,14 @@
 							</tr>
 							<tr>
 								<td>
+							<div class="inputArea">
+							 <label for="review_img">이미지</label>
+							 <p>원본 이미지</p>
+							 <img src="${read.review_img}" class="oriImg"/>
+							 
+							 <p>썸네일</p>
+							 <img src="${read.thumbimg}" class="thumbImg"/>
+							</div>
 									<label for="review_date">작성날짜</label>
 									<fmt:formatDate value="${read.review_date}" pattern="yyyy-MM-dd hh:mm"/>					
 								</td>
@@ -115,6 +134,7 @@
 					<button type="submit" class="update_btn">수정</button>
 					<button type="submit" class="delete_btn">삭제</button>
 				</c:if>
+					<button type = "submit" class = "btnRecommend">추천하기</button>
 					<button type="submit" class="list_btn">목록</button>	
 				
 				</div>

@@ -61,4 +61,10 @@ public class BoardDAOImpl implements BoardDAO {
 			// TODO Auto-generated method stub
 			sql.update("boardMapper.boardHit", review_id);
 		}
+		
+		 @Override
+		    public void recommend(int review_id) throws Exception {
+		        
+		        sql.update("boardMapper.recommend", review_id);
+		    }
 }

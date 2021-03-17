@@ -9,7 +9,7 @@
 	
 		<script type="text/javascript">
 		$(document).ready(function(){
-			var formObj = $("form[name='writeForm']");
+			var formObj = $("form[name='write']");
 			$(".write_btn").on("click", function(){
 				if(fn_valiChk()){
 					return false;
@@ -20,7 +20,7 @@
 			});
 		})
 		function fn_valiChk(){
-			var regForm = $("form[name='writeForm'] .chk").length;
+			var regForm = $("form[name='write'] .chk").length;
 			for(var i = 0; i<regForm; i++){
 				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
 					alert($(".chk").eq(i).attr("title"));
@@ -43,7 +43,7 @@
 			<hr />
 			
 			<section id="container">
-				<form name="writeForm" method="post" action="/board/write">
+				<form name="writeForm" method="post" action="/board/write" enctype="multipart/form-data">
 					<table>
 						<tbody>
 							<tr>
@@ -67,6 +67,24 @@
 							</tr>			
 						</tbody>			
 					</table>
+							<div class="inputArea">
+								 <label for="review_img">이미지</label>
+								 <input type="file" id="review_img" name="file" />
+								 <div class="select_img"><img src="" /></div>
+								 
+								 <script>
+								  $("#review_img").change(function(){
+								   if(this.files && this.files[0]) {
+								    var reader = new FileReader;
+								    reader.onload = function(data) {
+								     $(".select_img img").attr("src", data.target.result).width(500);        
+								    }
+								    reader.readAsDataURL(this.files[0]);
+								   }
+								  });
+						 </script>
+						 <%=request.getRealPath("/") %>
+						</div>
 				</form>
 			</section>
 			<hr />

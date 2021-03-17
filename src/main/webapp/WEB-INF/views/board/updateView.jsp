@@ -55,7 +55,7 @@
 			<hr />
 			
 			<section id="container">
-				<form name="updateForm" role="form" method="post" action="/board/update">
+				<form name="updateForm" role="form" method="post" action="/board/update" enctype="multipart/form-data">
 					<input type="hidden" name="review_id" value="${update.review_id}" readonly="readonly"/>
 					<table>
 						<tbody>
@@ -82,6 +82,28 @@
 							</tr>		
 						</tbody>			
 					</table>
+							<div class="inputArea">
+								 <label for=review_img>이미지</label>
+								 <input type="file" id="review_img" name="file" />
+								 <div class="select_img">
+								  <img src="${update.review_img}" />
+								  <input type="hidden" name="review_img" value="${update.review_img}" />
+								  <input type="hidden" name="thumbimg" value="${update.thumbimg}" /> 
+								 </div>
+								 
+								 <script>
+								  $("#review_img").change(function(){
+								   if(this.files && this.files[0]) {
+								    var reader = new FileReader;
+								    reader.onload = function(data) {
+								     $(".select_img img").attr("src", data.target.result).width(500);        
+								    }
+								    reader.readAsDataURL(this.files[0]);
+								   }
+								  });
+								 </script>
+								 <%=request.getRealPath("/") %>
+								</div>
 					<div>
 						<button type="submit" class="update_btn">저장</button>
 						<button type="submit" class="cancel_btn">취소</button>

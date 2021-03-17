@@ -14,6 +14,7 @@
 		        review_content,
 		        user_id, 
 		        review_date,
+		        review_views,
 		        total_push
 		 FROM ( 
 		        SELECT review_id, 
@@ -21,6 +22,7 @@
 		               review_content, 
 		               user_id, 
 		               review_date,
+		               review_views,
 		               total_push,
 		               ROW_NUMBER() OVER(ORDER BY review_id DESC) AS RNUM
 		         FROM RE_BOARD 
@@ -49,7 +51,7 @@
 	</sql>
 
 	<select id="read" parameterType="int" resultType="com.board.domain.RboardVO">
-			SELECT review_id, user_id, review_title, review_content, review_date
+			SELECT review_id, user_id, review_title, review_content, review_date, review_img, thumbimg
 			FROM re_board
 		 WHERE review_id = #{review_id}
 	</select>
@@ -58,18 +60,25 @@
 	   INSERT INTO re_board(  review_id
 	   					      , review_title
 	   					      , review_content 
-	   					      , user_id )
+	   					      , user_id
+	   					      , review_img
+	   					      , thumbimg )
 	                 VALUES(    REVIEW_BOARD_SEQ.NEXTVAL 
 	                 		  , #{review_title}
 	                 		  , #{review_content}
-	                 		  , #{user_id}  )
+	                 		  , #{user_id}  
+	                 		  , #{review_img} 
+	                 		  , #{thumbimg}  )
    
    </insert>
    
    <update id="update" parameterType="com.board.domain.RboardVO">
 		UPDATE re_board
 		   SET review_title    =   #{review_title},
-		   	   review_content  =   #{review_content}
+		   	   review_content  =   #{review_content},
+		   	   
+		   	   review_img = #{review_img},
+		   	   thumbimg = #{thumbimg}
 		 WHERE review_id = #{review_id} 
 	</update>
 	
@@ -85,4 +94,11 @@
     	review_views = review_views+1
     	WHERE review_id = #{review_id}
     </update>
+    
+    <update id = "recommend">
+		update re_board
+		set total_push = total_push+1 
+		where review_id = #{review_id}
+	</update>
+
 </mapper>

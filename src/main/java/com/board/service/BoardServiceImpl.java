@@ -64,4 +64,11 @@ public class BoardServiceImpl implements BoardService {
 			session.setAttribute("update_time_"+review_id, current_time);
 		}
 	}
+	
+	 @Override
+	 public void recommend(int review_id) throws Exception {
+	        
+	    dao.recommend(review_id);
+	        
+	       }
 }
