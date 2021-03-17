@@ -56,4 +56,11 @@ public class UserDAOImpl implements UserDAO {
 		int result = sql.selectOne(namespace + ".Xid", userId);
 		return result;
 	}
+	
+	//아이디 찾기
+	@Override
+	public String findId(String email) throws Exception {
+		String result = sql.selectOne(namespace + ".findId", email);
+		return result;
+	}
 }

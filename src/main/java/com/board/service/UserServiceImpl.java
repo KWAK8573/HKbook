@@ -61,4 +61,11 @@ public class UserServiceImpl implements UserService {
 		int result =userDAO.Xid(userId);
 		return result;
 	}
+	
+	//아이디 찾기
+	@Override
+	public String findId(String email)  throws Exception {
+		String result =userDAO.findId(email);
+		return result;
+	}
 }

@@ -8,6 +8,7 @@
 </head>
 <body>
 <%@include file="../header.jsp"%>
+<h3 class="title">회원 정보조회</h3>
 <div>
 로그인 세션: ${login.userId} <br/>
 아이디: ${userInfo.userId} <br/>

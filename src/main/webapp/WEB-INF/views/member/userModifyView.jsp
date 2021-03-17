@@ -21,6 +21,7 @@ $(document).ready(function(){
 </script>
 <body>
 	<%@include file="../header.jsp"%>
+	<h3 class="title">회원정보 수정</h3>
 	<form action="/member/userModify" method="post">
 		<div>
 			<label for="userId">아이디</label>

@@ -22,4 +22,7 @@ public interface UserDAO {
 	
 	//Xjoin 계정 로그인 금지
 	public int Xid(String userId) throws Exception;
+	
+	//아이디 찾기
+	public String findId(String email) throws Exception;
 }
