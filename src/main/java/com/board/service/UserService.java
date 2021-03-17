@@ -24,4 +24,3 @@ public interface UserService {
 	//Xid 로그인 막기
 	public int Xid(String userId) throws Exception;
 
-}
