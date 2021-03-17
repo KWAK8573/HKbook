@@ -26,4 +26,6 @@ public interface BoardService {
 	public void delete(int review_id) throws Exception;
 
 	public void boardHit(int review_id, HttpSession session) throws Exception;
+	
+	public void recommend(int review_id) throws Exception;
 }

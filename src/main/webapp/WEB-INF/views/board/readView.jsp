@@ -61,6 +61,17 @@
 			+"&perPageNum=${scri.perPageNum}"
 			+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 			})
+
+			$(".btnRecommend").on("click", function(){
+			    if(confirm("해당 글을 추천하시겠습니까?")){
+			        formObj.attr("action", "/board/recommend");
+					formObj.attr("method", "post");
+					formObj.submit();
+					
+			        alert("해당 글을 추천하였습니다.")
+			        
+			        }
+			    });
 		})
 	</script>
 	
@@ -115,6 +126,7 @@
 					<button type="submit" class="update_btn">수정</button>
 					<button type="submit" class="delete_btn">삭제</button>
 				</c:if>
+					<button type = "submit" class = "btnRecommend">추천하기</button>
 					<button type="submit" class="list_btn">목록</button>	
 				
 				</div>

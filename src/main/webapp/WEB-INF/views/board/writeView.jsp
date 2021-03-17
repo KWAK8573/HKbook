@@ -9,7 +9,7 @@
 	
 		<script type="text/javascript">
 		$(document).ready(function(){
-			var formObj = $("form[name='writeForm']");
+			var formObj = $("form[name='write']");
 			$(".write_btn").on("click", function(){
 				if(fn_valiChk()){
 					return false;
@@ -20,7 +20,7 @@
 			});
 		})
 		function fn_valiChk(){
-			var regForm = $("form[name='writeForm'] .chk").length;
+			var regForm = $("form[name='write'] .chk").length;
 			for(var i = 0; i<regForm; i++){
 				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
 					alert($(".chk").eq(i).attr("title"));
