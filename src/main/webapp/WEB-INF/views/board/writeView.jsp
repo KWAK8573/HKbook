@@ -3,17 +3,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 	<head>
-	<!-- 합쳐지고 최소화된 최신 CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- 부가적인 테마 -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	 	
-	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	 	<title>게시판</title>
 	</head>
 	
-	<script type="text/javascript">
+		<script type="text/javascript">
 		$(document).ready(function(){
-			var formObj = $("form[name='write']");
+			var formObj = $("form[name='writeForm']");
 			$(".write_btn").on("click", function(){
 				if(fn_valiChk()){
 					return false;
@@ -24,7 +20,7 @@
 			});
 		})
 		function fn_valiChk(){
-			var regForm = $("form[name='write'] .chk").length;
+			var regForm = $("form[name='writeForm'] .chk").length;
 			for(var i = 0; i<regForm; i++){
 				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
 					alert($(".chk").eq(i).attr("title"));
@@ -33,7 +29,6 @@
 			}
 		}
 	</script>
-	<title>게시판</title>
 	<body>
 	
 		<div id="root">
