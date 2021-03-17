@@ -1,7 +1,9 @@
 package com.board.controller;
 
+import java.io.File;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.board.domain.PageMaker;
@@ -22,6 +25,7 @@ import com.board.domain.UserVO;
 import com.board.service.BoardService;
 import com.board.service.ReplyService;
 import com.board.service.UserService;
+import com.board.utils.UploadFileUtils;
 
 @Controller
 @RequestMapping("/board/*")
@@ -38,6 +42,9 @@ public class BoardController {
 	 @Inject
 	 UserService userService;
 	
+	 @Resource(name="uploadPath")
+	 private String uploadPath;
+	 
 	// 게시판 목록 조회
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
 		public String list(Model model,@ModelAttribute("scri") SearchCriteria scri) throws Exception{
@@ -88,8 +95,21 @@ public class BoardController {
 		
 		// 게시판 글 작성
 		@RequestMapping(value = "/board/write", method = RequestMethod.POST)
-		public String write(RboardVO boardVO, HttpSession session) throws Exception{
+		public String write(RboardVO boardVO, HttpSession session, MultipartFile file) throws Exception{
 			logger.info("write");
+			
+			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			String fileName = null;
+
+			if(file != null) {
+			 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+			} else {
+			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+			}
+
+			boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 			
 			UserVO login = (UserVO)session.getAttribute("login");
 			boardVO.setUser_id(login.getUserId());
