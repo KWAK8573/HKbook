@@ -1,17 +1,22 @@
 package com.board.controller;
 
+import java.util.Random;
+
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,6 +29,9 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	private final UserService userService;
 	
+	@Autowired
+    private JavaMailSender mailSender;
+
 	@Inject
 	public MemberController(UserService userService) {
 		this.userService = userService;
@@ -162,6 +170,58 @@ public class MemberController {
 	@RequestMapping(value = "/findIdOk", method = RequestMethod.GET)
 	public String findIdOkGET() throws Exception {
 		return "/member/findIdOk";
+	}
+	
+	//이메일 중복확인
+	@ResponseBody
+	@RequestMapping(value="/findEmail", method = RequestMethod.POST)
+	public int findEmail(String email) throws Exception {
+		int findEmail = userService.findEmail(email);
+		return findEmail;
+	}
+	
+	//이메일 인증
+	@ResponseBody
+	@RequestMapping(value="/mailCheck", method = RequestMethod.GET)
+	public String mailCheckGET(String email) throws Exception {
+		
+		//인증번호 생성
+		Random random = new Random();
+		int checkNum = random.nextInt(888888) + 111111;
+		logger.info("인증번호확인 " + checkNum);
+		
+		//이메일 보내기
+		String setFrom = "asdfqwe5317@gmail.com"; //root-context.xml에 삽입한 자신의 이메일 계정
+		String toMail = email; //수신받을 이메일 (변수처리)
+		String title = "회원가입 인증 이메일 입니다."; //이메일 제목
+		String content = //이메일 내용
+				"인증 번호는 <span style='color:red; font-size:30px;'>" + 
+				checkNum + "</span>입니다.";
+		//이메일 전송코드
+		try {
+			/*
+			 * MimeMessage 대신 SimpleMailMessage도 사용가능
+			 * MimeMessage =  멀티파트 데이터를 처리 할 수 있다
+			 * SimpleMailMessage = 단순한 텍스트 데이터만 전송이 가능
+			 */
+			MimeMessage message = mailSender.createMimeMessage();
+			// true는 멀티파트 메세지를 사용하겠다는 의미
+			// 단순 메세지의 경우 = new MimeMessageHelper(mail,"UTF-8");
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content,true); //true는 html을 사용
+			mailSender.send(message);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		//ajax를 통한 요청으로 인해 뷰로 다시 반환할 때 데이터 타입은 String 타입만 가능
+		//인증번호 타입변환
+		String num = Integer.toString(checkNum);
+		
+		return num;
 	}
 
 }

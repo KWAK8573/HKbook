@@ -65,5 +65,11 @@
 		WHERE EMAIL = #{email}
 	</select>
 	
+	<!-- 이메일 중복확인 -->
+	<select id="findEmail" resultType="int">
+		SELECT COUNT(EMAIL) 
+		FROM MEMBER_BOARD
+		WHERE EMAIL = #{email}
+	</select>
 	
 </mapper>
