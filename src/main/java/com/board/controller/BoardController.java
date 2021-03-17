@@ -28,7 +28,7 @@ import com.board.service.ReplyService;
 import com.board.service.UserService;
 import com.board.utils.UploadFileUtils;
 
-@Controller
+//@Controller
 @RequestMapping("/board/*")
 public class BoardController {
 	
