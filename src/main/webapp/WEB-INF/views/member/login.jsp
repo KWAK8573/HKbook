@@ -8,6 +8,7 @@
 </head>
 <body>
 	<%@include file="../header.jsp"%>
+	<h3 class="title">로그인</h3>
 	<form action="/member/loginPost" method="post">
 		<div>
 			<input type="text" id="userId" name="userId" placeholder="아이디"/>
@@ -20,7 +21,7 @@
 		</div>
 		<div>
 			<a href="/member/register">회원가입</a>
-			<a href="#">아이디찾기</a>
+			<a href="/member/findIdView">아이디찾기</a>
 		</div>
 	</form>
 	

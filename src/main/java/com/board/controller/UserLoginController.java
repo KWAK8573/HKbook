@@ -33,15 +33,12 @@ public class UserLoginController {
 	//로그인 페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(@ModelAttribute("loginDTO") LoginDTO loginDTO){
-		logger.info("get login");
 		return "/member/login";
 	}
 	
 	//로그인처리
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public void loginPost(UserVO userVO, LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception{
-		logger.info("post login");
-		
 		//탈퇴회원 검사
 		int result = userService.Xid(userVO.getUserId());
 		if (result == 1) {
@@ -63,8 +60,6 @@ public class UserLoginController {
 	//로그아웃 처리
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception{
-		logger.info("get logout");
-		
 		//로그인 세션값을 object에 넣는다
 		Object object = httpSession.getAttribute("login");
 		
