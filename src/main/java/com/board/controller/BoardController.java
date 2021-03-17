@@ -71,6 +71,14 @@ public class BoardController {
 			return "board/readView";
 			}
 	
+		 @RequestMapping(value="/board/recommend", method = RequestMethod.POST)
+		    public String recommend (RboardVO boardVO) throws Exception {
+		        
+			 service.recommend(boardVO.getReview_id());
+		    
+		        return "redirect:/board/readView?review_id=" + boardVO.getReview_id();
+		    }
+
 	// 게시판 글 작성 화면
 		@RequestMapping(value = "/board/writeView", method = RequestMethod.GET)
 		public void writeView() throws Exception{
