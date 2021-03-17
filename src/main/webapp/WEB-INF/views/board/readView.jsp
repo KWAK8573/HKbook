@@ -21,7 +21,7 @@
 			// 삭제
 			$(".delete_btn").on("click", function(){
 				
-				var deleteYN = confirm("삭제하시겠습니가?");
+				var deleteYN = confirm("삭제하시겠습니까?");
 				if(deleteYN == true){
 					
 				formObj.attr("action", "/board/delete");
@@ -115,6 +115,14 @@
 							</tr>
 							<tr>
 								<td>
+							<div class="inputArea">
+							 <label for="review_img">이미지</label>
+							 <p>원본 이미지</p>
+							 <img src="${read.review_img}" class="oriImg"/>
+							 
+							 <p>썸네일</p>
+							 <img src="${read.thumbimg}" class="thumbImg"/>
+							</div>
 									<label for="review_date">작성날짜</label>
 									<fmt:formatDate value="${read.review_date}" pattern="yyyy-MM-dd hh:mm"/>					
 								</td>
