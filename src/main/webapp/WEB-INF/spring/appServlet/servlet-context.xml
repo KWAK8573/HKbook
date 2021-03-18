@@ -73,9 +73,5 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> de61144fa9f6e804966912601ae927c9ac2460a1
 </beans:beans>
