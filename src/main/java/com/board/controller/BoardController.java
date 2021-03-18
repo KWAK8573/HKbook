@@ -35,7 +35,7 @@ import com.board.service.ReplyService;
 import com.board.service.UserService;
 import com.board.utils.UploadFileUtils;
 
-@Controller
+//@Controller
 @RequestMapping("/board/*")
 public class BoardController {
 	
@@ -50,8 +50,8 @@ public class BoardController {
 	 @Inject
 	 UserService userService;
 	
-	 @Resource(name="uploadPath")
-	 private String uploadPath;
+	//@Resource(name="uploadPath")
+	//private String uploadPath;
 	 
 	// 게시판 목록 조회
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -106,18 +106,20 @@ public class BoardController {
 		public String write(RboardVO boardVO, HttpSession session, MultipartFile file) throws Exception{
 			logger.info("write");
 			
-			String imgUploadPath = uploadPath + File.separator + "imgUpload";
-			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-			String fileName = null;
 
-			if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
-			 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
-			} else {
-			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-			}
+//			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+//			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+//			String fileName = null;
+//
+//			if(file != null) {
+//			 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+//			} else {
+//			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+//			}
+//
+//			boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+//			boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 
-			boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-			boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 			
 			UserVO login = (UserVO)session.getAttribute("login");
 			boardVO.setUser_id(login.getUserId());
@@ -196,25 +198,25 @@ public class BoardController {
 			logger.info("update");
 			
 			 // 새로운 파일이 등록되었는지 확인
-			 if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
-			  // 기존 파일을 삭제
-			  new File(uploadPath + req.getParameter("review_img")).delete();
-			  new File(uploadPath + req.getParameter("thumbimg")).delete();
-			  
-			  // 새로 첨부한 파일을 등록
-			  String imgUploadPath = uploadPath + File.separator + "imgUpload";
-			  String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-			  String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
-			  
-			  boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-			  boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
-			  
-			 } else {  // 새로운 파일이 등록되지 않았다면
-			  // 기존 이미지를 그대로 사용
-			  boardVO.setReview_img(req.getParameter("review_img"));
-			  boardVO.setThumbimg(req.getParameter("thumbimg"));
-			  
-			 }
+//			 if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+//			  // 기존 파일을 삭제
+//			  new File(uploadPath + req.getParameter("review_img")).delete();
+//			  new File(uploadPath + req.getParameter("thumbimg")).delete();
+//			  
+//			  // 새로 첨부한 파일을 등록
+//			  String imgUploadPath = uploadPath + File.separator + "imgUpload";
+//			  String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+//			  String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+//			  
+//			  boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+//			  boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+//			  
+//			 } else {  // 새로운 파일이 등록되지 않았다면
+//			  // 기존 이미지를 그대로 사용
+//			  boardVO.setReview_img(req.getParameter("review_img"));
+//			  boardVO.setThumbimg(req.getParameter("thumbimg"));
+//			  
+//			 }
 			
 			service.update(boardVO);
 			

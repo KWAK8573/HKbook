@@ -72,4 +72,10 @@
 		WHERE EMAIL = #{email}
 	</select>
 	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePw" >
+		UPDATE MEMBER_BOARD
+		SET PW = #{pw}
+		WHERE EMAIL = #{email}
+	</update>
 </mapper>
