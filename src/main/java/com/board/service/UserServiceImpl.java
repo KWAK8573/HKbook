@@ -75,4 +75,10 @@ public class UserServiceImpl implements UserService {
 		int result = userDAO.findEmail(email);
 		return result;
 	}
+	
+	//비밀번호 변경 updatePw
+	@Override
+	public void updatePw(UserVO userVO) throws Exception {
+		userDAO.updatePw(userVO);
+	}
 }

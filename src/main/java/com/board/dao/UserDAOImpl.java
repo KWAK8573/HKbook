@@ -71,4 +71,9 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 	
+	//비밀번호 변경
+	@Override
+	public void updatePw(UserVO userVO) throws Exception {
+		sql.update(namespace + ".updatePw", userVO);
+	}
 }
