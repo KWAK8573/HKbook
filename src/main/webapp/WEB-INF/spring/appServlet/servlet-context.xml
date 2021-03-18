@@ -49,6 +49,7 @@
 			<beans:constructor-arg value="C:\mycode3\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\board\resources" />
 	</beans:bean>  -->
 		
+
 	<!-- 일반 파일 업로드 경로 -->
 <!-- 	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
 	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
@@ -56,6 +57,7 @@
 	</beans:bean> -->
 
 	<!-- 회원가입 메일인증 -->
+  
 	<beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com" />
 		<beans:property name="port" value="587" /><!-- 465 or 25 -->
@@ -71,5 +73,9 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> de61144fa9f6e804966912601ae927c9ac2460a1
 </beans:beans>

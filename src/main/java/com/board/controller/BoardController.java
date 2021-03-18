@@ -120,6 +120,10 @@ public class BoardController {
 //			boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 //			boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 
+<<<<<<< HEAD
+=======
+			
+>>>>>>> de61144fa9f6e804966912601ae927c9ac2460a1
 			UserVO login = (UserVO)session.getAttribute("login");
 			boardVO.setUser_id(login.getUserId());
 			
