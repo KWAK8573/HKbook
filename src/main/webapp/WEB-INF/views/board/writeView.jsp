@@ -69,7 +69,7 @@
 									   resize_enaleb : false,
 									   enterMode : CKEDITOR.ENTER_BR,
 									   shiftEnterMode : CKEDITOR.ENTER_P,
-									   filebrowserUploadUrl : "/board/ckUpload"
+									   filebrowserUploadUrl : "/admin/board/ckUpload"
 									 };
 									 
 									 CKEDITOR.replace("review_content", ckeditor_config);
