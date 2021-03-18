@@ -7,7 +7,6 @@
 <style>
 	
 </style>
-
 <div id="head">
 	<div id="header">
 		<div id="logo"><a href="/">로고(메인으로)</a></div>
