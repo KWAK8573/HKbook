@@ -4,12 +4,6 @@
 <html>
 	<head>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-		
 	 	<title>게시판</title>
 	</head>
 	
@@ -111,8 +105,7 @@
 							</tr>	
 							<tr>
 								<td>
-									내용<div class="greview_content">${read.review_content}</div>
-									
+									<label for="review_content">내용</label><textarea id="creview_content" name="review_content"><c:out value="${read.review_content}" /></textarea>
 								</td>
 							</tr>
 							<tr>

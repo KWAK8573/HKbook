@@ -4,8 +4,6 @@
 <html>
 	<head>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-		
 	 	<title>게시판</title>
 	</head>
 	<script type="text/javascript">
@@ -69,16 +67,6 @@
 							<tr>
 								<td>
 									<label for="review_content">내용</label><textarea id="review_content" name="review_content" class="chk" title="내용을 입력하세요."><c:out value="${update.review_content}" /></textarea>
-									 <script>
-									 var ckeditor_config = {
-									   resize_enaleb : false,
-									   enterMode : CKEDITOR.ENTER_BR,
-									   shiftEnterMode : CKEDITOR.ENTER_P,
-									   filebrowserUploadUrl : "/board/ckUpload"
-									 };
-									 
-									 CKEDITOR.replace("review_content", ckeditor_config);
-									</script>
 								</td>
 							</tr>
 							<tr>
