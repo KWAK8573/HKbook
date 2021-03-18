@@ -35,7 +35,7 @@ import com.board.service.ReplyService;
 import com.board.service.UserService;
 import com.board.utils.UploadFileUtils;
 
-//@Controller
+@Controller
 @RequestMapping("/board/*")
 public class BoardController {
 	
@@ -50,8 +50,8 @@ public class BoardController {
 	 @Inject
 	 UserService userService;
 	
-	//@Resource(name="uploadPath")
-	//private String uploadPath;
+//	@Resource(name="uploadPath")
+//	private String uploadPath;
 	 
 	// 게시판 목록 조회
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -111,7 +111,7 @@ public class BoardController {
 //			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 //			String fileName = null;
 //
-//			if(file != null) {
+//			if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 //			 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
 //			} else {
 //			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
@@ -119,10 +119,10 @@ public class BoardController {
 //
 //			boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 //			boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
-
-
-			UserVO login = (UserVO)session.getAttribute("login");
-			boardVO.setUser_id(login.getUserId());
+//
+//
+//			UserVO login = (UserVO)session.getAttribute("login");
+//			boardVO.setUser_id(login.getUserId());
 			
 			service.write(boardVO);
 			
