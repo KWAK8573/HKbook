@@ -12,6 +12,21 @@ public class RboardVO {
 		private Timestamp review_date;
 		private int review_views;
 		private int total_push;
+		private String review_img;
+		private String thumbimg;
+		
+		public String getReview_img() {
+			return review_img;
+		}
+		public void setReview_img(String review_img) {
+			this.review_img = review_img;
+		}
+		public String getThumbimg() {
+			return thumbimg;
+		}
+		public void setThumbimg(String thumbimg) {
+			this.thumbimg = thumbimg;
+		}
 		public int getReview_id() {
 			return review_id;
 		}
@@ -64,7 +79,8 @@ public class RboardVO {
 		public String toString() {
 			return "RboardVO [review_id=" + review_id + ", movie_id=" + movie_id + ", user_id=" + user_id
 					+ ", review_title=" + review_title + ", review_content=" + review_content + ", review_date="
-					+ review_date + ", review_views=" + review_views + ", total_push=" + total_push + "]";
+					+ review_date + ", review_views=" + review_views + ", total_push=" + total_push + ", review_img="
+					+ review_img + ", thumbimg=" + thumbimg + "]";
 		}
 		
 		

@@ -44,7 +44,7 @@ $(document).ready(function(){
 
 	$("#btnRecommend").click(function(){
 	    if(confirm("해당 글을 추천하시겠습니까?")){
-	        document.form1.action="recommend.do";
+	        document.form1.action="recommend";
 	        document.form1.submit();
 	        
 	        alert("해당 글을 추천하였습니다.")
