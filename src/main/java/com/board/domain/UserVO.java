@@ -8,6 +8,7 @@ public class UserVO {
 	private String email;
 	private Timestamp memberDate;
 	private String mState;
+
 	
 	public String getUserId() {
 		return userId;
@@ -39,11 +40,13 @@ public class UserVO {
 	public void setmState(String mState) {
 		this.mState = mState;
 	}
+	
 	@Override
 	public String toString() {
 		return "UserVO [userId=" + userId + ", pw=" + pw + ", email=" + email + ", memberDate=" + memberDate
-				+ ", mState=" + mState + "]";
+				+ ", mState=" + mState + ", u_recommend_active_time=" + "]";
 	}
+
 	
 	
 }

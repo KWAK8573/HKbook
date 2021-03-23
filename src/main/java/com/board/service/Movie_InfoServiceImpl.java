@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +21,9 @@ import com.board.domain.SearchCriteria;
 @Service
 public class Movie_InfoServiceImpl implements Movie_InfoService {
 
-	 @Inject
-	 private Movie_InfoDAO dao;
+	
+	@Inject
+	Movie_InfoDAO dao;
 	 
 	@Override
 	 public List<Movie_InfoVO> movielist(SearchCriteria scri) throws Exception {
@@ -45,6 +47,7 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 	@Override
 	public Movie_InfoVO read(int movie_id) throws Exception {
 		dao.movieviews(movie_id);
+//		dao.recommend(movie_id);
 		return dao.read(movie_id);
 	}
 
@@ -59,6 +62,20 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 		dao.update(movie_InfoVO);
 		
 	}
+	
+	@Override
+	public void recommend(int movie_id) throws Exception {
+		dao.recommend(movie_id);
+		
+		
+	}
+
+
+//	@Override
+//	public void countRecommend(HashMap<String, Object> params) throws Exception {
+//		dao.countRecommend(params);
+//		
+//	}
 
 
 }

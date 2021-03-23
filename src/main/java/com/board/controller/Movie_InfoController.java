@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -41,11 +42,12 @@ public class Movie_InfoController {
 
 	private static final Logger logger = LoggerFactory.getLogger(Movie_InfoController.class);
 
-	@Inject
-	Movie_InfoService service;
+	@Autowired
+	private Movie_InfoService service;
 	
-	@Inject
-	UserService loginService;
+	@Autowired
+	private UserService userService;
+	
 	
 	
 	// 게시판 목록 조회
@@ -83,12 +85,22 @@ public class Movie_InfoController {
 	// 게시판 조회
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
 	public String read(Movie_InfoVO movie_InfoVO , @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
+		
 		logger.info("read");
 		
 		
+//		// 현재 세션 로그인 유저 아이디 가져오기
+//		UserVO uvo = (UserVO) session.getAttribute( "login_session");
+//		// 유저 추천 활성화 시간 조회, "board/recommend" 요청 결과 값을 view.jsp hidden값(u_r_a_t) 갱신을 위해 조회하여 model에 추가한다
+//		if(uvo != null){
+//			Timestamp u_recommend_active_time = userService.checkRecommendActiveTime(uvo.getUserId());
+//			model.addAttribute("u_recommend_active_time", u_recommend_active_time);
+//		}
+
+		
 		model.addAttribute("read", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
-		
+	
 		
 		return "movie_info/readView";
 	}
@@ -100,6 +112,7 @@ public class Movie_InfoController {
 		
 		model.addAttribute("update", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
+		
 		
 		return "movie_info/updateView";
 	}
@@ -135,5 +148,32 @@ public class Movie_InfoController {
 	}
 	
 
+	//게시물 추천 관련 메소드
+    @RequestMapping("/recommend")
+    public String recommend (@RequestParam int movie_id) throws Exception {
+        
+       service.recommend(movie_id);
+    
+        return "redirect:/movie_info/movielist"; //페이지값을 그대로 넘겨받기위해서 포워딩을 사용해 컨트롤러로 리턴시킨다.
+    }
+
+	 
+	
+	//	// 추천하기
+	//	@RequestMapping(value = "/recommend", method = RequestMethod.GET)
+	//	public String responseRecommned(@RequestParam HashMap<String, Object> params) throws Exception {
+	//		logger.info("responseRecommned");
+	//		
+	//		// 현재시간 > u_recommend_active_time 인 경우, 추천Go
+	//		service.countRecommend(params);
+	//		// 추천 후, 유저 u_recommend_active_time에 현재시간+1분(시간 변경가능, movie_info_Mapper) 업데이트
+	//		userService.updateRecommendActiveTime((String) params.get("userId"));
+	//
+	//		return "redirect:movielist?movie_id=" + params.get("movie_id") + "&page=" + params.get("page") + "&perPageNum=" + params.get("perPageNum");
+	//	}
+
+
+
+	
 
 }

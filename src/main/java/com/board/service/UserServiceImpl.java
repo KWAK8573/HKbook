@@ -1,5 +1,7 @@
 package com.board.service;
 
+import java.sql.Timestamp;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -81,4 +83,15 @@ public class UserServiceImpl implements UserService {
 	public void updatePw(UserVO userVO) throws Exception {
 		userDAO.updatePw(userVO);
 	}
+
+//	@Override
+//	public void updateRecommendActiveTime(String userId) throws Exception {
+//		userDAO.updateRecommendActiveTime(userId);
+//		
+//	}
+//
+//	@Override
+//	public Timestamp checkRecommendActiveTime(String userId) throws Exception {
+//		return userDAO.checkRecommendActiveTime(userId);
+//	}
 }
