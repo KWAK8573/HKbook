@@ -10,8 +10,7 @@
 	
 	<select id="listPage" resultType="com.board.domain.RboardVO" parameterType="com.board.domain.SearchCriteria">
 		SELECT  review_id, 
-		        review_title, 
-		        review_content,
+		        review_title,
 		        user_id, 
 		        review_date,
 		        review_views,
@@ -19,7 +18,6 @@
 		 FROM ( 
 		        SELECT review_id, 
 		               review_title, 
-		               review_content, 
 		               user_id, 
 		               review_date,
 		               review_views,

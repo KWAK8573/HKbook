@@ -41,7 +41,6 @@
 				<td>
 					<a href="/board/readView?review_id=${list.review_id}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${list.review_title}" /></a>
 				</td>
-				<td>${list.review_content}</td>
 				<td>
 					<fmt:formatDate value="${list.review_date}" pattern="yyyy-MM-dd hh:mm"/>
 				</td>
