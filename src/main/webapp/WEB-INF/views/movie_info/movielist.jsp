@@ -13,8 +13,6 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <title>insert title here</title>
-</head>
-
 
 
 <body>
@@ -34,7 +32,8 @@
 						<th>영화 파일경로</th>
 						<th>작성날짜</th>
 						<th>조회수</th>
-						<th>추천</th>
+						<th>추천수</th>
+						
 					</tr>
 				</thead>
 
@@ -57,7 +56,6 @@
 					</tr>
 
 				</c:forEach>
-
 
 			</table>
 			<div class="search row">
