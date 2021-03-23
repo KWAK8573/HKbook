@@ -51,15 +51,9 @@
 	
 	
 	<select id= "read" parameterType = "int" resultType="com.board.domain.Movie_InfoVO">
-		select 	movie_id, 
-				category_id, 
-				user_id, 
-				movie_title, 
-				movie_content, 
-				movie_img, 
-				movie_date 
-				from movie_info 
-				where movie_id = #{movie_id}
+		select *
+		from movie_info 
+		where movie_id = #{movie_id}
 	</select>
 	
 	<select id = "delete" parameterType = "int">
@@ -80,10 +74,19 @@
     	WHERE movie_id = #{movie_id}
     </update>
     
-    <update id = "recommend" parameterType="int">
+ 	 <update id = "recommend" parameterType="int">
 	    update movie_info set 
-	    recommend = recommend+1
+	   recommend= recommend+1
 	    where movie_id = #{movie_id} 
-    </update>
+   	 </update> 
+   	 
+<!--     <update id = "countRecommend" parameterType="int" >
+    	update movie_info set b_recommend = b_recommend+1
+    	where movie_id = #{movie_id}
+    	and now() > (select u_recommend_active_time from
+    	member_board where USER_ID = #{userId});
+    	
+    </update> -->
     
+     
 </mapper>

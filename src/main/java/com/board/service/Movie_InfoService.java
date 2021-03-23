@@ -26,5 +26,8 @@ public interface Movie_InfoService {
 	public void update(Movie_InfoVO movie_InfoVO) throws Exception;
 	
 	public void recommend(int movie_id) throws Exception;
+	
+
+//	public void countRecommend(HashMap<String, Object> params) throws Exception;
 }
 

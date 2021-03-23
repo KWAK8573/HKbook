@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.board.mappers.board">
+<mapper namespace="boardMapper">
 	<!-- <select id="list" resultType="com.board.domain.RboardVO">
 			SELECT review_id, movie_id, user_id, review_title, review_content, review_date, review_views, total_push
 			FROM re_board

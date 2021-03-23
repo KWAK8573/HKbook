@@ -4,11 +4,14 @@
 <html>
 <head>
 <title>게시판</title>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 부트스트랩3 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>게시판</title>
 </head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript"></script>
 <script>
 $(document).ready(function(){
 	var formObj = $("form[name='readForm']");
@@ -40,8 +43,7 @@ $(document).ready(function(){
 				      +"&perPageNum=${scri.perPageNum}"
 				      +"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 	})
-	//추천하기 버튼
-
+/*    	//추천하기 버튼
 	$("#btnRecommend").click(function(){
 	    if(confirm("해당 글을 추천하시겠습니까?")){
 	        document.form1.action="recommend";
@@ -50,7 +52,29 @@ $(document).ready(function(){
 	        alert("해당 글을 추천하였습니다.")
 	        
 	        }
-	    });
+	    });   */
+	 
+	// 추천하기
+
+/* 	$("#recommendSubmit").click(function() {
+		if (confirm("추천을 하시겠습니까?")) {
+			var activeTime = new Date($("#u_recommend_active_time").val());
+			if (activeTime < new Date()) {
+				$("#recommend").submit();
+			} else {
+				if($("#userId").val() != null){
+					alert("다음 추천가능 시간: " + activeTime.toLocaleString());
+				}else{
+					// 로그인된 아이디가 없는 경우 인터셉터 경로로 반환
+					window.location = "recommend";
+				}
+			}
+		} else {
+			return;
+		}
+	}); */
+	
+	
 })
 
 </script>
@@ -104,10 +128,34 @@ $(document).ready(function(){
 				<button type="submit" class="list_btn">목록</button>
 				  <!-- 로그인이 되어있고, 본인 글이 아닐경우에만 추천할 수 있도록 버튼을 출력 -->
  
-				    <c:if test = "${login.userId != null and login.userId != UserVO.userId}">    
-						<button type = "button" id = "btnRecommend">추천하기</button>
-    				</c:if>
-
+ 				<c:if test = "${login.userId != null and login.userId != userVO.userId}">   
+					<button type = "button" id = "btnRecommend">추천하기</button>
+    			</c:if>
+    			<script>
+	    			$("#btnRecommend").click(function(){
+	    			    if(confirm("해당 글을 추천하시겠습니까?")){
+	    			        document.form1.action="recommend";
+	    			        document.form1.submit();
+	    			        
+	    			        alert("해당 글을 추천하였습니다.")
+	    			        
+	    			        }
+	    			    });
+    			</script>
+					
+ 								
+<%-- 						<div class="panel-body">
+ 								<div class="well text-center">
+									<form id="recommend" action="recommend?page=${page}&perPageNum=${perPageNum}" method="post">
+										<input type="hidden" name="movie_id" value="${read.movie_id}">
+										<c:if test="${login != null}">
+											<input id="userId" type="hidden" name="userId" value="${login.userId}">
+											<input id="u_recommend_active_time" type="hidden" name="u_recommend_active_time" value="${u_recommend_active_time}">
+										</c:if>
+										<button id="recommendSubmit" type="button" class="btn btn-primary">추천 ${read.b_recommend}</button>
+									</form>
+								</div>
+							</div> --%>
 			    
 			</div>		
 		</section>
