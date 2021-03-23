@@ -9,7 +9,7 @@
 			select MOVIE_INFO_SEQ.nextval FROM DUAL
 		</selectKey>
 		insert into movie_info (movie_id ,category_id, user_id, movie_title, movie_content, movie_img, movie_date)
-			values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, sysdate, #{image})
+			values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, sysdate)
 	</insert>
 
 
@@ -63,7 +63,6 @@
 		update movie_info set category_id = #{category_id},
 							  movie_title = #{movie_title}, 
 							  movie_content = #{movie_content}
-							  image = #{image}
 		 where movie_id = #{movie_id}
 	</select>
 	
@@ -76,7 +75,7 @@
     
  	 <update id = "recommend">
 	    update movie_info set 
-	   recommend= recommend+1
+	    recommend= recommend+1
 	    where movie_id = #{movie_id} 
    	 </update> 
    	 

@@ -68,13 +68,14 @@
 							</tr>	
 							<tr>
 								<td>
-									<label for="review_content">내용</label><textarea id="review_content" name="review_content" class="chk" title="내용을 입력하세요."><c:out value="${update.review_content}" /></textarea>
+									<label for="review_content">내용</label><textarea id="review_content" name="review_content" ><c:out value="${update.review_content}" /></textarea>
 									 <script>
 									 var ckeditor_config = {
 									   resize_enaleb : false,
 									   enterMode : CKEDITOR.ENTER_BR,
 									   shiftEnterMode : CKEDITOR.ENTER_P,
-									   filebrowserUploadUrl : "/board/ckUpload"
+									   filebrowserUploadUrl : "/board/ckUpload",
+									   uploadUrl: "/board/ckUpload",
 									 };
 									 
 									 CKEDITOR.replace("review_content", ckeditor_config);
@@ -98,7 +99,7 @@
 								 <label for=review_img>이미지</label>
 								 <input type="file" id="review_img" name="file" />
 								 <div class="select_img">
-								  <img src="${update.review_img}" />
+								 <!-- <img src="${update.review_img}" /> -->
 								  <input type="hidden" name="review_img" value="${update.review_img}" />
 								  <input type="hidden" name="thumbimg" value="${update.thumbimg}" /> 
 								 </div>
@@ -114,7 +115,6 @@
 								   }
 								  });
 								 </script>
-								 <%=request.getRealPath("/") %>
 								</div>
 					<div>
 						<button type="submit" class="update_btn">저장</button>
