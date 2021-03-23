@@ -12,7 +12,6 @@
 <title>게시판</title>
 </head>
 <script type="text/javascript"></script>
-
 <script>
 $(document).ready(function(){
 	var formObj = $("form[name='readForm']");
@@ -44,7 +43,7 @@ $(document).ready(function(){
 				      +"&perPageNum=${scri.perPageNum}"
 				      +"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 	})
-    	//추천하기 버튼
+/*    	//추천하기 버튼
 	$("#btnRecommend").click(function(){
 	    if(confirm("해당 글을 추천하시겠습니까?")){
 	        document.form1.action="recommend";
@@ -53,8 +52,8 @@ $(document).ready(function(){
 	        alert("해당 글을 추천하였습니다.")
 	        
 	        }
-	    });   
-	
+	    });   */
+	 
 	// 추천하기
 
 /* 	$("#recommendSubmit").click(function() {
@@ -129,9 +128,20 @@ $(document).ready(function(){
 				<button type="submit" class="list_btn">목록</button>
 				  <!-- 로그인이 되어있고, 본인 글이 아닐경우에만 추천할 수 있도록 버튼을 출력 -->
  
- 				<c:if test = "${login.userId != null and login.userId != read.user_id}">   
-					<button type = "button" id = "btnRecommend" class = "btnRecommend">추천하기</button>
+ 				<c:if test = "${login.userId != null and login.userId != userVO.userId}">   
+					<button type = "button" id = "btnRecommend">추천하기</button>
     			</c:if>
+    			<script>
+	    			$("#btnRecommend").click(function(){
+	    			    if(confirm("해당 글을 추천하시겠습니까?")){
+	    			        document.form1.action="recommend";
+	    			        document.form1.submit();
+	    			        
+	    			        alert("해당 글을 추천하였습니다.")
+	    			        
+	    			        }
+	    			    });
+    			</script>
 					
  								
 <%-- 						<div class="panel-body">

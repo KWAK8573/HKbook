@@ -12,7 +12,7 @@ public class Movie_InfoVO {
 	private Timestamp movie_date;
 	private int movie_views;
 	private int recommend;
-	
+
 	public int getMovie_id() {
 		return movie_id;
 	}
@@ -74,7 +74,7 @@ public class Movie_InfoVO {
 		return "Movie_InfoVO [movie_id=" + movie_id + ", category_id=" + category_id + ", user_id=" + user_id
 				+ ", movie_title=" + movie_title + ", movie_content=" + movie_content + ", movie_img=" + movie_img
 				+ ", movie_date=" + movie_date + ", movie_views=" + movie_views + ", recommend=" + recommend
-				+ ", gdsThumbImg=" + "]";
+				+ "]";
 	}
 	
 

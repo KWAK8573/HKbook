@@ -42,11 +42,11 @@ public class Movie_InfoController {
 
 	private static final Logger logger = LoggerFactory.getLogger(Movie_InfoController.class);
 
-	@Inject
-	Movie_InfoService service;
+	@Autowired
+	private Movie_InfoService service;
 	
-	@Inject
-	UserService userService;
+	@Autowired
+	private UserService userService;
 	
 	
 	
@@ -151,11 +151,10 @@ public class Movie_InfoController {
 	//게시물 추천 관련 메소드
     @RequestMapping("/recommend")
     public String recommend (@RequestParam int movie_id) throws Exception {
-       logger.info("recommend");
-   
+        
        service.recommend(movie_id);
     
-       return "redirect:/movie_info/movielist"; //페이지값을 그대로 넘겨받기위해서 포워딩을 사용해 컨트롤러로 리턴시킨다.
+        return "redirect:/movie_info/movielist"; //페이지값을 그대로 넘겨받기위해서 포워딩을 사용해 컨트롤러로 리턴시킨다.
     }
 
 	 
