@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.dao.IScrapDao">
+
+<select id="readScraps" resultType="com.board.domain.ScrapVO">
+		
+		SELECT scrap_Id, scrap_Title,scrap_Address,  user_Id FROM scrap ORDER BY scrap_Id 
+	</select>
+
+
+<select id="readScrap" resultType="com.board.domain.ScrapVO" parameterType="Integer">
+		
+		SELECT * FROM scrap ORDER BY scrap_Id DESC
+	</select>
+	
+	
+	
+	
+ <insert id="insertScrap" >
+		INSERT INTO scrap (scrap_Id, scrap_Title,scrap_Address,  user_Id ) VALUES (SCRAP_SEQ.NEXTVAL, #{param1},#{param2},#{param3} )
+	</insert>
+	
+	
+	
+	<delete id="deleteScrap" parameterType="Integer" >
+	DELETE FROM scrap WHERE scrap_Id= #{param}
+	</delete>
+
+	
+	<update id="updateScrap" >
+		
+		
+		update scrap set scrap_Id = #{param1} , scrap_Address =#{param3},  user_Id = #{param4} where scrap_Title = #{param2}
+		
+	
+	</update>
+	
+	
+</mapper>
