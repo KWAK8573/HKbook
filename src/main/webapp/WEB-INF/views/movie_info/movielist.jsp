@@ -6,20 +6,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<title>insert title here</title>
-
 
 <body>
-	<div>
-		<%@include file="nav.jsp"%>
-	</div>
-	<div class="container">
+<%@ include file="../include/head.jsp" %>
+
+<body class="sb-nav-fixed">
+
+<%@ include file="../include/main_header.jsp" %>
+
+<div id="layoutSidenav">
+	<%@ include file="../include/left_column.jsp" %>
+	<div id="layoutSidenav_content">
 		<form role="form" method="get">
 			<table class='table table-striped'>
 				<thead>
@@ -33,7 +30,7 @@
 						<th>작성날짜</th>
 						<th>조회수</th>
 						<th>추천수</th>
-						
+						<th>이미지</th>
 					</tr>
 				</thead>
 
@@ -53,6 +50,7 @@
 								pattern="yyyy-MM-dd" /></td>
 						<td><c:out value="${movielist.movie_views}" /></td>
 						<td><c:out value="${movielist.recommend}" /></td>
+						<td><c:out value ="${movielist.image}"/></td>
 					</tr>
 
 				</c:forEach>
@@ -83,6 +81,7 @@
 						</span>
 					</div>
 				</div>
+				
 
 				<script>
 					$(function() {
@@ -120,6 +119,11 @@
 					</c:if>
 				</ul>
 			</div>
+							<ul>
+					<li><a href="/movie_info/movielist">목록</a></li>
+					<li><a href="/movie_info/writeView">글 작성</a></li>
+					<li><div id="logo"><a href="/">로고(메인으로)</a></div></li>
+				</ul>
 	</div>
 </body>
 </html>

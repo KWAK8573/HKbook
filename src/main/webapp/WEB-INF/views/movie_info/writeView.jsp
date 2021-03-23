@@ -22,15 +22,6 @@
 				formObj.submit();
 			});
 		})
-		function fn_valiChk(){
-			var regForm = $("form[name='write'] .chk").length;
-			for(var i = 0; i<regForm; i++){
-				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
-					alert($(".chk").eq(i).attr("title"));
-					return true;
-				}
-			}
-		}
 	</script>
 <body>
 
@@ -44,7 +35,7 @@
 		<hr />
 
 		<section id="container">
-			<form action="write" method="post" action="/movie_info/write">
+			<form action="write" method="post" action="/movie_info/write" enctype="multipart/form-data">
 				<table>
 					<tbody>
 						<c:if test="${login.userId != null}">
@@ -69,6 +60,11 @@
 							<td><label for="movie_img">파일경로</label><input type="text"
 								id="movie_img" name="movie_img" class="chk"/></td>
 						</tr>
+						
+						<td>
+							<input type="file" name="file">
+						</td>
+						
 						<tr>
 							<td>
 								<button class="write_btn" type="submit">작성</button>

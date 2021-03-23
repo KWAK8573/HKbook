@@ -9,7 +9,7 @@
 			select MOVIE_INFO_SEQ.nextval FROM DUAL
 		</selectKey>
 		insert into movie_info (movie_id ,category_id, user_id, movie_title, movie_content, movie_img, movie_date)
-			values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, sysdate)
+			values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, sysdate, #{image})
 	</insert>
 
 
@@ -26,7 +26,7 @@
 			movie_views,
 			recommend,
 		row_number() over(order by movie_id desc) as rnum from movie_info where 1=1 
-				<include refid="search"></include> 
+			<include refid="search"></include>  
 								) movie 
 				where rnum between #{rowStart} and #{rowEnd}
 				order by movie_id desc
@@ -36,7 +36,7 @@
 		SELECT COUNT(movie_id)
 		FROM MOVIE_INFO
 		WHERE 1=1
-		<include refid="search"></include>
+		 <include refid="search"></include> 
 		AND MOVIE_ID > 0
 	</select>
 	
@@ -48,7 +48,6 @@
 			<if test="searchType == 'tc'.toString()">AND (movie_title LIKE '%' || #{keyword} || '%') or (movie_content LIKE '%' || #{keyword} || '%')</if>
 		</if>
 	</sql>
-	
 	
 	<select id= "read" parameterType = "int" resultType="com.board.domain.Movie_InfoVO">
 		select *
@@ -64,6 +63,7 @@
 		update movie_info set category_id = #{category_id},
 							  movie_title = #{movie_title}, 
 							  movie_content = #{movie_content}
+							  image = #{image}
 		 where movie_id = #{movie_id}
 	</select>
 	
@@ -74,11 +74,37 @@
     	WHERE movie_id = #{movie_id}
     </update>
     
- 	 <update id = "recommend" parameterType="int">
+ 	 <update id = "recommend">
 	    update movie_info set 
 	   recommend= recommend+1
 	    where movie_id = #{movie_id} 
    	 </update> 
+   	 
+   	<insert id="insertFile" parameterType="hashMap">
+		INSERT INTO movie_FILE(
+			FILE_NO,
+			movie_id,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			SEQ_movie_FILE_NO.NEXTVAL,
+			#{movie_id},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
+    
+    <!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		SELECT FILE_NO,
+			   ORG_FILE_NAME,
+			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		  FROM movie_FILE
+		 WHERE movie_id = #{movie_id}
+		   AND DEL_GB = 'N'
+	</select>
    	 
 <!--     <update id = "countRecommend" parameterType="int" >
     	update movie_info set b_recommend = b_recommend+1

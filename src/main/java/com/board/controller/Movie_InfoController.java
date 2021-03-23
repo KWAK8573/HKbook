@@ -3,6 +3,8 @@ package com.board.controller;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
@@ -75,9 +77,9 @@ public class Movie_InfoController {
 	
 	// 게시판 글 작성
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(Movie_InfoVO movie_InfoVO) throws Exception{
+	public String write(Movie_InfoVO movie_InfoVO, MultipartHttpServletRequest mpRequest) throws Exception{
 		logger.info("write");
-		service.write(movie_InfoVO);
+		service.write(movie_InfoVO, mpRequest);
 		
 		return "redirect:/movie_info/movielist";
 	}
@@ -87,8 +89,7 @@ public class Movie_InfoController {
 	public String read(Movie_InfoVO movie_InfoVO , @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
 		
 		logger.info("read");
-		
-		
+						
 //		// 현재 세션 로그인 유저 아이디 가져오기
 //		UserVO uvo = (UserVO) session.getAttribute( "login_session");
 //		// 유저 추천 활성화 시간 조회, "board/recommend" 요청 결과 값을 view.jsp hidden값(u_r_a_t) 갱신을 위해 조회하여 model에 추가한다
@@ -97,9 +98,11 @@ public class Movie_InfoController {
 //			model.addAttribute("u_recommend_active_time", u_recommend_active_time);
 //		}
 
-		
 		model.addAttribute("read", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
+		
+		List<Map<String, Object>> fileList = service.selectFileList(movie_InfoVO.getMovie_id());
+		model.addAttribute("file", fileList);
 	
 		
 		return "movie_info/readView";
@@ -155,7 +158,7 @@ public class Movie_InfoController {
    
        service.recommend(movie_id);
     
-       return "redirect:/movie_info/movielist"; //페이지값을 그대로 넘겨받기위해서 포워딩을 사용해 컨트롤러로 리턴시킨다.
+       return "redirect:/movie_info/movielist";
     }
 
 	 
