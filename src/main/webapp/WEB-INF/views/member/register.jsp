@@ -2,10 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
-<head>
- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<title>회원가입</title>
-</head>
+
+<%@ include file="../include/head.jsp" %>
 <script type="text/javascript">
 //이메일전송 인증번호 저장위한 코드
 var code = "";
@@ -150,39 +148,95 @@ function onblur_event(){
 	}
 };
 </script>
-<body>
-	<%@include file="../header.jsp"%>
-	<h3 class="title">회원가입</h3>
-	<section id="container">
-		<form action="/member/register" method="post" id="regForm">
-			<div>
-				<input type="text" id="userId"  name="userId" placeholder="아이디" onchange="keyebent()"/>
-				<button class="idChk" type="button" id="idChk" onclick="fn_idChk()" >중복확인</button>
+<body class="bg-primary">
+<div id="layoutAuthentication">
+	<div id="layoutAuthentication_content">
+	<main>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-7">
+					<div class="card shadow-lg border-0 rounded-lg mt-5">
+						<div class="card-header">
+							<h3 class="text-center font-weight-light my-4">회원가입</h3>
+						</div>
+						<div class="card-body">
+							<form action="/member/register" method="post" id="regForm">
+								<div class="form-row">
+									<div class="col-md-8">
+										<div class="form-group"> 
+											<input class="form-control py-4" id="userId"  name="userId" type="text" onchange="keyebent()" placeholder="아이디" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<button class="idChk btn btn-primary btn-block py-2" type="button" id="idChk" onclick="fn_idChk()" >중복확인</button>
+										</div>
+									</div>
+								</div>
+								<div class="form-group result">
+									<span class="msg">아이디를 확인해주세요</span>
+								</div>
+								<div class="form-row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input class="form-control py-4" id="pw" name="pw" type="password" placeholder="패스워드" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input class="form-control py-4"  id="pw2" name="pw2" type="password" placeholder="패스워드 확인" />
+										</div>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="col-md-8">
+										<div class="form-group"> 
+											<input class="form-control py-4" id="email" name="email"  type="text" placeholder="이메일" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<button class="idChk btn btn-primary btn-block py-2" type="button" id="fn_emailChk" onclick="fn_EChk()">이메일 사용확인</button>
+										</div>
+									</div>
+								</div>
+								<div class="form-group result">
+									<span class="msg_email">이메일 인증을 해주세요</span>
+								</div>
+								<div class="form-row">
+									<div class="col-md-8">
+										<div class="form-group"> 
+											<input type="text" class="mail_check_input form-control py-4" disabled="disabled" onblur="onblur_event()" placeholder="인증번호 입력" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<button class="mail_check_button btn btn-primary btn-block py-2" id="mc_btn" type="button" onclick="mailClick()" disabled="disabled">인증번호 전송</button>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<span id="mail_check_input_box_warn">인증번호를 확인해주세요</span>
+								</div>
+								<div class="form-group mt-4 mb-0">
+									<button class="btn btn-primary btn-block"  type="submit" id="submit" disabled="disabled">회원가입</button>
+								</div>
+							</form>
+						</div>
+						<div class="card-footer text-center">
+							<div class="small">
+								<a href="/member/login">로그인</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="result">
-				<span class="msg">아이디를 확인해주세요</span>
-			</div>
-			<div class="pdt30">
-				<input type="password" id="pw" name="pw" placeholder="패스워드"/>
-				<input type="password" id="pw2" name="pw2" placeholder="패스워드 확인"/>
-			</div>
-			<div class="pdt30">
-				<input type="text" id="email" name="email" placeholder="이메일"/>
-				<button type="button" id="fn_emailChk" onclick="fn_EChk()">이메일 사용확인</button>
-			</div>
-			<div class="result">
-				<span class="msg_email"></span>
-			</div>
-			<div  class="pdt30">
-				<input type="text" class="mail_check_input" disabled="disabled" onblur="onblur_event()"/>
-				<button class="mail_check_button" id="mc_btn" type="button" onclick="mailClick()" disabled="disabled">인증번호 전송</button>
-			</div>
-			<span id="mail_check_input_box_warn"></span>
-			<div class="pdt30">
-				<button type="submit" id="submit" disabled="disabled">회원가입</button>
-				<a href="/member/login" >로그인</a>
-			</div>
-		</form>
-	</section>
+		</div>
+	</main>
+	</div>
+	<%@ include file="../include_user/user_footer.jsp" %>
+</div>
+
+<%@ include file="../include_user/user_plugin_js.jsp" %>
 </body>
 </html>
