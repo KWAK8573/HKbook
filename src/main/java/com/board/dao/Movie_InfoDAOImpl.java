@@ -6,6 +6,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.board.domain.Criteria;
@@ -16,8 +18,9 @@ import com.board.domain.SearchCriteria;
 @Repository
 public class Movie_InfoDAOImpl implements Movie_InfoDAO {
 
+
 	@Inject
-	private SqlSession sql;
+	SqlSessionTemplate sql;
 
 	private static String namespace = "com.board.mappers.board";
 
@@ -62,6 +65,20 @@ public class Movie_InfoDAOImpl implements Movie_InfoDAO {
 		sql.update( namespace + ".movieviews", movie_id);
 		
 	}
+
+	@Override
+	public void recommend(int movie_id) throws Exception {
+		sql.update( namespace + ".recommend", movie_id);
+		
+	}
+
+
+
+//	@Override
+//	public void countRecommend(HashMap<String, Object> params) throws Exception {
+//		sql.update( namespace + ".countRecommend", params);
+//		
+//	}
 
 
 }

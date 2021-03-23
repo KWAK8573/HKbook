@@ -3,16 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.mappers.board">
+
 	<insert id="insert" parameterType = "com.board.domain.Movie_InfoVO" useGeneratedKeys="true" keyProperty="movie_id">
 		<selectKey keyProperty="movie_id" resultType="int" order="BEFORE">
 			select MOVIE_INFO_SEQ.nextval FROM DUAL
 		</selectKey>
-		insert into movie_info (movie_id ,category_id, user_id, movie_title, movie_content, movie_img, movie_date, total_rating)
-			values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, sysdate, #{total_rating})
+		insert into movie_info (movie_id ,category_id, user_id, movie_title, movie_content, movie_img, movie_date)
+			values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, sysdate)
 	</insert>
 
+
 	<select id="listPage" resultType="com.board.domain.Movie_InfoVO" parameterType="com.board.domain.SearchCriteria">
-		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, total_rating
+		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, recommend
 		from 
 			(select movie_id, 
 			category_id, 
@@ -22,7 +24,7 @@
 			movie_img, 
 			movie_date, 
 			movie_views,
-			total_rating,
+			recommend,
 		row_number() over(order by movie_id desc) as rnum from movie_info where 1=1 
 				<include refid="search"></include> 
 								) movie 
@@ -49,15 +51,9 @@
 	
 	
 	<select id= "read" parameterType = "int" resultType="com.board.domain.Movie_InfoVO">
-		select 	movie_id, 
-				category_id, 
-				user_id, 
-				movie_title, 
-				movie_content, 
-				movie_img, 
-				movie_date 
-				from movie_info 
-				where movie_id = #{movie_id}
+		select *
+		from movie_info 
+		where movie_id = #{movie_id}
 	</select>
 	
 	<select id = "delete" parameterType = "int">
@@ -78,4 +74,19 @@
     	WHERE movie_id = #{movie_id}
     </update>
     
+ 	 <update id = "recommend" parameterType="int">
+	    update movie_info set 
+	   recommend= recommend+1
+	    where movie_id = #{movie_id} 
+   	 </update> 
+   	 
+<!--     <update id = "countRecommend" parameterType="int" >
+    	update movie_info set b_recommend = b_recommend+1
+    	where movie_id = #{movie_id}
+    	and now() > (select u_recommend_active_time from
+    	member_board where USER_ID = #{userId});
+    	
+    </update> -->
+    
+     
 </mapper>

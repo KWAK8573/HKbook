@@ -12,94 +12,11 @@
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>insert title here</title>
 </head>
-<script type="text/javascript">
-var lcnt = '<c:out value="${resultList[0].faqrp_likeCnt }"/>';
-var hcnt = '<c:out value="${resultList[0].faqrp_hateCnt }"/>';
-var faq_idx = "${searchVO.faq_idx }";
-var faqrp_idx = "${resultList[0].faqrp_idx }";
-var me_id = "${resultList[0].me_id }";
-var alreadyLikeClick = false;
-var alreadyHateClick = false;
- 
-function updateLike(ths){
-        
-    var idx = $("button.likeBtn").index(ths); 
-    faqrp_idx = $("input[name='faqrp_idx']").eq(idx).val(); 
-    
- 
-    if(!alreadyLikeClick){
-        lcnt = parseInt(lcnt)+1;
-        alreadyLikeClick = true;
-        alreadyHateClick = true;
-    }
-    
-    
-    var submitObj = new Object();
-    submitObj.faq_idx = faq_idx;
-    submitObj.faqrp_idx = faqrp_idx;
-    submitObj.me_id = me_id;
-    submitObj.faqrp_likeCnt= lcnt;
-    
-    
-    $.ajax({ 
-            url: path+"/onlinecounsel/csfaq/likeCnt.do", 
-            type: "POST", 
-            contentType: "application/json;charset=UTF-8",
-            data:JSON.stringify(submitObj),
-            dataType : "json",
-            async: false,
-           })
-          .done(function(resMap) {
-              alert("추천하였습니다.");
-              location.reload();
-           }) 
-           .fail(function(e) {  
-               alert("한개의 글에 한번만 클릭이 가능합니다.");
-           }) 
-           .always(function() { 
-           }); 
-    
-}
-    
-function updateHate(ths){
-    var idx = $("button.hateBtn").index(ths); 
-    faqrp_idx = $("input[name='faqrp_idx']").eq(idx).val();
-    if(!alreadyHateClick){
-        hcnt = parseInt(hcnt)+1;
-        alreadyLikeClick = true;
-        alreadyHateClick = true;
-    }
-    
-    var submitObj = new Object();
-    submitObj.faq_idx = faq_idx;
-    submitObj.faqrp_idx = faqrp_idx;
-    submitObj.me_id = me_id;
-    submitObj.faqrp_hateCnt=  hcnt;
-    
-    $.ajax({ 
-            url: path+"/onlinecounsel/csfaq/hateCnt.do", 
-            type: "POST", 
-            contentType: "application/json;charset=UTF-8",
-            data:JSON.stringify(submitObj),
-            dataType : "json",
-            async: false,
-           })
-          .done(function(resMap) {
-              alert("비추천하였습니다.");
-              location.reload();
-           }) 
-           .fail(function(e) {  
-               alert("한개의 글에 한번만 클릭이 가능합니다.");
-           }) 
-           .always(function() { 
-           }); 
-}
-</script>
+
+
+
 <body>
 	<div>
 		<%@include file="nav.jsp"%>
@@ -136,10 +53,11 @@ function updateHate(ths){
 						<td><fmt:formatDate value="${movielist.movie_date}"
 								pattern="yyyy-MM-dd" /></td>
 						<td><c:out value="${movielist.movie_views}" /></td>
-						<td><c:out value="${movielist.total_rating}" /></td>
+						<td><c:out value="${movielist.recommend}" /></td>
 					</tr>
 
 				</c:forEach>
+
 
 			</table>
 			<div class="search row">

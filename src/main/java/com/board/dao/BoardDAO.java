@@ -1,5 +1,6 @@
 package com.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -27,5 +28,4 @@ public interface BoardDAO {
 	
 	public void recommend(int review_id) throws Exception;
 
-    
 }
