@@ -151,9 +151,11 @@ public class MemberController {
 		// input으로 들어오는 이메일 
 		// 이메일 등록여부 확인
 		String findId = userService.findId(userVO.getEmail());
+		//찾은 아이디가 탈퇴 회원인지 확인
+		int findXid = userService.Xid(findId);
 		
 		//이메일을 찾을 수 없는 경우
-		if (findId == null) {
+		if (findId == null || findXid == 1) {
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:/member/findIdView";
 		}
@@ -223,7 +225,67 @@ public class MemberController {
 		
 		return num;
 	}
+	
+	//비밀번호 찾기 페이지 이동
+	@RequestMapping(value = "/findPwView", method = RequestMethod.GET)
+	public String findPwGET() throws Exception {
+		return "/member/findPwView";
+	}
 
+	//비밀번호 찾기
+	@RequestMapping(value = "/findPw", method = RequestMethod.POST) 
+	public String findPwPOST(UserVO userVO, RedirectAttributes rttr, HttpServletRequest request, HttpSession httpsession) throws Exception { 
+		logger.info("비밀번호 찾기");
+		
+		String findId = userService.findId(userVO.getEmail());
+		int findXid = userService.Xid(findId);
+		
+		//등록되지 않은 이메일 혹은 탈퇴회원
+		if (findId == null || findXid == 1) {
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/member/findPwView";
+		}
+		
+		//임시비밀번호 만들기
+		char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' }; 
+		int idx = 0; 
+		StringBuffer imsiPw = new StringBuffer(); 
+		for (int i = 0; i < 10; i++) { 
+			idx = (int) (charSet.length * Math.random()); 
+			imsiPw.append(charSet[idx]);
+		}
+		//형변환 시키기
+		String imsiSPw = imsiPw.toString();
+		
+		//비밀번호 암호화 처리 
+		String hashedPW = BCrypt.hashpw(imsiSPw, BCrypt.gensalt());
+		userVO.setPw(hashedPW);
+		
+		userService.updatePw(userVO);
+		
+		//이메일 보내기
+		String setFrom = "asdfqwe5317@gmail.com"; 
+		String toMail = userVO.getEmail();
+		String title = "임시 비밀번호 입니다."; 
+		String content = //이메일 내용
+				"임시 비밀번호는 <span style='color:red; font-size:30px;'>" + 
+				imsiSPw + "</span>입니다.";
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content,true);
+			mailSender.send(message);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		httpsession.invalidate();
+		
+		return "redirect:/member/login"; 
+	}
 }
 
 

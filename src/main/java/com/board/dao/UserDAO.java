@@ -28,4 +28,7 @@ public interface UserDAO {
 	
 	//이메일 중복체크
 	public int findEmail(String email) throws Exception;
+	
+	//비밀번호 변경
+	public void updatePw(UserVO userVO) throws Exception;
 }
