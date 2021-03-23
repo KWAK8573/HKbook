@@ -63,7 +63,7 @@
 							<tr>
 								<td>
 									<label for="review_content">내용</label>
-									<textarea rows="5" cols="50" id="review_content" name="review_content" ></textarea>
+									<textarea rows="5" cols="100" id="review_content" name="review_content" ></textarea>
 									<script>
 									 var ckeditor_config = {
 									   resize_enaleb : false,
@@ -93,7 +93,7 @@
 								 <input type="file" id="review_img" name="file" />
 								 <div class="select_img"><img src="" /></div>
 								 
-								 <script>
+							<script>
 								  $("#review_img").change(function(){
 								   if(this.files && this.files[0]) {
 								    var reader = new FileReader;
@@ -104,7 +104,6 @@
 								   }
 								  });
 						 </script>
-						 <%=request.getRealPath("/") %>
 						</div>
 				</form>
 			</section>
