@@ -11,7 +11,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>게시판</title>
 </head>
+<style>
+.inputArea { margin:10px 0;}
+select {width:100px;}
+label {display:inline-block; width:70px; padding:5px;}
+.oriImg {width:500px; height:auto;}
+.thumbImg{}
+</style>
 <script type="text/javascript"></script>
+
 <script>
 $(document).ready(function(){
 	var formObj = $("form[name='readForm']");
@@ -43,7 +51,7 @@ $(document).ready(function(){
 				      +"&perPageNum=${scri.perPageNum}"
 				      +"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 	})
-/*    	//추천하기 버튼
+    	//추천하기 버튼
 	$("#btnRecommend").click(function(){
 	    if(confirm("해당 글을 추천하시겠습니까?")){
 	        document.form1.action="recommend";
@@ -52,8 +60,9 @@ $(document).ready(function(){
 	        alert("해당 글을 추천하였습니다.")
 	        
 	        }
-	    });   */
-	 
+	    });   
+	
+	
 	// 추천하기
 
 /* 	$("#recommendSubmit").click(function() {
@@ -82,7 +91,7 @@ $(document).ready(function(){
 
 	<div class="container">
 		<header>
-			<h1>게시판</h1>
+			<h1>게시판 조회</h1>
 		</header>
 		<hr />
 
@@ -97,7 +106,7 @@ $(document).ready(function(){
 				  <input type="hidden" id="page" name="page" value="${scri.page}"> 
 				  <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 				  <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
-				  <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+				  <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 				</form>
 				<table>
 					<tbody>
@@ -110,9 +119,7 @@ $(document).ready(function(){
 						<tr>
 							<td><label for="movie_content">영화 소개</label> <textarea id="movie_content" name="movie_content"><c:out value="${read.movie_content}" /></textarea></td>
 						</tr>
-						<tr>
-							<td><label for="movie_img">파일경로</label><input type="text" id="movie_img" name="movie_img" value="${read.movie_img}" /></td>
-						</tr>
+
 						<tr>
 							<td><label for="user_id">작성자</label><input type="text" id="user_id" name="user_id" value="${read.user_id}" /></td>
 						</tr>
@@ -122,27 +129,20 @@ $(document).ready(function(){
 					</tbody>
 				</table>
 			</form>
+
 			<div>
 				<button type="submit" class="update_btn">수정</button>
 				<button type="submit" class="delete_btn">삭제</button>
 				<button type="submit" class="list_btn">목록</button>
 				  <!-- 로그인이 되어있고, 본인 글이 아닐경우에만 추천할 수 있도록 버튼을 출력 -->
  
- 				<c:if test = "${login.userId != null and login.userId != userVO.userId}">   
-					<button type = "button" id = "btnRecommend">추천하기</button>
+ 				<c:if test = "${login.userId != null and login.userId != read.user_id}">   
+					<button type = "button" id = "btnRecommend" class = "btnRecommend">추천하기</button>
     			</c:if>
-    			<script>
-	    			$("#btnRecommend").click(function(){
-	    			    if(confirm("해당 글을 추천하시겠습니까?")){
-	    			        document.form1.action="recommend";
-	    			        document.form1.submit();
-	    			        
-	    			        alert("해당 글을 추천하였습니다.")
-	    			        
-	    			        }
-	    			    });
-    			</script>
 					
+							<div class="inputArea">
+								<img src="${read.movie_img}" class="oriImg"/>
+							</div>
  								
 <%-- 						<div class="panel-body">
  								<div class="well text-center">

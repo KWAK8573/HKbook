@@ -3,6 +3,7 @@ package com.board.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -27,7 +28,7 @@ public interface Movie_InfoService {
 	
 	public void recommend(int movie_id) throws Exception;
 	
-
+	
 //	public void countRecommend(HashMap<String, Object> params) throws Exception;
 }
 

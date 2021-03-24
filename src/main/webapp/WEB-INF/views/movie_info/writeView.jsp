@@ -10,6 +10,10 @@
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>게시판</title>
 </head>
+<style>
+
+.select_img img {margin:20px 0;}
+</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var formObj = $("form[name='write']");
@@ -22,15 +26,7 @@
 				formObj.submit();
 			});
 		})
-		function fn_valiChk(){
-			var regForm = $("form[name='write'] .chk").length;
-			for(var i = 0; i<regForm; i++){
-				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
-					alert($(".chk").eq(i).attr("title"));
-					return true;
-				}
-			}
-		}
+
 	</script>
 <body>
 
@@ -44,7 +40,7 @@
 		<hr />
 
 		<section id="container">
-			<form action="write" method="post" action="/movie_info/write">
+			<form action="write" method="post" action="/movie_info/write" enctype="multipart/form-data">
 				<table>
 					<tbody>
 						<c:if test="${login.userId != null}">
@@ -65,10 +61,25 @@
 									name="movie_content" class="chk"></textarea></td>
 						</tr>
 
-						<tr>
-							<td><label for="movie_img">파일경로</label><input type="text"
-								id="movie_img" name="movie_img" class="chk"/></td>
-						</tr>
+						
+						<div class="inputArea">
+							 <label for="movie_img">이미지</label>
+							 <input type="file" id="movie_img" name="file" />
+							 <div class="select_img"><img src="" /></div>
+							 
+							 <script>
+							  $("#movie_img").change(function(){
+							   if(this.files && this.files[0]) {
+							    var reader = new FileReader;
+							    reader.onload = function(data) {
+							     $(".select_img img").attr("src", data.target.result).width(500);        
+							    }
+							    reader.readAsDataURL(this.files[0]);
+							   }
+							  });
+							 </script>
+							 <%=request.getRealPath("/") %>
+						</div>
 						<tr>
 							<td>
 								<button class="write_btn" type="submit">작성</button>

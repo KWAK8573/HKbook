@@ -22,6 +22,35 @@
 			   + "&searchType=${scri.searchType}"
 			   + "&keyword=${scri.keyword}";
 		})
+					$(".update_btn").on("click", function(){
+				if(fn_valiChk()){
+					return false;
+				}
+				formObj.attr("action", "/movie_info/update");
+				formObj.attr("method", "post");
+				formObj.submit();
+			})
+		})
+		 		function fn_addFile(){
+			var fileIndex = 1;
+			//$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"<button type='button' style='float:right;' id='fileAddBtn'>"+"추가"+"</button></div>");
+			$(".fileAdd_btn").on("click", function(){
+				$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
+			});
+			$(document).on("click","#fileDelBtn", function(){
+				$(this).parent().remove();
+				
+			});
+		}
+ 		var fileNoArry = new Array();
+ 		var fileNameArry = new Array();
+ 		function fn_del(value, name){
+ 			
+ 			fileNoArry.push(value);
+ 			fileNameArry.push(name);
+ 			$("#fileNoDel").attr("value", fileNoArry);
+ 			$("#fileNameDel").attr("value", fileNameArry);
+ 		}
 	
 	</script>
 	<body>
@@ -66,12 +95,24 @@
 									<label for="movie_date">작성날짜</label>
 									<fmt:formatDate value="${update.movie_date}" pattern="yyyy-MM-dd"/>					
 								</td>
-							</tr>		
+							</tr>
+														<tr>
+								<td id="fileIndex">
+									<c:forEach var="file" items="${file}" varStatus="var">
+									<div>
+										<input type="hidden" id="FILE_NO" name="FILE_NO_${var.index}" value="${file.FILE_NO }">
+										<input type="hidden" id="FILE_NAME" name="FILE_NAME" value="FILE_NO_${var.index}">
+										<a href="#" id="fileName" onclick="return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)
+										<button id="fileDel" onclick="fn_del('${file.FILE_NO}','FILE_NO_${var.index}');" type="button">삭제</button><br>
+									</div>
+									</c:forEach>
+								</td>		
 						</tbody>			
 					</table>
 					<div>
 						<button type="submit" class="update_btn">저장</button>
 						<button type="submit" class="cancel_btn">취소</button>
+						<button type="button" class="fileAdd_btn">파일추가</button>
 					</div>
 				</form>
 			</section>
