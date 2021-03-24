@@ -17,16 +17,12 @@ import com.board.dao.Movie_InfoDAO;
 import com.board.domain.Criteria;
 import com.board.domain.Movie_InfoVO;
 import com.board.domain.SearchCriteria;
-import com.board.utils.FileUtils;
 
 
 
 @Service
 public class Movie_InfoServiceImpl implements Movie_InfoService {
 
-	@Resource(name="fileUtils")
-	private FileUtils fileUtils;
-	
 	@Inject
 	Movie_InfoDAO dao;
 	 
@@ -43,14 +39,8 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 	}
 
 	@Override
-	public void write(Movie_InfoVO movie_InfoVO, MultipartHttpServletRequest mpRequest) throws Exception {
+	public void write(Movie_InfoVO movie_InfoVO) throws Exception {
 		dao.write(movie_InfoVO);
-		
-		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(movie_InfoVO, mpRequest); 
-		int size = list.size();
-		for(int i=0; i<size; i++){ 
-			dao.insertFile(list.get(i)); 
-		}
 		
 	}
 	
@@ -71,7 +61,7 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 	@Override
 	public void update(Movie_InfoVO movie_InfoVO) throws Exception {
 		dao.update(movie_InfoVO);
-		
+			
 	}
 	
 	@Override
@@ -81,11 +71,6 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 		
 	}
 
-	@Override
-	public List<Map<String, Object>> selectFileList(int movie_id) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.selectFileList(movie_id);
-	}
 
 
 //	@Override

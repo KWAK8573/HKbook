@@ -8,13 +8,13 @@
 		<selectKey keyProperty="movie_id" resultType="int" order="BEFORE">
 			select MOVIE_INFO_SEQ.nextval FROM DUAL
 		</selectKey>
-		insert into movie_info (movie_id ,category_id, user_id, movie_title, movie_content, movie_img, movie_date)
-			values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, sysdate)
+		insert into movie_info (movie_id ,category_id, user_id, movie_title, movie_content, movie_img, movie_date, Img)
+			values(#{movie_id}, #{category_id}, #{user_id}, #{movie_title}, #{movie_content}, #{movie_img}, sysdate, #{Img})
 	</insert>
 
 
 	<select id="listPage" resultType="com.board.domain.Movie_InfoVO" parameterType="com.board.domain.SearchCriteria">
-		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, recommend
+		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, recommend, Img
 		from 
 			(select movie_id, 
 			category_id, 
@@ -25,6 +25,7 @@
 			movie_date, 
 			movie_views,
 			recommend,
+			Img,
 		row_number() over(order by movie_id desc) as rnum from movie_info where 1=1 
 			<include refid="search"></include>  
 								) movie 
@@ -78,32 +79,7 @@
 	    recommend= recommend+1
 	    where movie_id = #{movie_id} 
    	 </update> 
-   	 
-   	<insert id="insertFile" parameterType="hashMap">
-		INSERT INTO movie_FILE(
-			FILE_NO,
-			movie_id,
-			ORG_FILE_NAME,
-			STORED_FILE_NAME,
-			FILE_SIZE
-		)VALUES(
-			SEQ_movie_FILE_NO.NEXTVAL,
-			#{movie_id},
-			#{ORG_FILE_NAME},
-			#{STORED_FILE_NAME},
-			#{FILE_SIZE}
-		)
-    </insert>
-    
-    <!-- 첨부파일 조회 -->
-	<select id="selectFileList" parameterType="int" resultType="hashMap">
-		SELECT FILE_NO,
-			   ORG_FILE_NAME,
-			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
-		  FROM movie_FILE
-		 WHERE movie_id = #{movie_id}
-		   AND DEL_GB = 'N'
-	</select>
+
    	 
 <!--     <update id = "countRecommend" parameterType="int" >
     	update movie_info set b_recommend = b_recommend+1

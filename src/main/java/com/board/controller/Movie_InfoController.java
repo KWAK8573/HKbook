@@ -1,11 +1,14 @@
 package com.board.controller;
 
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,6 +40,7 @@ import com.board.domain.SearchCriteria;
 import com.board.domain.UserVO;
 import com.board.service.Movie_InfoService;
 import com.board.service.UserService;
+import com.board.utils.UploadFileUtils;
 
 
 @Controller
@@ -49,6 +54,9 @@ public class Movie_InfoController {
 	
 	@Inject
 	UserService userService;
+	
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	
 	
@@ -77,9 +85,23 @@ public class Movie_InfoController {
 	
 	// 게시판 글 작성
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(Movie_InfoVO movie_InfoVO, MultipartHttpServletRequest mpRequest) throws Exception{
+	public String write(Movie_InfoVO movie_InfoVO, MultipartFile file) throws Exception{
 		logger.info("write");
-		service.write(movie_InfoVO, mpRequest);
+		
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+
+		if(file != null) {
+		 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+		} else {
+		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		movie_InfoVO.setMovie_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		movie_InfoVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		
+		service.write(movie_InfoVO);
 		
 		return "redirect:/movie_info/movielist";
 	}
@@ -100,9 +122,6 @@ public class Movie_InfoController {
 
 		model.addAttribute("read", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
-		
-		List<Map<String, Object>> fileList = service.selectFileList(movie_InfoVO.getMovie_id());
-		model.addAttribute("file", fileList);
 	
 		
 		return "movie_info/readView";
@@ -116,22 +135,23 @@ public class Movie_InfoController {
 		model.addAttribute("update", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
 		
-		
 		return "movie_info/updateView";
 	}
 	
 	// 게시판 수정
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Movie_InfoVO movie_InfoVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
+	public String update(Movie_InfoVO movie_InfoVO, 
+						 @ModelAttribute("scri") SearchCriteria scri, 
+						 RedirectAttributes rttr,												
+						 MultipartHttpServletRequest mpRequest) throws Exception {
 		logger.info("update");
-		
 		service.update(movie_InfoVO);
-		
+
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
-		
+
 		return "redirect:/movie_info/movielist";
 	}
 
@@ -160,6 +180,7 @@ public class Movie_InfoController {
     
        return "redirect:/movie_info/movielist";
     }
+    
 
 	 
 	

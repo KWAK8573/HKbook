@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <body>
 <%@ include file="../include/head.jsp" %>
 
@@ -21,23 +20,22 @@
 			<table class='table table-striped'>
 				<thead>
 					<tr>
+						<th>썸네일</th>
 						<th>영화소개 아이디</th>
 						<th>카테고리</th>
 						<th>작성자</th>
 						<th>영화제목</th>
 						<th>영화 내용</th>
-						<th>영화 파일경로</th>
 						<th>작성날짜</th>
 						<th>조회수</th>
 						<th>추천수</th>
-						<th>이미지</th>
 					</tr>
 				</thead>
 
 
-				<c:forEach items="${movielist}" var="movielist">
-
+					<c:forEach items="${movielist}" var="movielist">
 					<tr>
+						<td><img src="${movielist.img}"/> </td>
 						<td><c:out value="${movielist.movie_id}" /></td>
 						<td><c:out value="${movielist.category_id}" /></td>
 						<td><c:out value="${movielist.user_id}" /></td>
@@ -45,15 +43,13 @@
 							href="/movie_info/readView?movie_id=${movielist.movie_id}"><c:out
 									value="${movielist.movie_title}" /></a></td>
 						<td><c:out value="${movielist.movie_content}" /></td>
-						<td><c:out value="${movielist.movie_img}" /></td>
 						<td><fmt:formatDate value="${movielist.movie_date}"
 								pattern="yyyy-MM-dd" /></td>
 						<td><c:out value="${movielist.movie_views}" /></td>
 						<td><c:out value="${movielist.recommend}" /></td>
-						<td><c:out value ="${movielist.image}"/></td>
 					</tr>
-
 				</c:forEach>
+
 
 			</table>
 			<div class="search row">

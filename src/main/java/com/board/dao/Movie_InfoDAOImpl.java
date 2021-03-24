@@ -73,18 +73,6 @@ public class Movie_InfoDAOImpl implements Movie_InfoDAO {
 		
 	}
 
-	@Override
-	public void insertFile(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		sql.insert( namespace + ".insertFile", map);
-	}
-
-	@Override
-	public List<Map<String, Object>> selectFileList(int movie_id) throws Exception {
-		// TODO Auto-generated method stub
-		return sql.selectList( namespace + ".selectFileList", movie_id);
-	}
-
 
 
 //	@Override
