@@ -50,8 +50,8 @@ public class BoardController {
 	 @Inject
 	 UserService userService;
 	
-//	@Resource(name="uploadPath")
-//	private String uploadPath;
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	 
 	// 게시판 목록 조회
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -107,18 +107,18 @@ public class BoardController {
 			logger.info("write");
 			
 
-//			String imgUploadPath = uploadPath + File.separator + "imgUpload";
-//			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-//			String fileName = null;
-//
-//			if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
-//			 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
-//			} else {
-//			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-//			}
-//
-//			boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-//			boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			String fileName = null;
+
+			if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+			} else {
+			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+			}
+
+			boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 
 
 			UserVO login = (UserVO)session.getAttribute("login");
@@ -130,53 +130,53 @@ public class BoardController {
 		}
 		
 		// ck 에디터에서 파일 업로드
-//		@RequestMapping(value = "/board/ckUpload" , method = RequestMethod.POST)
-//		public void postCKEditorImgUpload(HttpServletRequest req,
-//		          HttpServletResponse res,
-//		          @RequestParam MultipartFile upload) throws Exception {
-//			 logger.info("post CKEditor img upload");
-//			 
-//			 // 랜덤 문자 생성
-//			 UUID uid = UUID.randomUUID();
-//			 
-//			 OutputStream out = null;
-//			 PrintWriter printWriter = null;
-//			   
-//			 // 인코딩
-//			 res.setCharacterEncoding("utf-8");
-//			 res.setContentType("text/html;charset=utf-8");
-//			 
-//			 try {
-//			  
-//			  String fileName = upload.getOriginalFilename();  // 파일 이름 가져오기
-//			  byte[] bytes = upload.getBytes();
-//			  
-//			  // 업로드 경로
-//			  String ckUploadPath = uploadPath + File.separator + "ckUpload" + File.separator + uid + "_" + fileName;
-//			  
-//			  out = new FileOutputStream(new File(ckUploadPath));
-//			  out.write(bytes);
-//			  out.flush();  // out에 저장된 데이터를 전송하고 초기화
-//			  
-//			  String callback = req.getParameter("CKEditorFuncNum");
-//			  printWriter = res.getWriter();
-//			  String fileUrl = "/ckUpload/" + uid + "_" + fileName;  // 작성화면
-//			  
-//			  // 업로드시 메시지 출력
-//			  printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
-//			  
-//			  printWriter.flush();
-//			  
-//			 } catch (IOException e) { e.printStackTrace();
-//			 } finally {
-//			  try {
-//			   if(out != null) { out.close(); }
-//			   if(printWriter != null) { printWriter.close(); }
-//			  } catch(IOException e) { e.printStackTrace(); }
-//			 }
-//			 
-//			 return; 
-//		}
+		@RequestMapping(value = "/board/ckUpload" , method = RequestMethod.POST)
+		public void postCKEditorImgUpload(HttpServletRequest req,
+		          HttpServletResponse res,
+		          @RequestParam MultipartFile upload) throws Exception {
+			 logger.info("post CKEditor img upload");
+			 
+			 // 랜덤 문자 생성
+			 UUID uid = UUID.randomUUID();
+			 
+			 OutputStream out = null;
+			 PrintWriter printWriter = null;
+			   
+			 // 인코딩
+			 res.setCharacterEncoding("utf-8");
+			 res.setContentType("text/html;charset=utf-8");
+			 
+			 try {
+			  
+			  String fileName = upload.getOriginalFilename();  // 파일 이름 가져오기
+			  byte[] bytes = upload.getBytes();
+			  
+			  // 업로드 경로
+			  String ckUploadPath = uploadPath + File.separator + "ckUpload" + File.separator + uid + "_" + fileName;
+			  
+			  out = new FileOutputStream(new File(ckUploadPath));
+			  out.write(bytes);
+			  out.flush();  // out에 저장된 데이터를 전송하고 초기화
+			  
+			  String callback = req.getParameter("CKEditorFuncNum");
+			  printWriter = res.getWriter();
+			  String fileUrl = "/ckUpload/" + uid + "_" + fileName;  // 작성화면
+			  
+			  // 업로드시 메시지 출력
+			  printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+			  
+			  printWriter.flush();
+			  
+			 } catch (IOException e) { e.printStackTrace();
+			 } finally {
+			  try {
+			   if(out != null) { out.close(); }
+			   if(printWriter != null) { printWriter.close(); }
+			  } catch(IOException e) { e.printStackTrace(); }
+			 }
+			 
+			 return; 
+		}
 		
 		// 게시판 수정뷰
 		@RequestMapping(value = "/updateView", method = RequestMethod.GET)
@@ -195,25 +195,25 @@ public class BoardController {
 			logger.info("update");
 			
 			 // 새로운 파일이 등록되었는지 확인
-//			 if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
-//			  // 기존 파일을 삭제
-//			  new File(uploadPath + req.getParameter("review_img")).delete();
-//			  new File(uploadPath + req.getParameter("thumbimg")).delete();
-//			  
-//			  // 새로 첨부한 파일을 등록
-//			  String imgUploadPath = uploadPath + File.separator + "imgUpload";
-//			  String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-//			  String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
-//			  
-//			  boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-//			  boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
-//			  
-//			 } else {  // 새로운 파일이 등록되지 않았다면
-//			  // 기존 이미지를 그대로 사용
-//			  boardVO.setReview_img(req.getParameter("review_img"));
-//			  boardVO.setThumbimg(req.getParameter("thumbimg"));
-//			  
-//			 }
+			 if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			  // 기존 파일을 삭제
+			  new File(uploadPath + req.getParameter("review_img")).delete();
+			  new File(uploadPath + req.getParameter("thumbimg")).delete();
+			  
+			  // 새로 첨부한 파일을 등록
+			  String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			  String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			  String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+			  
+			  boardVO.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			  boardVO.setThumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+			  
+			 } else {  // 새로운 파일이 등록되지 않았다면
+			  // 기존 이미지를 그대로 사용
+			  boardVO.setReview_img(req.getParameter("review_img"));
+			  boardVO.setThumbimg(req.getParameter("thumbimg"));
+			  
+			 }
 			
 			service.update(boardVO);
 			
