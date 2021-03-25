@@ -28,11 +28,9 @@ li {
 					<li class="breadcrumb-item"><a href="/board/list">영화리뷰</a></li>
 					<li class="breadcrumb-item active">영화리뷰</li>
 				</ol>
-<body>
-<p><a href="/board/writeView">게시물 쓰기</a></p>
- <form role="form" method="get">
-<table>
-<div class="mb-4">
+				
+					 <form role="form" method="get">
+					<div class="mb-4">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="" width="100%" cellspacing="0">
 							<thead>
@@ -45,9 +43,9 @@ li {
 									<th>추천</th>
 								</tr>
 							</thead>
- <tbody>
-  <c:forEach items="${list}" var="list">
-	<tr>
+				 <tbody>
+				  <c:forEach items="${list}" var="list">
+					<tr>
 
 				<td>${list.review_id}</td>
 				<!-- <td>${list.movie_id}</td>-->
@@ -74,9 +72,11 @@ li {
 	      <option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
 	    </select>
 	
-	    <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+	    <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}" placeholder="검색"/>
 	
-	    <button id="searchBtn" type="button">검색</button>
+	    <button class="btn btn-primary" id="searchBtn" type="button">
+	    	<i class="fas fa-search"></i>
+	    </button>
 	    <script>
 	      $(function(){
 	        $('#searchBtn').click(function() {
@@ -85,21 +85,36 @@ li {
 	      });   
 	    </script>
 	  </div>
-	  <div>
-	  <ul>
-	    <c:if test="${pageMaker.prev}">
-	    	<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
-	    </c:if> 
-	
-	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-	    	<li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
-	    </c:forEach>
-	
-	    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-	    	<li><a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
-	    </c:if> 
+	  <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+						<!-- 페이징 시작 -->
+						<div class="row">
+							<div class="col-sm-12 col-md-5">
+								<div class="form-group d-flex align-items-center justify-content-between mb-0">
+										<a class="btn btn-primary"  href="/board/writeView">글쓰기</a>
+								</div>
+							</div>
+							<div class="col-sm-12 col-md-7">
+								<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+									<ul class="pagination">
+			    <c:if test="${pageMaker.prev}">
+			    	<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+			    </c:if> 
+			
+			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+			    	<li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+			    </c:forEach>
+			
+			    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+			    	<li><a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+			    </c:if> 
 	  </ul>
 	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
 </form>
 </body>
 </div>
