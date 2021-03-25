@@ -63,7 +63,9 @@
 	<select id = "update" parameterType = "com.board.domain.Movie_InfoVO">
 		update movie_info set category_id = #{category_id},
 							  movie_title = #{movie_title}, 
-							  movie_content = #{movie_content}
+							  movie_content = #{movie_content},
+							  movie_img = #{movie_img},
+							  Img = #{Img}
 		 where movie_id = #{movie_id}
 	</select>
 	

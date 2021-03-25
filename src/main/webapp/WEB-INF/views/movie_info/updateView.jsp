@@ -6,6 +6,10 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	 	<title>게시판</title>
 	</head>
+	<style>
+	.inputArea {margin:10px 0;}
+	.select_img img {width:500px; margin:20px 0;}
+	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
@@ -66,7 +70,7 @@
 
 			
 			<section id="container">
-				<form name="updateForm" role="form" method="post" action="/movie_info/update">
+				<form name="updateForm" role="form" method="post" action="/movie_info/update" enctype="multipart/form-data">
 					<input type="hidden" name="movie_id" value="${update.movie_id}" readonly="readonly"/>
 					<table>
 						<tbody>
@@ -96,23 +100,33 @@
 									<fmt:formatDate value="${update.movie_date}" pattern="yyyy-MM-dd"/>					
 								</td>
 							</tr>
-														<tr>
-								<td id="fileIndex">
-									<c:forEach var="file" items="${file}" varStatus="var">
-									<div>
-										<input type="hidden" id="FILE_NO" name="FILE_NO_${var.index}" value="${file.FILE_NO }">
-										<input type="hidden" id="FILE_NAME" name="FILE_NAME" value="FILE_NO_${var.index}">
-										<a href="#" id="fileName" onclick="return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)
-										<button id="fileDel" onclick="fn_del('${file.FILE_NO}','FILE_NO_${var.index}');" type="button">삭제</button><br>
-									</div>
-									</c:forEach>
-								</td>		
+							<div class="inputArea">
+							 <label for="movie_img">이미지</label>
+							 <input type="file" id="movie_img" name="file" />
+							 <div class="select_img">
+							  <img src="${update.movie_img}" />
+							  <input type="hidden" name="movie_img" value="${update.movie_img}" />
+							  <input type="hidden" name="img" value="${update.img}" /> 
+							 </div>
+							 
+							 <script>
+							  $("#movie_img").change(function(){
+							   if(this.files && this.files[0]) {
+							    var reader = new FileReader;
+							    reader.onload = function(data) {
+							     $(".select_img img").attr("src", data.target.result).width(500);        
+							    }
+							    reader.readAsDataURL(this.files[0]);
+							   }
+							  });
+							 </script>
+							 <%=request.getRealPath("/") %>
+							</div>	
 						</tbody>			
 					</table>
 					<div>
 						<button type="submit" class="update_btn">저장</button>
 						<button type="submit" class="cancel_btn">취소</button>
-						<button type="button" class="fileAdd_btn">파일추가</button>
 					</div>
 				</form>
 			</section>
