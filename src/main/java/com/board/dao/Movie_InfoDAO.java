@@ -4,6 +4,7 @@ package com.board.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.board.domain.Criteria;
 import com.board.domain.Movie_InfoVO;
@@ -36,6 +37,7 @@ public interface Movie_InfoDAO {
 	
 	// 게시물 추천
 	public void recommend(int movie_id) throws Exception;
+	
 	
 //	 public void countRecommend(HashMap<String, Object> params) throws Exception;
 	

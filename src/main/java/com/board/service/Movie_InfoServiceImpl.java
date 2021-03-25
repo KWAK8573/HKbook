@@ -2,7 +2,9 @@ package com.board.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,6 @@ import com.board.domain.SearchCriteria;
 @Service
 public class Movie_InfoServiceImpl implements Movie_InfoService {
 
-	
 	@Inject
 	Movie_InfoDAO dao;
 	 
@@ -60,7 +61,7 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 	@Override
 	public void update(Movie_InfoVO movie_InfoVO) throws Exception {
 		dao.update(movie_InfoVO);
-		
+			
 	}
 	
 	@Override
@@ -69,6 +70,7 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 		
 		
 	}
+
 
 
 //	@Override
