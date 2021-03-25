@@ -46,11 +46,11 @@
 	
 	<!-- 업로드 패스 설정 --> 
 	<beans:bean class="java.lang.String" id="uploadPath">
-			<beans:constructor-arg value="C:\Users\pc355\Desktop\asd\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MVreview\resources" />
+			<beans:constructor-arg value="C:\teamProject\MVreview-master\src\main\webapp\resources" />
 	</beans:bean>
 		
 	<!-- ck에디터 파일 업로드 경로 -->
-	<resources mapping="/ckUpload/**" location="/resources/ckUpload/" />
+	<!-- <resources mapping="/ckUpload/**" location="/resources/ckUpload/" /> -->
 
 	<!-- 일반 파일 업로드 경로 -->
 	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
@@ -76,4 +76,11 @@
 		</beans:property>
 	</beans:bean>
 
+<!-- 스크랩 -->
+	<beans:bean class="org.springframework.jdbc.core.JdbcTemplate" name="template">
+		<beans:property name="dataSource" ref="dataSource"/>
+	</beans:bean>
+		<beans:bean class="com.board.dao.ScrapDAOImpl" name="dao2">
+		<beans:property name="template" ref="template"/>
+</beans:bean>
 </beans:beans>
