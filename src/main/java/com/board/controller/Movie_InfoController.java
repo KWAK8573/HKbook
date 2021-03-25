@@ -143,8 +143,31 @@ public class Movie_InfoController {
 	public String update(Movie_InfoVO movie_InfoVO, 
 						 @ModelAttribute("scri") SearchCriteria scri, 
 						 RedirectAttributes rttr,												
-						 MultipartHttpServletRequest mpRequest) throws Exception {
+						 MultipartFile file,
+						 HttpServletRequest req) throws Exception {
 		logger.info("update");
+		
+		 // 새로운 파일이 등록되었는지 확인
+		 if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+		  // 기존 파일을 삭제
+		  new File(uploadPath + req.getParameter("movie_img")).delete();
+		  new File(uploadPath + req.getParameter("img")).delete();
+		  
+		  // 새로 첨부한 파일을 등록
+		  String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		  String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		  String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+		  
+		  movie_InfoVO.setMovie_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		  movie_InfoVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		  
+		 } else {  // 새로운 파일이 등록되지 않았다면
+		  // 기존 이미지를 그대로 사용
+		movie_InfoVO.setMovie_img(req.getParameter("movie_img"));
+		movie_InfoVO.setImg(req.getParameter("img"));
+		  
+		 }
+		
 		service.update(movie_InfoVO);
 
 		rttr.addAttribute("page", scri.getPage());
