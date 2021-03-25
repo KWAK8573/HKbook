@@ -123,6 +123,8 @@
 				</form>
 			</section>
 			<hr />
+					<%@ include file="../include/main_footer.jsp" %>
 		</div>
+		<%@ include file="../include/plugin_js.jsp" %>
 	</body>
 </html>

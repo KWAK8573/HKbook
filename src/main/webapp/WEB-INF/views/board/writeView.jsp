@@ -3,17 +3,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 	<head>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<%@ include file="../include/head.jsp" %>
 
-		<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-	 	<title>게시판</title>
+<body class="sb-nav-fixed">
+
+<%@ include file="../include/main_header.jsp" %>
+
+<div id="layoutSidenav">
+	<%@ include file="../include/left_column.jsp" %>
+	
+	<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">영화리뷰 글쓰기</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a href="/board/list">영화리뷰</a></li>
+					<li class="breadcrumb-item active">영화리뷰 글쓰기</li>
+				</ol>
+	 	
 	</head>
 	
 		<script type="text/javascript">
@@ -38,18 +46,7 @@
 			}
 		}
 	</script>
-	<body>
 	
-		<div id="root">
-			<header>
-				<h1> 게시판</h1>
-			</header>
-			<hr />
-			 
-			<nav>
-			  홈 - 글 작성
-			</nav>
-			<hr />
 			
 			<section id="container">
 				<form name="writeForm" method="post" action="/board/write" enctype="multipart/form-data">
@@ -62,11 +59,13 @@
 							</tr>	
 							<tr>
 								<td>
-									<label for="review_content">내용</label>
-									<textarea rows="5" cols="100" id="review_content" name="review_content" ></textarea>
+									<label for="review_content"></label>
+									<textarea rows="5" cols="50" id="review_content" name="review_content" ></textarea>
 									<script>
 									 var ckeditor_config = {
 									   resize_enaleb : false,
+									   width : 1000,
+									   height : 450, 
 									   enterMode : CKEDITOR.ENTER_BR,
 									   shiftEnterMode : CKEDITOR.ENTER_P,
 									   filebrowserUploadUrl : "/board/ckUpload",
@@ -88,6 +87,7 @@
 							</tr>			
 						</tbody>			
 					</table>
+					<br/>
 							<div class="inputArea">
 								 <label for="review_img">이미지</label>
 								 <input type="file" id="review_img" name="file" />
@@ -108,6 +108,11 @@
 				</form>
 			</section>
 			<hr />
-		</div>
+			</div>
+			</main>
+					<%@ include file="../include/main_footer.jsp" %>
+			</div>
+			</div>
+		<%@ include file="../include/plugin_js.jsp" %>
 	</body>
 </html>

@@ -3,14 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 	<head>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-		
-	 	<title>게시판</title>
+		<%@ include file="../include/head.jsp" %>
 	</head>
 	
 	<script type="text/javascript">
@@ -81,21 +74,23 @@
 		})
 	</script>
 	
-	<body>
+<body class="sb-nav-fixed">
+<%@ include file="../include/main_header.jsp" %>
+<div id="layoutSidenav">
+	<%@ include file="../include/left_column.jsp" %>
 	
-		<div id="root">
-			<header>
-				<h1> 게시판</h1>
-			</header>
-			<hr />
-			 
-			<nav>
-			  홈 - 글 작성
-			</nav>
-			<hr />
+	<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">영화리뷰 읽기</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a href="/board/list">영화리뷰</a></li>
+					<li class="breadcrumb-item active">영화리뷰 읽기</li>
+				</ol>
 			
-			<section id="container">
-				<form name="readForm" role="form" method="post">
+		<div class="card shadow-lg border-0 rounded-lg">
+			<div class="card-body">
+					<form name="readForm" role="form" method="post">
 					<input type="hidden" id="review_id" name="review_id" value="${read.review_id}" />
 					<input type="hidden" id="page" name="page" value="${scri.page}"> 
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
@@ -145,6 +140,7 @@
 					<button type="submit" class="list_btn">목록</button>	
 				
 				</div>
+			</div>
 				
 				<!-- 댓글 -->
 					<div id="reply">
@@ -179,7 +175,16 @@
 					 	 <button type="button" class="replyWriteBtn">작성</button>
 					  </div>
 				</form>
-			</section>
+			
 			<hr />
+			
+			</div>
+			</div>
+			</main>
+			<%@ include file="../include/main_footer.jsp" %>
+			</div>
 		</div>
+		<%@ include file="../include/plugin_js.jsp" %>
 	</body>
+</html>
+	
