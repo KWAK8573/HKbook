@@ -6,6 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+.name{
+  width        : 300px;     /* 너비는 변경될수 있습니다. */
+  text-overflow: ellipsis;  /* 위에 설정한 300px 보다 길면 말줄임표처럼 표시합니다. */
+  white-space  : nowrap;    /* 줄바꿈을 하지 않습니다. */
+  overflow     : hidden;    /* 내용이 길면 감춤니다 */
+  display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
+}
+</style>
 <body>
 <%@ include file="../include/head.jsp" %>
 

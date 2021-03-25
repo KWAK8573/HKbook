@@ -54,7 +54,6 @@
 	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
 		<beans:property name="maxUploadSize" value="10485760" />
 	</beans:bean>
-		
 
 	<!-- 회원가입 메일인증 -->
 	<beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -72,12 +71,10 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-
-<!-- 스크랩 -->
-	<beans:bean class="org.springframework.jdbc.core.JdbcTemplate" name="template">
-		<beans:property name="dataSource" ref="dataSource"/>
-	</beans:bean>
-		<beans:bean class="com.board.dao.ScrapDAOImpl" name="dao2">
-		<beans:property name="template" ref="template"/>
+   <beans:bean class="org.springframework.jdbc.core.JdbcTemplate" name="template">
+      <beans:property name="dataSource" ref="dataSource"/>
+   </beans:bean>
+      <beans:bean class="com.board.dao.ScrapDAOImpl" name="dao2">
+      <beans:property name="template" ref="template"/>
 </beans:bean>
 </beans:beans>
