@@ -67,19 +67,6 @@ public class Movie_InfoDAOImpl implements Movie_InfoDAO {
 		
 	}
 
-	@Override
-	public void recommend(int movie_id) throws Exception {
-		sql.update( namespace + ".recommend", movie_id);
-		
-	}
-
-
-
-//	@Override
-//	public void countRecommend(HashMap<String, Object> params) throws Exception {
-//		sql.update( namespace + ".countRecommend", params);
-//		
-//	}
 
 
 }

@@ -9,7 +9,6 @@ public class UserVO {
 	private Timestamp memberDate;
 	private String mState;
 
-	
 	public String getUserId() {
 		return userId;
 	}
@@ -44,7 +43,7 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [userId=" + userId + ", pw=" + pw + ", email=" + email + ", memberDate=" + memberDate
-				+ ", mState=" + mState + ", u_recommend_active_time=" + "]";
+				+ ", mState=" + mState + "]";
 	}
 
 	
