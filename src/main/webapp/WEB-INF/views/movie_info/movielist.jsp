@@ -60,6 +60,9 @@
 						<tr>
 							<th>썸네일</th>
 							<th>장르</th>
+							<th>영화소개 아이디</th>
+							<th>카테고리</th>
+							<th>작성자</th>
 							<th>영화제목</th>
 							<th>영화 내용</th>
 							<th>작성자</th>
@@ -72,8 +75,9 @@
 						<c:forEach items="${movielist}" var="movielist">
 						<tr>
 							<td><img src="${movielist.img}"/> </td>
+							<td><c:out value="${movielist.movie_id}" /></td>
 							<td><c:out value="${movielist.category_id}" /></td>
-
+							<td><c:out value="${movielist.user_id}" /></td>
 							<td>
 								<a href="/movie_info/readView?movie_id=${movielist.movie_id}">
 									<c:out value="${movielist.movie_title}" />
@@ -81,6 +85,7 @@
 							</td>
 							<td><div class="name"><c:out value="${movielist.movie_content}" /></td></div>
 							<td><c:out value="${movielist.user_id }"/></td>
+							<td><c:out value="${movielist.movie_content}" /></td>
 							<td><fmt:formatDate value="${movielist.movie_date}" pattern="yyyy-MM-dd" /></td>
 							<td><c:out value="${movielist.movie_views}" /></td>
 							<td><c:out value="${movielist.bno}" /></td>
