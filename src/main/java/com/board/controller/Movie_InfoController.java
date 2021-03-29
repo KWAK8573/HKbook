@@ -92,8 +92,9 @@ public class Movie_InfoController {
 	
 	// 게시판 글 작성
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(Movie_InfoVO movie_InfoVO, MultipartFile file, HttpSession httpsession) throws Exception{
+	public String write(@ModelAttribute Movie_InfoVO movie_InfoVO, MultipartFile file, HttpSession httpsession) throws Exception{
 		logger.info("write");
+		
 		
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
@@ -105,13 +106,9 @@ public class Movie_InfoController {
 		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 		}
 		
-		// httpsession에 저장된 userId를 user_id에 저장
-		String user_id = (String) httpsession.getAttribute("userId");
-		// movie_InfoVO에 user_id를 세팅
-		movie_InfoVO.setUser_id(user_id);
-
 		movie_InfoVO.setMovie_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		movie_InfoVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		
 		
 		service.write(movie_InfoVO);
 		
@@ -120,8 +117,7 @@ public class Movie_InfoController {
 	
 	// 게시판 조회
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(Movie_InfoVO movie_InfoVO,UserVO userVO, PushVO pushVO,  @ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession httpsession) throws Exception{
-		
+	public String read(Movie_InfoVO movie_InfoVO, UserVO userVO, PushVO pushVO,  @ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession httpsession) throws Exception{
 		logger.info("read");
 		
 		//추천버튼제어
@@ -152,8 +148,16 @@ public class Movie_InfoController {
 	
 	// 게시판 수정뷰
 	@RequestMapping(value = "/updateView", method = RequestMethod.GET)
-	public String updateView(Movie_InfoVO movie_InfoVO, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
+	public String updateView(Movie_InfoVO movie_InfoVO, UserVO userVO, @ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession httpsession) throws Exception{
 		logger.info("updateView");
+		
+		UserVO login = (UserVO) httpsession.getAttribute("login");
+		
+		if(login != null) {
+			String sessionId = login.getUserId();
+			movie_InfoVO.setUser_id(sessionId);
+			System.out.println(movie_InfoVO);
+		}
 		
 		model.addAttribute("update", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
@@ -163,11 +167,7 @@ public class Movie_InfoController {
 	
 	// 게시판 수정
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Movie_InfoVO movie_InfoVO, 
-						 @ModelAttribute("scri") SearchCriteria scri, 
-						 RedirectAttributes rttr,												
-						 MultipartFile file,
-						 HttpServletRequest req) throws Exception {
+	public String update(Movie_InfoVO movie_InfoVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr, MultipartFile file, HttpServletRequest req) throws Exception {
 		logger.info("update");
 		
 		 // 새로운 파일이 등록되었는지 확인

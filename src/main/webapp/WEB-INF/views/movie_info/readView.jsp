@@ -46,8 +46,10 @@ $(document).ready(function(){
 	})
 	
 	
+})
 	//추천하기
 	function pushClick(){
+		alert("확인");
 		var formObj = $("form[name='pushForm']");
 		formObj.attr("action", "/movie_info/pushIn");
 		formObj.attr("method", "post");
@@ -61,7 +63,6 @@ $(document).ready(function(){
 		formObj.submit();
 	}	
 	
-})
 
 </script>
 
@@ -92,14 +93,16 @@ $(document).ready(function(){
 				
 				<!-- 자료 넘어가는 폼 -->
 					<form name="pushForm" role="form" method="post" >
-						<input id="bno" name="bno" type="hidden" value="${read.bno}"/>
+						<input id="pushno" name="pushno" type="hidden" value="${read.pushno}"/>
 						<input type="hidden" id="userId" name="userId" value="${login.userId}">
 						<input type="hidden" id="page" name="page" value="${scri.page}"> 
 						<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 						<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 					</form>
-
+				
+				
+				
 				<!-- 추천버튼 -->
 					<c:if test="${not empty login}">
 						<c:if test="${pushCheck == 0}">
@@ -132,9 +135,12 @@ $(document).ready(function(){
 			
 			<div class="form-group align-items-center justify-content-between mt-4 mb-0">
 			
-			
+			<c:if test="${not empty login}">
+				<c:if test = "${login.userId != null and login.userId != dto.user_id}">
 				<button type="submit" class="update_btn">수정</button>
 				<button type="submit" class="delete_btn">삭제</button>
+				</c:if>
+			</c:if>
 				<button type="submit" class="list_btn">목록</button>
 				
 
