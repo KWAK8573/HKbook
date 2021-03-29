@@ -42,13 +42,15 @@
 						총 게시물: ${pageMaker.totalCount}
 					</div>
 				</div>
-				<c:if test="${not empty login}">
+
 				<div class="col-md-6">
 					<div class="form-group float-right">
+										
 						<a class="btn btn-primary"  href="/movie_info/writeView">글 작성</a>
+	
+						
 					</div>
 				</div>
-				</c:if>
 			</div>
 			<!-- 버튼 & 페이지 끝-->
 			<!-- 리스트 폼 -->
@@ -57,11 +59,13 @@
 					<thead>
 						<tr>
 							<th>썸네일</th>
+							<th>장르</th>
 							<th>영화소개 아이디</th>
 							<th>카테고리</th>
 							<th>작성자</th>
 							<th>영화제목</th>
 							<th>영화 내용</th>
+							<th>작성자</th>
 							<th>작성날짜</th>
 							<th>조회수</th>
 							<th>추천수</th>
@@ -79,10 +83,12 @@
 									<c:out value="${movielist.movie_title}" />
 								</a>
 							</td>
+							<td><div class="name"><c:out value="${movielist.movie_content}" /></td></div>
+							<td><c:out value="${movielist.user_id }"/></td>
 							<td><c:out value="${movielist.movie_content}" /></td>
 							<td><fmt:formatDate value="${movielist.movie_date}" pattern="yyyy-MM-dd" /></td>
 							<td><c:out value="${movielist.movie_views}" /></td>
-							<td><c:out value="${movielist.recommend}" /></td>
+							<td><c:out value="${movielist.bno}" /></td>
 						</tr>
 						</c:forEach>
 					</tbody>

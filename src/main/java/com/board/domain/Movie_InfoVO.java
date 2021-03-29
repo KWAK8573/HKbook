@@ -11,12 +11,20 @@ public class Movie_InfoVO {
 	private String movie_img;
 	private Timestamp movie_date;
 	private int movie_views;
-	private int recommend;
+	private int bno;
 	
 	private String Img;
 
 	
 	
+
+	public int getBno() {
+		return bno;
+	}
+
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 
 	public int getMovie_id() {
 		return movie_id;
@@ -82,14 +90,6 @@ public class Movie_InfoVO {
 		this.movie_views = movie_views;
 	}
 
-	public int getRecommend() {
-		return recommend;
-	}
-
-	public void setRecommend(int recommend) {
-		this.recommend = recommend;
-	}
-
 	public String getImg() {
 		return Img;
 	}
@@ -98,13 +98,11 @@ public class Movie_InfoVO {
 		Img = img;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return "Movie_InfoVO [movie_id=" + movie_id + ", category_id=" + category_id + ", user_id=" + user_id
 				+ ", movie_title=" + movie_title + ", movie_content=" + movie_content + ", movie_img=" + movie_img
-				+ ", movie_date=" + movie_date + ", movie_views=" + movie_views + ", recommend=" + recommend + ", Img="
-				+ Img + "]";
+				+ ", movie_date=" + movie_date + ", movie_views=" + movie_views + ", bno=" + bno + ", Img=" + Img + "]";
 	}
 	
 }

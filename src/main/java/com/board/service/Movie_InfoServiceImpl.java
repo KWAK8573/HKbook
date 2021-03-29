@@ -34,7 +34,6 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 
 	@Override
 	public int listCount(SearchCriteria scri) throws Exception {
-		// TODO Auto-generated method stub
 		return dao.listCount(scri);
 	}
 
@@ -48,7 +47,6 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 	@Override
 	public Movie_InfoVO read(int movie_id) throws Exception {
 		dao.movieviews(movie_id);
-//		dao.recommend(movie_id);
 		return dao.read(movie_id);
 	}
 
@@ -64,20 +62,8 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 			
 	}
 	
-	@Override
-	public void recommend(int movie_id) throws Exception {
-		dao.recommend(movie_id);
-		
-		
-	}
 
 
-
-//	@Override
-//	public void countRecommend(HashMap<String, Object> params) throws Exception {
-//		dao.countRecommend(params);
-//		
-//	}
 
 
 }

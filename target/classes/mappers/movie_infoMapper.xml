@@ -14,7 +14,7 @@
 
 
 	<select id="listPage" resultType="com.board.domain.Movie_InfoVO" parameterType="com.board.domain.SearchCriteria">
-		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, recommend, Img
+		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, bno, Img
 		from 
 			(select movie_id, 
 			category_id, 
@@ -24,7 +24,7 @@
 			movie_img, 
 			movie_date, 
 			movie_views,
-			recommend,
+			bno,
 			Img,
 		row_number() over(order by movie_id desc) as rnum from movie_info where 1=1 
 			<include refid="search"></include>  
@@ -74,22 +74,7 @@
     	UPDATE movie_info SET
     	movie_views = movie_views+1
     	WHERE movie_id = #{movie_id}
-    </update>
-    
- 	 <update id = "recommend">
-	    update movie_info set 
-	    recommend= recommend+1
-	    where movie_id = #{movie_id} 
-   	 </update> 
-
-   	 
-<!--     <update id = "countRecommend" parameterType="int" >
-    	update movie_info set b_recommend = b_recommend+1
-    	where movie_id = #{movie_id}
-    	and now() > (select u_recommend_active_time from
-    	member_board where USER_ID = #{userId});
-    	
-    </update> -->
-    
+    </update> 
+	
      
 </mapper>
