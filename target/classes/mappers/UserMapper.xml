@@ -79,18 +79,5 @@
 		WHERE EMAIL = #{email}
 	</update>
 	
-
-	<update id = "updateRecommendActiveTime">
-		update MEMBER_BOARD
-		set u_recommend_active_time = TIMESTAMPADD(miunte, 1, now())
-		WHERE USER_ID = #{userId}
-	</update>
-	
-	
-	<select id="checkRecommendActiveTime" resultType="java.sql.Timestamp">
-		select u_recommend_active_time
-		from MEMBER_BOARD
-		WHERE USER_ID = #{userId}
-	</select> 
 	
 </mapper>

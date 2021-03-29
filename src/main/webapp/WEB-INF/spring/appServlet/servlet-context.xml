@@ -42,11 +42,17 @@
 			<mvc:mapping path="/board/list"/>
 			<beans:ref bean = "authInterceptor"/>
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/movie_info/updateView"/>
+			<beans:ref bean = "authInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
+	
 	
 	<!-- 업로드 패스 설정 --> 
 	<beans:bean class="java.lang.String" id="uploadPath">
-			<beans:constructor-arg value="C:\mycode3\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\board\resources" />
+			<beans:constructor-arg value="C:\Users\pc394\git\info\src\main\webapp\resources" />
 	</beans:bean>
 	
 	<!-- 일반 파일 업로드 경로 -->
