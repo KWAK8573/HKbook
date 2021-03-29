@@ -57,49 +57,45 @@
  		}
 	
 	</script>
-	<body>
-	
-		<div id="root">
-			<header>
-				<h1> 게시판</h1>
-			</header>
+<%@ include file="../include/head.jsp" %>
 
-			 <div>
-			<%@include file = "nav.jsp" %>
-			</div>
+<body class="sb-nav-fixed">
+<%@ include file="../include/main_header.jsp" %>
+<div id="layoutSidenav">
+	<%@ include file="../include/left_column.jsp" %>
+	
+	<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">영화 읽기</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a href="/board/list">영화소개</a></li>
+					<li class="breadcrumb-item active">영화소개 읽기</li>
+				</ol>
 
 			
-			<section id="container">
+				<div class="card shadow-lg border-0 rounded-lg">
+					<div class="card-body">
 				<form name="updateForm" role="form" method="post" action="/movie_info/update" enctype="multipart/form-data">
 					<input type="hidden" name="movie_id" value="${update.movie_id}" readonly="readonly"/>
-					<table>
-						<tbody>
-							<tr>
-								<td>
-									<label for="category_id">카테고리 번호</label><input type="number" id="category_id" name="category_id" value="${update.category_id}"/>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label for="movie_title">제목</label><input type="text" id="movie_title" name="movie_title" value="${update.movie_title}"/>
-								</td>
-							</tr>	
-							<tr>
-								<td>
-									<label for="movie_content">내용</label><textarea id="movie_content" name="movie_content"><c:out value="${update.movie_content}" /></textarea>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label for="user_id">작성자</label><input type="text" id="user_id" name="user_id" value="${update.user_id}" readonly="readonly"/>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label for="movie_date">작성날짜</label>
+									<div class="form-group">
+									<label class="small mb-2" for="category_id">카테고리 번호</label><input type="number" id="category_id" name="category_id" class="form-control py-2" value="${update.category_id}"/>
+									</div>
+									<div class="form-group">
+									<label class="small mb-2" for="movie_title">제목</label><input type="text" id="movie_title" name="movie_title" class="form-control py-2" value="${update.movie_title}"/>
+									</div>
+									<div class="form-group">
+									<label class="small mb-1" for="movie_content">내용 </label><textarea id="movie_content" name="movie_content" class="hidden form-control py-4"><c:out value="${update.movie_content}" /></textarea>
+									</div>
+									<div class="form-group">
+									<label class="small mb-1" for="user_id">작성자 </label><input class="form-control py-4" type="text" id="user_id" type="hidden" name="user_id" value="${update.user_id}" readonly="readonly"/>
+									</div>
+									<div class="form-group">
+									<label for="movie_date">작성날짜 </label>
 									<fmt:formatDate value="${update.movie_date}" pattern="yyyy-MM-dd"/>					
-								</td>
-							</tr>
+									</div>
+									
+							
 							<div class="inputArea">
 							 <label for="movie_img">이미지</label>
 							 <input type="file" id="movie_img" name="file" />
@@ -122,15 +118,26 @@
 							 </script>
 							 <%=request.getRealPath("/") %>
 							</div>	
-						</tbody>			
-					</table>
-					<div>
+					<div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
 						<button type="submit" class="update_btn">저장</button>
 						<button type="submit" class="cancel_btn">취소</button>
 					</div>
 				</form>
-			</section>
-			<hr />
-		</div>
+					</div>
+					<div class="card-footer text-center">
+						<div class="small">
+							<a href="#">계정이 있으면 로그인 해주세요</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</main>
+		<%@ include file="../include/main_footer.jsp" %>
+	</div>
+</div>
+
+<%@ include file="../include/plugin_js.jsp" %>
+
 	</body>
 </html>

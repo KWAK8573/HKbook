@@ -101,6 +101,8 @@ $(document).ready(function(){
 						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 					</form>
 				
+				총 추천수: ${push} 
+				
 				
 				
 				<!-- 추천버튼 -->
@@ -122,7 +124,7 @@ $(document).ready(function(){
 							<img src="${read.movie_img}" class="oriImg"/>
 						</div>
 						<div class="form-group">
-							<label class="small mb-1" for="movie_content">영화 소개</label> <textarea id="movie_content" name="movie_content"><c:out value="${read.movie_content}" /></textarea>
+							<label class="small mb-2" for="movie_content"></label> <textarea id="movie_content" name="movie_content" class="hidden form-control py-5"><c:out value="${read.movie_content}" /></textarea>
 						</div>
 
 						<div class="form-group">
@@ -136,21 +138,21 @@ $(document).ready(function(){
 			<div class="form-group align-items-center justify-content-between mt-4 mb-0">
 			
 			<c:if test="${not empty login}">
-				<c:if test = "${login.userId != null and login.userId != dto.user_id}">
+			    <c:if test="${login.userId == read.user_id}">
 				<button type="submit" class="update_btn">수정</button>
 				<button type="submit" class="delete_btn">삭제</button>
 				</c:if>
 			</c:if>
 				<button type="submit" class="list_btn">목록</button>
-				
-
-				</div>
+			</div>
+			</div>
 				</div>
 			</div>
 
 		</main>
 		<%@ include file="../include/main_footer.jsp" %>
 	</div>
+</div>
 	<%@ include file="../include/plugin_js.jsp" %>
 </body>
 </html>
