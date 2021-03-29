@@ -46,8 +46,9 @@
 				<div class="col-md-6">
 					<div class="form-group float-right">
 										
-					
+						<c:if test="${login.userId != null}">
 						<a class="btn btn-primary"  href="/movie_info/writeView">글 작성</a>
+						</c:if>
 	
 						
 					</div>
