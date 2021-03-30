@@ -94,8 +94,9 @@ li {
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-7">
+							
 								<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-									<ul class="pagination">
+									<ul class="pagination justify-content-center">
 			    <c:if test="${pageMaker.prev}">
 			    	<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			    </c:if> 
@@ -116,7 +117,6 @@ li {
 	</div>
 	
 </form>
-</body>
 </div>
 </main>
 	<%@ include file="../include/main_footer.jsp" %>

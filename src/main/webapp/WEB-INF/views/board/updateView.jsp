@@ -2,12 +2,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
-	<head>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 		<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 		
-	 	<title>게시판</title>
-	</head>
+	<%@ include file="../include/head.jsp" %>
+
+<body class="sb-nav-fixed">
+<%@ include file="../include/main_header.jsp" %>
+<div id="layoutSidenav">
+	<%@ include file="../include/left_column.jsp" %>
+	
+	<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">영화리뷰 읽기</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a href="/board/list">영화리뷰</a></li>
+					<li class="breadcrumb-item active">영화리뷰 읽기</li>
+				</ol>
+				
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var formObj = $("form[name='updateForm']");
@@ -43,8 +56,6 @@
 		
 	</script>
 
-	<body>
-	
 		<div id="root">
 			<header>
 				<h1> 게시판</h1>
@@ -72,6 +83,8 @@
 									 <script>
 									 var ckeditor_config = {
 									   resize_enaleb : false,
+									   width : 1000,
+									   height : 450, 
 									   enterMode : CKEDITOR.ENTER_BR,
 									   shiftEnterMode : CKEDITOR.ENTER_P,
 									   filebrowserUploadUrl : "/board/ckUpload",
@@ -122,9 +135,14 @@
 					</div>
 				</form>
 			</section>
-			<hr />
+		</div>
+		</div>
+		</main>
 					<%@ include file="../include/main_footer.jsp" %>
 		</div>
+		</div>
+		
 		<%@ include file="../include/plugin_js.jsp" %>
 	</body>
+
 </html>

@@ -131,35 +131,34 @@
 							</tr>		
 						</tbody>			
 					</table>
-					<div>
+			<div class="btn-group btn-group-sm" role="group" style="float:right;">
 				<c:if test="${login.userId == read.user_id}">
 					<button type="submit" class="update_btn">수정</button>
 					<button type="submit" class="delete_btn">삭제</button>
 				</c:if>
+			</div>
 					<button type = "submit" class = "btnRecommend">추천하기</button>
 					<button type="submit" class="list_btn">목록</button>	
 				
-				</div>
 			</div>
 				
 				<!-- 댓글 -->
 					<div id="reply">
 					  <ol class="replyList">
 					    <c:forEach items="${replyList}" var="replyList">
-					      <li>
+					      
 					        <p>
-					        작성자 : ${replyList.user_id}<br />
-					        작성 날짜 :  <fmt:formatDate value="${replyList.comment_date}" pattern="yy-MM-dd hh:mm" />
+					        ● ${replyList.user_id}  <fmt:formatDate value="${replyList.comment_date}" pattern="yy-MM-dd hh:mm" />
 					        </p>
 					
 					        <p>${replyList.comment_content}</p>
-					        <div>
+					        <div class="btn-group btn-group-sm" role="group" style="float:right;">
 					        <c:if test="${login.userId == replyList.user_id}">
 							  <button type="button" class="replyUpdateBtn" data-comment_id="${replyList.comment_id}">수정</button>
 							  <button type="button" class="replyDeleteBtn" data-comment_id="${replyList.comment_id}">삭제</button>
 							</c:if>
 							</div>
-					      </li>
+					     
 					    </c:forEach>   
 					  </ol>
 					</div>
