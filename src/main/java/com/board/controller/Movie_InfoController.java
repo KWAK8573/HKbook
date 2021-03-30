@@ -34,11 +34,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.board.dao.Movie_InfoDAO;
 import com.board.domain.PageMaker;
+import com.board.domain.PushVO;
+
 import com.board.domain.Criteria;
 import com.board.domain.Movie_InfoVO;
 import com.board.domain.SearchCriteria;
 import com.board.domain.UserVO;
 import com.board.service.Movie_InfoService;
+import com.board.service.PushService;
 import com.board.service.UserService;
 import com.board.utils.UploadFileUtils;
 
@@ -55,14 +58,17 @@ public class Movie_InfoController {
 	@Inject
 	UserService userService;
 	
+	@Inject
+	PushService pushService;
+
+	
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
 	
-	
 	// 게시판 목록 조회
 	@RequestMapping(value = "/movielist", method = RequestMethod.GET)
-	public String movielist(Model model, @ModelAttribute SearchCriteria scri) throws Exception {
+	public String movielist(Model model,  @ModelAttribute SearchCriteria scri) throws Exception {
 		logger.info("movielist");
 
 		model.addAttribute("movielist", service.movielist(scri));
@@ -72,6 +78,8 @@ public class Movie_InfoController {
 		pageMaker.setTotalCount(service.listCount(scri));
 
 		model.addAttribute("pageMaker", pageMaker);
+		
+
 
 		return "movie_info/movielist";
 	}
@@ -85,8 +93,9 @@ public class Movie_InfoController {
 	
 	// 게시판 글 작성
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(Movie_InfoVO movie_InfoVO, MultipartFile file) throws Exception{
+	public String write(@ModelAttribute Movie_InfoVO movie_InfoVO, MultipartFile file, HttpSession httpsession) throws Exception{
 		logger.info("write");
+		
 		
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
@@ -97,9 +106,10 @@ public class Movie_InfoController {
 		} else {
 		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 		}
-
+		
 		movie_InfoVO.setMovie_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		movie_InfoVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		
 		
 		service.write(movie_InfoVO);
 		
@@ -108,29 +118,47 @@ public class Movie_InfoController {
 	
 	// 게시판 조회
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(Movie_InfoVO movie_InfoVO , @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
-		
+	public String read(Movie_InfoVO movie_InfoVO, UserVO userVO, PushVO pushVO,  @ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession httpsession) throws Exception{
 		logger.info("read");
-						
-//		// 현재 세션 로그인 유저 아이디 가져오기
-//		UserVO uvo = (UserVO) session.getAttribute( "login_session");
-//		// 유저 추천 활성화 시간 조회, "board/recommend" 요청 결과 값을 view.jsp hidden값(u_r_a_t) 갱신을 위해 조회하여 model에 추가한다
-//		if(uvo != null){
-//			Timestamp u_recommend_active_time = userService.checkRecommendActiveTime(uvo.getUserId());
-//			model.addAttribute("u_recommend_active_time", u_recommend_active_time);
-//		}
-
+		
+		//추천버튼제어
+		UserVO login = (UserVO) httpsession.getAttribute("login");
+		if(login != null) {
+			String sessionId = login.getUserId();
+			pushVO.setUserId(sessionId);
+			System.out.println(pushVO);
+			int pushCheck = pushService.pushCheck(pushVO);
+			System.out.println(pushCheck);
+			if(pushCheck == 1) {
+				model.addAttribute("pushCheck", pushCheck);
+			}else {
+				model.addAttribute("pushCheck", pushCheck);
+			}
+			System.out.println("회원" + sessionId);
+		}
+		
 		model.addAttribute("read", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
-	
+		
+		//총 추천수
+		int Ptotal = pushService.totalPush(pushVO);
+		model.addAttribute("push", Ptotal);
 		
 		return "movie_info/readView";
 	}
 	
 	// 게시판 수정뷰
 	@RequestMapping(value = "/updateView", method = RequestMethod.GET)
-	public String updateView(Movie_InfoVO movie_InfoVO, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
+	public String updateView(Movie_InfoVO movie_InfoVO, UserVO userVO, @ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession httpsession) throws Exception{
 		logger.info("updateView");
+		
+		UserVO login = (UserVO) httpsession.getAttribute("login");
+		
+		if(login != null) {
+			String sessionId = login.getUserId();
+			movie_InfoVO.setUser_id(sessionId);
+			System.out.println(movie_InfoVO);
+		}
 		
 		model.addAttribute("update", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
@@ -140,11 +168,7 @@ public class Movie_InfoController {
 	
 	// 게시판 수정
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Movie_InfoVO movie_InfoVO, 
-						 @ModelAttribute("scri") SearchCriteria scri, 
-						 RedirectAttributes rttr,												
-						 MultipartFile file,
-						 HttpServletRequest req) throws Exception {
+	public String update(Movie_InfoVO movie_InfoVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr, MultipartFile file, HttpServletRequest req) throws Exception {
 		logger.info("update");
 		
 		 // 새로운 파일이 등록되었는지 확인
@@ -161,7 +185,8 @@ public class Movie_InfoController {
 		  movie_InfoVO.setMovie_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		  movie_InfoVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 		  
-		 } else {  // 새로운 파일이 등록되지 않았다면
+		 } else {  
+		  // 새로운 파일이 등록되지 않았다면
 		  // 기존 이미지를 그대로 사용
 		movie_InfoVO.setMovie_img(req.getParameter("movie_img"));
 		movie_InfoVO.setImg(req.getParameter("img"));
@@ -192,36 +217,40 @@ public class Movie_InfoController {
 		
 		return "redirect:/movie_info/movielist";
 	}
+	//추천하기
+	@RequestMapping(value = "/pushIn", method = RequestMethod.POST)
+	public String pushIn(Movie_InfoVO movie_InfoVO, PushVO pushVO, SearchCriteria scri, RedirectAttributes rttr, Model model) throws Exception{
+		logger.info("pushIn");
+		
+		//페이지 값 가져오기
+		model.addAttribute("scri", scri);
+		rttr.addAttribute("movie_id", movie_InfoVO.getMovie_id());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+
+		pushService.pushIn(pushVO);
+		
+		return "redirect:/movie_info/readView";
+	}
 	
+	//추천회수
+	@RequestMapping(value = "/pushOut", method = RequestMethod.POST)
+	public String pushOut(Movie_InfoVO movie_InfoVO, PushVO pushVO, SearchCriteria scri, RedirectAttributes rttr, Model model) throws Exception{
+		logger.info("pushOut");
+		
+		//페이지 값 가져오기
+		model.addAttribute("scri", scri);
+		rttr.addAttribute("movie_id", movie_InfoVO.getMovie_id());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
 
-	//게시물 추천 관련 메소드
-    @RequestMapping("/recommend")
-    public String recommend (@RequestParam int movie_id) throws Exception {
-       logger.info("recommend");
-   
-       service.recommend(movie_id);
-    
-       return "redirect:/movie_info/movielist";
-    }
-    
-
-	 
+		pushService.pushOut(pushVO);
+		
+		return "redirect:/movie_info/readView";
+	}
 	
-	//	// 추천하기
-	//	@RequestMapping(value = "/recommend", method = RequestMethod.GET)
-	//	public String responseRecommned(@RequestParam HashMap<String, Object> params) throws Exception {
-	//		logger.info("responseRecommned");
-	//		
-	//		// 현재시간 > u_recommend_active_time 인 경우, 추천Go
-	//		service.countRecommend(params);
-	//		// 추천 후, 유저 u_recommend_active_time에 현재시간+1분(시간 변경가능, movie_info_Mapper) 업데이트
-	//		userService.updateRecommendActiveTime((String) params.get("userId"));
-	//
-	//		return "redirect:movielist?movie_id=" + params.get("movie_id") + "&page=" + params.get("page") + "&perPageNum=" + params.get("perPageNum");
-	//	}
-
-
-
-	
-
 }

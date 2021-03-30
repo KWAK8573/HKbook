@@ -83,15 +83,5 @@ public class UserServiceImpl implements UserService {
 	public void updatePw(UserVO userVO) throws Exception {
 		userDAO.updatePw(userVO);
 	}
-
-//	@Override
-//	public void updateRecommendActiveTime(String userId) throws Exception {
-//		userDAO.updateRecommendActiveTime(userId);
-//		
-//	}
-//
-//	@Override
-//	public Timestamp checkRecommendActiveTime(String userId) throws Exception {
-//		return userDAO.checkRecommendActiveTime(userId);
-//	}
+	
 }

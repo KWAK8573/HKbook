@@ -42,7 +42,13 @@
 			<mvc:mapping path="/board/list"/>
 			<beans:ref bean = "authInterceptor"/>
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/movie_info/updateView"/>
+			<beans:ref bean = "authInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
+	
 	
 	<!-- 업로드 패스 설정 --> 
 	<beans:bean class="java.lang.String" id="uploadPath">
@@ -77,7 +83,10 @@
    <beans:bean class="org.springframework.jdbc.core.JdbcTemplate" name="template">
       <beans:property name="dataSource" ref="dataSource"/>
    </beans:bean>
+   
       <beans:bean class="com.board.dao.ScrapDAOImpl" name="dao2">
       <beans:property name="template" ref="template"/>
 </beans:bean>
+
+
 </beans:beans>

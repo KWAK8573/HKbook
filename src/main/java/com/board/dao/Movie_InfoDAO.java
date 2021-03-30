@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.board.domain.Criteria;
 import com.board.domain.Movie_InfoVO;
+
 import com.board.domain.SearchCriteria;
 
 
@@ -35,12 +36,7 @@ public interface Movie_InfoDAO {
 	// 게시물 조회수
 	public void movieviews(int movie_id) throws Exception;
 	
-	// 게시물 추천
-	public void recommend(int movie_id) throws Exception;
-	
-	
-//	 public void countRecommend(HashMap<String, Object> params) throws Exception;
-	
+
 
 }
 

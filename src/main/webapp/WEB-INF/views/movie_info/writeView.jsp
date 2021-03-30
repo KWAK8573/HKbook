@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<html>
-<head>
-		<!-- 합쳐지고 최소화된 최신 CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- 부가적인 테마 -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	 	
-	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <title>게시판</title>
 </head>
 <style>
@@ -28,44 +21,63 @@
 		})
 
 	</script>
-<body>
+<%@ include file="../include/head.jsp" %>
 
-	<div id="root">
-		<header>
-			<h1>게시판</h1>
-		</header>
-		<hr />
+<body class="sb-nav-fixed">
 
-		<nav>홈 - 글 작성</nav>
-		<hr />
+<%@ include file="../include/main_header.jsp" %>
 
-		<section id="container">
+<div id="layoutSidenav">
+	<%@ include file="../include/left_column.jsp" %>
+	
+	<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">영화 글쓰기</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a href="/movie_info/movielist">영화소개</a></li>
+					<li class="breadcrumb-item active">영화 글쓰기</li>
+				</ol>
+
+		<div class="card shadow-lg border-0 rounded-lg">
+					<div class="card-body">
 			<form action="write" method="post" action="/movie_info/write" enctype="multipart/form-data">
-				<table>
-					<tbody>
 						<c:if test="${login.userId != null}">
-						<tr>
-							<td><label for="category_id">영화 카테고리</label><input
-								type="number" id="category_id" class="chk" name="category_id" /></td>
-						</tr>
-						<tr>
-							<td><label for="movie_title">영화 제목</label><input type="text"
-								id="movie_title" name="movie_title" class="chk"/></td>
-						</tr>
-						<tr>
-							<td><label for="user_id">작성자</label><input type="text"
-								id="user_id" name="user_id" class="chk" value="${login.userId}"/></td>
-						</tr>
-						<tr>
-							<td><label for="movie_content">영화 소개</label> <textarea id="movie_content"
-									name="movie_content" class="chk"></textarea></td>
-						</tr>
-
 						
+						<div class="form-group">
+							<div class="col-md-2">
+							<label class="small mb-2" for="category_id">영화 카테고리</label>
+							<input type="text" id="category_id" class="form-control py-3" name="category_id" />
+							</div>
+						</div>
+	
+					<div class="form-group">
+						<div class="col-md-2">
+						<label for="movie_title">영화 제목</label>
+						<input type="text" id="movie_title" name="movie_title" class="form-control py-3"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-md-2">
+							<div class="form-group">
+							<label class="small mb-2" for="user_id">작성자</label>
+							<input type="text"id="user_id" name="user_id" class="form-control py-2" value="${login.userId}"/>
+							</div>
+						</div>
+					</div>
+						
+						<div class="form-group">
+							<label class="small mb-2">영화 소개</label> 
+							<textarea id="movie_content" name="movie_content"  class="form-control py-4"></textarea>
+						</div>
+
+					<div class="form-group">
 						<div class="inputArea">
 							 <label for="movie_img">이미지</label>
 							 <input type="file" id="movie_img" name="file" />
-							 <div class="select_img"><img src="" /></div>
+						<div class="select_img"><img src="" /></div>
+					</div>
 							 
 							 <script>
 							  $("#movie_img").change(function(){
@@ -80,21 +92,23 @@
 							 </script>
 							 <%=request.getRealPath("/") %>
 						</div>
-						<tr>
-							<td>
+						<div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
 								<button class="write_btn" type="submit">작성</button>
-							</td>
-						</tr>
+						</div>
 						</c:if>
+						</form>
+						<div class="card-footer text-center">
 						<c:if test="${login.userId == null}">
 								<p>로그인 후에 작성하실 수 있습니다.</p>
-							</c:if>
-
-					</tbody>
-				</table>
-			</form>
-		</section>
-		<hr />
+						</c:if>
+						</div>
+					</div>
+				</div>
+			</div>
+						</main>
+					<%@ include file="../include/main_footer.jsp" %>
+			</div>
 	</div>
+	<%@ include file="../include/plugin_js.jsp" %>
 </body>
 </html>
