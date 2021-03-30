@@ -63,9 +63,31 @@ $(document).ready(function(){
 		formObj.submit();
 	}	
 	
+	$(document).ready(function() {
+		 $('#favorite').on('click', function(e) { 
+		var bookmarkURL = window.location.href; 
+		var bookmarkTitle = document.title; 
+		var triggerDefault = false; if (window.sidebar && window.sidebar.addPanel) { 
+		// Firefox version < 23 window.sidebar.addPanel(bookmarkTitle, bookmarkURL, ''); 
+		} else if ((window.sidebar && (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)) || (window.opera && window.print)) { 
+		// Firefox version >= 23 and Opera Hotlist 
+		var $this = $(this); $this.attr('href', bookmarkURL); 
+		$this.attr('title', bookmarkTitle); 
+		$this.attr('rel', 'sidebar'); 
+		$this.off(e); triggerDefault = true; 
+		} else if (window.external && ('AddFavorite' in window.external)) { 
+		// IE Favorite 
+		window.external.AddFavorite(bookmarkURL, bookmarkTitle); 
+		} else { 
+		// WebKit - Safari/Chrome 
+		alert((navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다.'); 
+		} return triggerDefault; 
+		});
+		 });
+	
 
 </script>
-
+<script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
 <body class="sb-nav-fixed">
 <%@ include file="../include/main_header.jsp" %>
 <div id="layoutSidenav">
@@ -101,7 +123,7 @@ $(document).ready(function(){
 						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 					</form>
 				
-				총 추천수: ${push} 
+				
 				
 				
 				
@@ -114,6 +136,7 @@ $(document).ready(function(){
 						<button class="btn btn-primary float-right" type="submit" onclick="pushOutClick()">추천회수</button>
 						</c:if>
 					</c:if>
+					
 						<div class="form-group">
 							<label class="small mb-1" for="movie_title">영화 제목</label><input type="text" id="movie_title" name="movie_title" value="${read.movie_title}" />
 						</div>
@@ -142,13 +165,18 @@ $(document).ready(function(){
 				<button type="submit" class="update_btn">수정</button>
 				<button type="submit" class="delete_btn">삭제</button>
 				</c:if>
+				<a href="#" id="favorite" title="즐겨찾기 등록">즐겨찾기</a>
 			</c:if>
-				<button type="submit" class="list_btn">목록</button>
+				<button type="submit" class="list_btn" style="float: right;" >목록으로</button>
 			</div>
+			
+			
+
+								 
 			</div>
 				</div>
 			</div>
-
+				
 		</main>
 		<%@ include file="../include/main_footer.jsp" %>
 	</div>

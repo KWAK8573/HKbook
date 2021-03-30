@@ -47,7 +47,7 @@
 						<div class="form-group">
 							<div class="col-md-2">
 							<label class="small mb-2" for="category_id">영화 카테고리</label>
-							<input type="number" id="category_id" class="form-control py-3" name="category_id" />
+							<input type="text" id="category_id" class="form-control py-3" name="category_id" />
 							</div>
 						</div>
 	

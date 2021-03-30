@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Movie_InfoVO {
 	private int movie_id;
-	private int category_id;
+	private String category_id;
 	private String user_id;
 	private String movie_title;
 	private String movie_content;
@@ -54,7 +54,10 @@ public class Movie_InfoVO {
 
 
 
-	public int getCategory_id() {
+
+
+
+	public String getCategory_id() {
 		return category_id;
 	}
 
@@ -62,7 +65,7 @@ public class Movie_InfoVO {
 
 
 
-	public void setCategory_id(int category_id) {
+	public void setCategory_id(String category_id) {
 		this.category_id = category_id;
 	}
 
@@ -201,7 +204,7 @@ public class Movie_InfoVO {
 		return "Movie_InfoVO [movie_id=" + movie_id + ", category_id=" + category_id + ", user_id=" + user_id
 				+ ", movie_title=" + movie_title + ", movie_content=" + movie_content + ", movie_img=" + movie_img
 				+ ", movie_date=" + movie_date + ", movie_views=" + movie_views + ", pushno=" + pushno + ", Img=" + Img
-				+  "]";
+				+ ", userName=" + userName + "]";
 	}
 	
 }

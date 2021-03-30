@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.board.dao.Movie_InfoDAO;
 import com.board.domain.Criteria;
 import com.board.domain.Movie_InfoVO;
+
 import com.board.domain.SearchCriteria;
 
 
@@ -61,7 +62,6 @@ public class Movie_InfoServiceImpl implements Movie_InfoService {
 		dao.update(movie_InfoVO);
 			
 	}
-	
 
 
 
