@@ -52,8 +52,11 @@
 	
 	<!-- 업로드 패스 설정 --> 
 	<beans:bean class="java.lang.String" id="uploadPath">
-			<beans:constructor-arg value="C:\Users\pc394\git\info\src\main\webapp\resources" />
+			<beans:constructor-arg value="C:\Users\pc355\Desktop\asd\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MVreview\resources" />
 	</beans:bean>
+	
+	<!-- ck에디터 파일 업로드 경로 -->
+	<resources mapping="/ckUpload/**" location="/resources/ckUpload/" />
 	
 	<!-- 일반 파일 업로드 경로 -->
 	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />

@@ -5,13 +5,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
+<head>
 <style type="text/css">
 li {
 	list-style: none;
-	float: left;
-	padding: 6px;
+	float: none;
+	padding: 10px;
 }
 </style>
+</head>
 <%@ include file="../include/head.jsp"%>
 <body class="sb-nav-fixed">
 	<!-- 상단메뉴(로고 있는 라인) -->
@@ -32,29 +34,28 @@ li {
 					 <form role="form" method="get">
 					<div class="mb-4">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="" width="100%" cellspacing="0">
+						<table class="table table-bordered" width="100" ">
 							<thead>
-								<tr>
-									<th>글번호</th>
+								<tr align ="center">
 									<th>제목</th>
-									<th>작성자</th>
-									<th>등록일</th>
-									<th>조회수</th>
-									<th>추천</th>
+									<th width="20%"><center>작성자</th>
+									<th width="15%">등록일</th>
+									<th width="10%">조회수</th>
+									<th width="10%">추천</th>
 								</tr>
 							</thead>
 				 <tbody>
 				  <c:forEach items="${list}" var="list">
 					<tr>
 
-				<td>${list.review_id}</td>
+				<td>${list.review_id}	&nbsp;&nbsp;
 				<!-- <td>${list.movie_id}</td>-->
-				<td>
+			
 					<a href="/board/readView?review_id=${list.review_id}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${list.review_title}" /></a>
 				</td>
 				<td>${list.user_id}</td>
 				<td>
-					<fmt:formatDate value="${list.review_date}" pattern="yyyy-MM-dd hh:mm"/>
+					<fmt:formatDate value="${list.review_date}" pattern="yy-MM-dd hh:mm"/>
 				</td>
 				<td>${list.review_views}</td>
 				<td>${list.total_push}</td>
@@ -94,8 +95,9 @@ li {
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-7">
+							
 								<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-									<ul class="pagination">
+									<ul class="pagination justify-content-center">
 			    <c:if test="${pageMaker.prev}">
 			    	<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			    </c:if> 
@@ -116,7 +118,6 @@ li {
 	</div>
 	
 </form>
-</body>
 </div>
 </main>
 	<%@ include file="../include/main_footer.jsp" %>
