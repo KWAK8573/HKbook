@@ -55,17 +55,6 @@
 		}
 		
 	</script>
-
-		<div id="root">
-			<header>
-				<h1> 게시판</h1>
-			</header>
-			<hr />
-			 
-			<nav>
-			  홈 - 글 작성
-			</nav>
-			<hr />
 			
 			<section id="container">
 				<form name="updateForm" role="form" method="post" action="/board/update" enctype="multipart/form-data">
@@ -74,12 +63,12 @@
 						<tbody>
 							<tr>
 								<td>
-									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" value="${update.review_title}" class="chk" title="제목을 입력하세요."/>
+									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" value="${update.review_title}" class="chk" title="제목을 입력하세요." placeholder="제목을 입력하세요." />
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="review_content">내용</label><textarea id="review_content" name="review_content" ><c:out value="${update.review_content}" /></textarea>
+									<label for="review_content"></label><textarea id="review_content" name="review_content" ><c:out value="${update.review_content}" /></textarea>
 									 <script>
 									 var ckeditor_config = {
 									   resize_enaleb : false,
@@ -103,7 +92,7 @@
 							<tr>
 								<td>
 									<label for="review_date">작성날짜</label>
-									<fmt:formatDate value="${update.review_date}" pattern="yyyy-MM-dd"/>					
+									<fmt:formatDate value="${update.review_date}" pattern="yy.MM.dd"/>					
 								</td>
 							</tr>		
 						</tbody>			
@@ -129,13 +118,13 @@
 								  });
 								 </script>
 								</div>
+		<br/>
 					<div>
 						<button type="submit" class="update_btn">저장</button>
 						<button type="submit" class="cancel_btn">취소</button>
 					</div>
 				</form>
 			</section>
-		</div>
 		</div>
 		</main>
 					<%@ include file="../include/main_footer.jsp" %>

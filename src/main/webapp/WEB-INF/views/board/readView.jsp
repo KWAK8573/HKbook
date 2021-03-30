@@ -97,26 +97,32 @@
 					<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 				</form>
+								<div class="btn-group btn-group-sm" role="group" style="float:right;">
+										<c:if test="${login.userId == read.user_id}">
+											<button type="submit" class="update_btn">수정</button>
+											&nbsp;
+											<button type="submit" class="delete_btn">삭제</button>
+										</c:if>
+											<br/>
+									</div>
 					<table>
 						<tbody>
 							<tr>
 								<td>
-									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" value="${read.review_title}"/>
+									
+									<label for="review_title" style="font-size:30px;">${read.review_title}</label>
+									<br/><label for="user_id"> ● </label> ${read.user_id} <label for="review_date"></label>
+									<fmt:formatDate value="${read.review_date}" pattern="yy.MM.dd hh:mm"/>			
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									내용<div class="greview_content">${read.review_content}</div>
+									<div class="greview_content">${read.review_content}</div>
 									
 								</td>
 							</tr>
-							<tr>
-								<td>
-									<label for="user_id">작성자</label><input type="text" id="user_id" name="user_id" value="${read.user_id}" readonly />
-								</td>
-							</tr>
-							<tr>
-								<td>
+						
+							
 							<!-- <div class="inputArea">
 							 <label for="review_img">이미지</label>
 							 <p>원본 이미지</p>
@@ -125,21 +131,16 @@
 							 <p>썸네일</p>
 							 <img src="${read.thumbimg}" class="thumbImg"/>
 							</div>-->
-									<label for="review_date">작성날짜</label>
-									<fmt:formatDate value="${read.review_date}" pattern="yyyy-MM-dd hh:mm"/>					
-								</td>
-							</tr>		
+											
+							
 						</tbody>			
 					</table>
+					<br/>
 			<div class="btn-group btn-group-sm" role="group" style="float:right;">
-				<c:if test="${login.userId == read.user_id}">
-					<button type="submit" class="update_btn">수정</button>
-					<button type="submit" class="delete_btn">삭제</button>
-				</c:if>
-			</div>
 					<button type = "submit" class = "btnRecommend">추천하기</button>
+					&nbsp;&nbsp;
 					<button type="submit" class="list_btn">목록</button>	
-				
+				</div>
 			</div>
 				
 				<!-- 댓글 -->
@@ -155,6 +156,7 @@
 					        <div class="btn-group btn-group-sm" role="group" style="float:right;">
 					        <c:if test="${login.userId == replyList.user_id}">
 							  <button type="button" class="replyUpdateBtn" data-comment_id="${replyList.comment_id}">수정</button>
+							  &nbsp;
 							  <button type="button" class="replyDeleteBtn" data-comment_id="${replyList.comment_id}">삭제</button>
 							</c:if>
 							</div>
@@ -168,9 +170,10 @@
 					  <div>
 					    <!--<label for="user_id">댓글 작성자</label><input type="text" id="user_id" name="user_id" value="${login.userId}" readonly/>
 					    <br/>-->
-					    <label for="comment_content">댓글 내용</label><input type="text" id="comment_content" name="comment_content" />
+					    <label for="comment_content"></label><input type="text" id="comment_content" name="comment_content" style="width:1000px; height:50px;"placeholder="무플 멈춰!" />
 					  </div>
 					  <div>
+					  <br/>
 					 	 <button type="button" class="replyWriteBtn">작성</button>
 					  </div>
 				</form>

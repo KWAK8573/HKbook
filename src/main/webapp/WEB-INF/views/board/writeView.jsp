@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
-	<head>
+
 	<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <%@ include file="../include/head.jsp" %>
 
@@ -21,10 +21,8 @@
 					<li class="breadcrumb-item"><a href="/board/list">영화리뷰</a></li>
 					<li class="breadcrumb-item active">영화리뷰 글쓰기</li>
 				</ol>
-	 	
-	</head>
 	
-		<script type="text/javascript">
+	<script type="text/javascript">
 		$(document).ready(function(){
 			var formObj = $("form[name='write']");
 			$(".write_btn").on("click", function(){
@@ -37,7 +35,7 @@
 			});
 		})
 		function fn_valiChk(){
-			var regForm = $("form[name='write'] .chk").length;
+			var regForm = $("form[name='writeForm'] .chk").length;
 			for(var i = 0; i<regForm; i++){
 				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
 					alert($(".chk").eq(i).attr("title"));
@@ -54,7 +52,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" class="chk" title="제목을 입력하세요." />
+									<label for="review_title"></label><input type="text" id="review_title" name="review_title" class="chk" title="제목을 입력하세요." placeholder="제목을 입력하세요." style="width:1000px; height:35px;"/>
 								</td>
 							</tr>	
 							<tr>
@@ -82,7 +80,7 @@
 								</td>--> 
 							<tr>
 								<td>						
-									<button class="write_btn" type="submit">작성</button>
+								<br/><button class="write_btn" type="submit">작성</button>
 								</td>
 							</tr>			
 						</tbody>			
