@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.board.domain.Criteria;
 import com.board.domain.Movie_InfoVO;
+
 import com.board.domain.SearchCriteria;
 
 
@@ -66,6 +67,7 @@ public class Movie_InfoDAOImpl implements Movie_InfoDAO {
 		sql.update( namespace + ".movieviews", movie_id);
 		
 	}
+
 
 
 

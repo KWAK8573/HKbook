@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.board.domain.Criteria;
 import com.board.domain.Movie_InfoVO;
+
 import com.board.domain.SearchCriteria;
 
 
