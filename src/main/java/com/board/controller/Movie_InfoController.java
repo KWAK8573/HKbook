@@ -46,7 +46,7 @@ import com.board.service.UserService;
 import com.board.utils.UploadFileUtils;
 
 
-@Controller
+//@Controller
 @RequestMapping("/movie_info/*")
 public class Movie_InfoController {
 
