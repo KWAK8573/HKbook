@@ -15,10 +15,10 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-				<h1 class="mt-4">영화리뷰 읽기</h1>
+				<h1 class="mt-4">영화리뷰 수정</h1>
 				<ol class="breadcrumb mb-4">
 					<li class="breadcrumb-item"><a href="/board/list">영화리뷰</a></li>
-					<li class="breadcrumb-item active">영화리뷰 읽기</li>
+					<li class="breadcrumb-item active">영화리뷰 수정</li>
 				</ol>
 				
 	<script type="text/javascript">
@@ -63,7 +63,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" value="${update.review_title}" class="chk" title="제목을 입력하세요." placeholder="제목을 입력하세요." />
+									<label for="review_title"></label><input type="text" id="review_title" name="review_title" value="${update.review_title}" class="chk" title="제목을 입력하세요." placeholder="제목을 입력하세요." style="width:1000px; height:35px;"/>
 								</td>
 							</tr>	
 							<tr>
@@ -86,15 +86,15 @@
 							</tr>
 							<tr>
 								<td>
-									<label for="user_id">작성자</label><input type="text" id="user_id" name="user_id" value="${update.user_id}" readonly="readonly"/>
+									<label for="user_id"></label><input type="hidden" id="user_id" name="user_id" value="${update.user_id}" readonly="readonly"/>
 								</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td>
 									<label for="review_date">작성날짜</label>
 									<fmt:formatDate value="${update.review_date}" pattern="yy.MM.dd"/>					
 								</td>
-							</tr>		
+							</tr>-->
 						</tbody>			
 					</table>
 							<div class="inputArea">
