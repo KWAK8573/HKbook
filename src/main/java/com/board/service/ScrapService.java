@@ -1,11 +1,11 @@
-package com.board.dao;
+package com.board.service;
 
 import java.util.List;
 
 import com.board.domain.ScrapVO;
 
-public interface ScrapDAO {
-	
+
+public interface ScrapService {
 	//스크랩 저장
 	public void scrapIn(ScrapVO scrapVO) throws Exception;
 	

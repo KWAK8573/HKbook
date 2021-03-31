@@ -71,6 +71,19 @@
 			        
 			        }
 			    });
+			$(".btnScrap").on("click", function(){
+			    if(confirm("해당 글을 스크랩하시겠습니까?")){
+			    	var scrapUrl = '/board/readView?review_id=${read.review_id}';
+			    	$('input[name=scrapAd]').attr('value',scrapUrl);
+			    	var formObj = $("form[name='scrapForm']");
+			    	formObj.attr("action", "/board/scrapIn");
+			    	formObj.attr("method", "post");
+			    	formObj.submit();
+					
+			        alert("해당 글을 스크랩하였습니다.")
+			        
+			        }
+			    });
 		})
 	</script>
 	
@@ -89,6 +102,16 @@
 				</ol>
 			
 		<div class="card shadow-lg border-0 rounded-lg">
+		<form name="scrapForm" role="form" method="post" >
+							<input id="bno" name="review_id" type="hidden" value="${read.review_id}"/>
+							<input type="hidden" id="scrapTitle" name="scrapTitle" value="${read.review_title}"/>
+							<input type="hidden" id="scrapAd" name="scrapAd" value=""/>
+							<input type="hidden" id="userId" name="userId" value="${login.userId}">
+							<input type="hidden" id="page" name="page" value="${scri.page}"> 
+							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+						</form>
 			<div class="card-body">
 					<form name="readForm" role="form" method="post">
 					<input type="hidden" id="review_id" name="review_id" value="${read.review_id}" />
@@ -139,7 +162,9 @@
 			<div class="btn-group btn-group-sm" role="group" style="float:right;">
 					<button type = "submit" class = "btnRecommend">추천하기</button>
 					&nbsp;&nbsp;
-					<button type="submit" class="list_btn">목록</button>	
+					<button type="submit" class="list_btn">목록</button>
+					&nbsp;&nbsp;	
+					<button type = "submit" class = "btnScrap">스크랩</button>
 				</div>
 			</div>
 				
