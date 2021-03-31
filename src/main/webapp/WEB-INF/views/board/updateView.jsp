@@ -2,12 +2,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
-	<head>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 		<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 		
-	 	<title>게시판</title>
-	</head>
+	<%@ include file="../include/head.jsp" %>
+
+<body class="sb-nav-fixed">
+<%@ include file="../include/main_header.jsp" %>
+<div id="layoutSidenav">
+	<%@ include file="../include/left_column.jsp" %>
+	
+	<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">영화리뷰 읽기</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a href="/board/list">영화리뷰</a></li>
+					<li class="breadcrumb-item active">영화리뷰 읽기</li>
+				</ol>
+				
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var formObj = $("form[name='updateForm']");
@@ -42,19 +55,6 @@
 		}
 		
 	</script>
-
-	<body>
-	
-		<div id="root">
-			<header>
-				<h1> 게시판</h1>
-			</header>
-			<hr />
-			 
-			<nav>
-			  홈 - 글 작성
-			</nav>
-			<hr />
 			
 			<section id="container">
 				<form name="updateForm" role="form" method="post" action="/board/update" enctype="multipart/form-data">
@@ -63,15 +63,17 @@
 						<tbody>
 							<tr>
 								<td>
-									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" value="${update.review_title}" class="chk" title="제목을 입력하세요."/>
+									<label for="review_title">제목</label><input type="text" id="review_title" name="review_title" value="${update.review_title}" class="chk" title="제목을 입력하세요." placeholder="제목을 입력하세요." />
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="review_content">내용</label><textarea id="review_content" name="review_content" ><c:out value="${update.review_content}" /></textarea>
+									<label for="review_content"></label><textarea id="review_content" name="review_content" ><c:out value="${update.review_content}" /></textarea>
 									 <script>
 									 var ckeditor_config = {
 									   resize_enaleb : false,
+									   width : 1000,
+									   height : 450, 
 									   enterMode : CKEDITOR.ENTER_BR,
 									   shiftEnterMode : CKEDITOR.ENTER_P,
 									   filebrowserUploadUrl : "/board/ckUpload",
@@ -90,7 +92,7 @@
 							<tr>
 								<td>
 									<label for="review_date">작성날짜</label>
-									<fmt:formatDate value="${update.review_date}" pattern="yyyy-MM-dd"/>					
+									<fmt:formatDate value="${update.review_date}" pattern="yy.MM.dd"/>					
 								</td>
 							</tr>		
 						</tbody>			
@@ -116,15 +118,20 @@
 								  });
 								 </script>
 								</div>
+		<br/>
 					<div>
 						<button type="submit" class="update_btn">저장</button>
 						<button type="submit" class="cancel_btn">취소</button>
 					</div>
 				</form>
 			</section>
-			<hr />
+		</div>
+		</main>
 					<%@ include file="../include/main_footer.jsp" %>
 		</div>
+		</div>
+		
 		<%@ include file="../include/plugin_js.jsp" %>
 	</body>
+
 </html>
