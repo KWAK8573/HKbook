@@ -7,25 +7,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-write.jsp <br />
-
 <table width="500" cellpadding="0" cellspacing="0" border="1">
 		<form action="/scrap/write" method="post">
+			<c:if test="${login.userId != null}">
+		
 			<tr>
 				<td >스크랩제목 </td>
-				<td> <input type="text" name="scrap_Title" size = "50"> </td>
+				<td> <input type="text" name="scrap_Title" size = "50" > </td>
 			</tr>
 			<tr>
 				<td> 스크랩주소 </td>
-				<td> ${b.scrap_Address} </td>
+				<td> <input type="text" name="scrap_Address" size = "50"> </td>
 			</tr>
 			<tr>
 				<td> 아이디 </td>
-				<td> <input type="text" name="user_Id" size = "50" > </td>
+				<td> <input type="text" name="user_Id" size = "50" value="${login.userId}"> </td>
 			</tr>
 			<tr >
 				<td colspan="2"> <input type="submit" value="스크랩하기"> &nbsp;&nbsp; <a href="list">스크랩 목록</a></td>
 			</tr>
+			</c:if>
 		</form>
 </table>
 </body>

@@ -75,5 +75,5 @@
     	movie_views = movie_views+1
     	WHERE movie_id = #{movie_id}
     </update>
-     
+
 </mapper>

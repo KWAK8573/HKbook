@@ -35,7 +35,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.board.dao.Movie_InfoDAO;
 import com.board.domain.PageMaker;
 import com.board.domain.PushVO;
-
 import com.board.domain.Criteria;
 import com.board.domain.Movie_InfoVO;
 import com.board.domain.SearchCriteria;
@@ -125,7 +124,9 @@ public class Movie_InfoController {
 		UserVO login = (UserVO) httpsession.getAttribute("login");
 		if(login != null) {
 			String sessionId = login.getUserId();
+			int movie_id = movie_InfoVO.getMovie_id();
 			pushVO.setUserId(sessionId);
+			pushVO.setMovieId(movie_id);
 			System.out.println(pushVO);
 			int pushCheck = pushService.pushCheck(pushVO);
 			System.out.println(pushCheck);
@@ -136,7 +137,6 @@ public class Movie_InfoController {
 			}
 			System.out.println("회원" + sessionId);
 		}
-		
 		model.addAttribute("read", service.read(movie_InfoVO.getMovie_id()));
 		model.addAttribute("scri", scri);
 		
@@ -221,6 +221,9 @@ public class Movie_InfoController {
 	@RequestMapping(value = "/pushIn", method = RequestMethod.POST)
 	public String pushIn(Movie_InfoVO movie_InfoVO, PushVO pushVO, SearchCriteria scri, RedirectAttributes rttr, Model model) throws Exception{
 		logger.info("pushIn");
+		int movie_id = movie_InfoVO.getMovie_id();
+		pushVO.setMovieId(movie_id);
+		pushService.pushIn(pushVO);
 		
 		//페이지 값 가져오기
 		model.addAttribute("scri", scri);
@@ -230,8 +233,6 @@ public class Movie_InfoController {
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
 
-		pushService.pushIn(pushVO);
-		
 		return "redirect:/movie_info/readView";
 	}
 	
@@ -248,9 +249,13 @@ public class Movie_InfoController {
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
 
+		int movie_id = movie_InfoVO.getMovie_id();
+		pushVO.setMovieId(movie_id);
+		System.out.println("추천회수" + pushVO);
 		pushService.pushOut(pushVO);
 		
 		return "redirect:/movie_info/readView";
 	}
 	
+
 }

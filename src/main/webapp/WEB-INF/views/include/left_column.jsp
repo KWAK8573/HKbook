@@ -19,7 +19,7 @@
 
 				<c:if test="${not empty login}">
 					<div class="sb-sidenav-menu-heading">마이페이지</div>
-					<a class="nav-link" href="#">
+					<a class="nav-link" href="/scrap/list">
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-scroll"></i>
 						</div> 내 스크랩
