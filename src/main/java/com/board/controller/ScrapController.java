@@ -21,7 +21,7 @@ import com.board.dao.ScrapDAOImpl;
 
 
 
-@Controller
+//@Controller
 @RequestMapping("/scrap")
 
 public class ScrapController {

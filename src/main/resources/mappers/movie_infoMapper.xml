@@ -14,7 +14,7 @@
 
 
 	<select id="listPage" resultType="com.board.domain.Movie_InfoVO" parameterType="com.board.domain.SearchCriteria">
-		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, pushno, Img
+		select movie_id, category_id, user_id, movie_title, movie_content, movie_img, movie_date, movie_views, Img
 		from 
 			(select movie_id, 
 			category_id, 
@@ -24,7 +24,6 @@
 			movie_img, 
 			movie_date, 
 			movie_views,
-			pushno,
 			Img,
 		row_number() over(order by movie_id desc) as rnum from movie_info where 1=1 
 			<include refid="search"></include>  
@@ -75,5 +74,5 @@
     	movie_views = movie_views+1
     	WHERE movie_id = #{movie_id}
     </update>
-     
+
 </mapper>

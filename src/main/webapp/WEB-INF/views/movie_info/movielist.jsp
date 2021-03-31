@@ -67,7 +67,6 @@
 							<th>작성자</th>
 							<th>작성날짜</th>
 							<th>조회수</th>
-							<th>추천수</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -84,7 +83,6 @@
 							<td><div class="name"><c:out value="${movielist.movie_content}" /></div></td>
 							<td><fmt:formatDate value="${movielist.movie_date}" pattern="yyyy-MM-dd" /></td>
 							<td><c:out value="${movielist.movie_views}" /></td>
-							<td><c:out value="${movielist.pushno}" /></td>
 						</tr>
 						</c:forEach>
 					</tbody>

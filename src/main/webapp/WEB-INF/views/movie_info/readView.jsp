@@ -12,10 +12,17 @@ label {display:inline-block; width:70px; padding:5px;}
 .thumbImg{}
 </style>
 <script type="text/javascript"></script>
-
 <script>
 $(document).ready(function(){
 	var formObj = $("form[name='readForm']");
+		
+	
+	// 수정 
+	$(".scrap_btn").on("click", function(){
+		formObj.attr("action", "/scrap/list");
+		formObj.attr("method", "get");
+		formObj.submit();				
+	})
 	
 	// 수정 
 	$(".update_btn").on("click", function(){
@@ -85,7 +92,6 @@ $(document).ready(function(){
 		});
 		 });
 	
-
 </script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
 <body class="sb-nav-fixed">
@@ -115,7 +121,7 @@ $(document).ready(function(){
 				
 				<!-- 자료 넘어가는 폼 -->
 					<form name="pushForm" role="form" method="post" >
-						<input id="pushno" name="pushno" type="hidden" value="${read.pushno}"/>
+					  <input type="hidden" id="movie_id" name="movie_id" value="${read.movie_id}" />
 						<input type="hidden" id="userId" name="userId" value="${login.userId}">
 						<input type="hidden" id="page" name="page" value="${scri.page}"> 
 						<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
@@ -135,7 +141,12 @@ $(document).ready(function(){
 						<c:if test="${pushCheck == 1}">
 						<button class="btn btn-primary float-right" type="submit" onclick="pushOutClick()">추천회수</button>
 						</c:if>
-					</c:if>
+					</c:if> 
+					
+						<div class="form-group">
+							<i class="fa fa-heart" style="font-size:16px;color:red"></i> ${push}
+						</div>
+					
 					
 						<div class="form-group">
 							<label class="small mb-1" for="movie_title">영화 제목</label><input type="text" id="movie_title" name="movie_title" value="${read.movie_title}" />
@@ -164,15 +175,18 @@ $(document).ready(function(){
 			    <c:if test="${login.userId == read.user_id}">
 				<button type="submit" class="update_btn">수정</button>
 				<button type="submit" class="delete_btn">삭제</button>
-				</c:if>
+			</c:if>
+			
+			<c:if test="${not empty login}">
+				<button type="submit" class="scrap_btn">스크랩</button>
+			</c:if>
+			
 				<a href="#" id="favorite" title="즐겨찾기 등록">즐겨찾기</a>
 			</c:if>
 				<button type="submit" class="list_btn" style="float: right;" >목록으로</button>
 			</div>
 			
-			
-
-								 
+						 
 			</div>
 				</div>
 			</div>

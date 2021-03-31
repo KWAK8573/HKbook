@@ -79,7 +79,7 @@
 				<form name="updateForm" role="form" method="post" action="/movie_info/update" enctype="multipart/form-data">
 					<input type="hidden" name="movie_id" value="${update.movie_id}" readonly="readonly"/>
 									<div class="form-group">
-									<label class="small mb-2" for="category_id">카테고리 번호</label><input type="number" id="category_id" name="category_id" class="form-control py-2" value="${update.category_id}"/>
+									<label class="small mb-2" for="category_id">장르</label><input type="text" id="category_id" name="category_id" class="form-control py-2" value="${update.category_id}"/>
 									</div>
 									<div class="form-group">
 									<label class="small mb-2" for="movie_title">제목</label><input type="text" id="movie_title" name="movie_title" class="form-control py-2" value="${update.movie_title}"/>
