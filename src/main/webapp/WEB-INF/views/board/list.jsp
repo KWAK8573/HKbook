@@ -8,9 +8,8 @@
 <head>
 <style type="text/css">
 li {
-	list-style: none;
-	float: none;
 	padding: 10px;
+	text-align:center;
 }
 </style>
 </head>
@@ -34,11 +33,11 @@ li {
 					 <form role="form" method="get">
 					<div class="mb-4">
 					<div class="table-responsive">
-						<table class="table table-bordered" width="100" ">
+						<table class="table table-hover">
 							<thead>
 								<tr align ="center">
 									<th>제목</th>
-									<th width="20%"><center>작성자</th>
+									<th width="20%">작성자</th>
 									<th width="15%">등록일</th>
 									<th width="10%">조회수</th>
 									<th width="10%">추천</th>
@@ -46,9 +45,9 @@ li {
 							</thead>
 				 <tbody>
 				  <c:forEach items="${list}" var="list">
-					<tr>
+					<tr style="text-align:center">
 
-				<td>${list.review_id}	&nbsp;&nbsp;
+				<td style="text-align:left">${list.review_id}	&nbsp;&nbsp;
 				<!-- <td>${list.movie_id}</td>-->
 			
 					<a href="/board/readView?review_id=${list.review_id}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${list.review_title}" /></a>
@@ -94,10 +93,9 @@ li {
 										<a class="btn btn-primary"  href="/board/writeView">글쓰기</a>
 								</div>
 							</div>
-							<div class="col-sm-12 col-md-7">
-							
-								<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-									<ul class="pagination justify-content-center">
+			<div style="display:inline;text-align:center;" class="col-sm-12 col-md-7">							
+				<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+				<ul class="pagination justify-content-center">
 			    <c:if test="${pageMaker.prev}">
 			    	<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			    </c:if> 
