@@ -68,29 +68,24 @@ $(document).ready(function(){
 		formObj.attr("action", "/movie_info/pushOut");
 		formObj.attr("method", "post");
 		formObj.submit();
-	}	
+	}
+	//스크랩
+	function scrapIn(){
+		var scrapUrl = '/movie_info/readView?movie_id=${read.movie_id}';
+		$('input[name=scrapAd]').attr('value',scrapUrl);
+		var formObj = $("form[name='scrapForm']");
+		formObj.attr("action", "/movie_info/scrapIn");
+		formObj.attr("method", "post");
+		formObj.submit();
+	}
+
+	//스크랩 확인 문구
+	var msg = "${msg}";
+	if (msg === "scrapOk") {
+	alert ("스크랩되었습니다");
 	
-	$(document).ready(function() {
-		 $('#favorite').on('click', function(e) { 
-		var bookmarkURL = window.location.href; 
-		var bookmarkTitle = document.title; 
-		var triggerDefault = false; if (window.sidebar && window.sidebar.addPanel) { 
-		// Firefox version < 23 window.sidebar.addPanel(bookmarkTitle, bookmarkURL, ''); 
-		} else if ((window.sidebar && (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)) || (window.opera && window.print)) { 
-		// Firefox version >= 23 and Opera Hotlist 
-		var $this = $(this); $this.attr('href', bookmarkURL); 
-		$this.attr('title', bookmarkTitle); 
-		$this.attr('rel', 'sidebar'); 
-		$this.off(e); triggerDefault = true; 
-		} else if (window.external && ('AddFavorite' in window.external)) { 
-		// IE Favorite 
-		window.external.AddFavorite(bookmarkURL, bookmarkTitle); 
-		} else { 
-		// WebKit - Safari/Chrome 
-		alert((navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다.'); 
-		} return triggerDefault; 
-		});
-		 });
+	}
+	
 	
 </script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
@@ -128,8 +123,18 @@ $(document).ready(function(){
 						<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 					</form>
+					
 				
-				
+						<form name="scrapForm" role="form" method="post" >
+							<input id="movie_id" name="movie_id" type="hidden" value="${read.movie_id}"/>
+							<input type="hidden" id="scrapTitle" name="scrapTitle" value="${read.movie_title}"/>
+							<input type="hidden" id="scrapAd" name="scrapAd" value=""/>
+							<input type="hidden" id="userId" name="userId" value="${login.userId}">
+							<input type="hidden" id="page" name="page" value="${scri.page}"> 
+							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+						</form>
 				
 				
 				
@@ -178,10 +183,8 @@ $(document).ready(function(){
 			</c:if>
 			
 			<c:if test="${not empty login}">
-				<button type="submit" class="scrap_btn">스크랩</button>
+				<button class="btn btn-primary " type="submit" onclick="scrapIn()">스크랩</button>
 			</c:if>
-			
-				<a href="#" id="favorite" title="즐겨찾기 등록">즐겨찾기</a>
 			</c:if>
 				<button type="submit" class="list_btn" style="float: right;" >목록으로</button>
 			</div>

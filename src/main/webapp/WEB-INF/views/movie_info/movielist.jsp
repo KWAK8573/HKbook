@@ -18,7 +18,7 @@
 <body>
 <%@ include file="../include/head.jsp" %>
 
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed sb-sidenav-toggled">
 
 <%@ include file="../include/main_header.jsp" %>
 
@@ -62,9 +62,9 @@
 						<tr>
 							<th>썸네일</th>
 							<th>장르</th>
+							<th>작성자</th>
 							<th>영화제목</th>
 							<th>영화 내용</th>
-							<th>작성자</th>
 							<th>작성날짜</th>
 							<th>조회수</th>
 						</tr>
@@ -127,7 +127,7 @@
 							<ul class="pagination">
 								<c:if test="${pageMaker.prev}">
 									<li class="paginate_button page-item previous" id="dataTable_previous">
-										<a href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}" aria-controls="dataTable" data-dt-idx="${pageMaker.startPage}" tabindex="0" class="page-link">
+										<a href="movielist${pageMaker.makeQuery(pageMaker.startPage - 1)}" aria-controls="dataTable" data-dt-idx="${pageMaker.startPage}" tabindex="0" class="page-link">
 											<i class="fas fa-angle-double-left"></i>
 										</a>
 									</li>
@@ -136,19 +136,19 @@
 									<c:choose>
 										<c:when test="${pageMaker.cri.page == idx}">
 											<li class="paginate_button page-item active">
-												<a href="list${pageMaker.makeQuery(idx)}" aria-controls="dataTable" tabindex="0" data-dt-idx="${idx}" class="page-link">${idx}</a>
+												<a href="movielist${pageMaker.makeQuery(idx)}" aria-controls="dataTable" tabindex="0" data-dt-idx="${idx}" class="page-link">${idx}</a>
 											</li>
 										</c:when>
 										<c:when test="${pageMaker.cri.page != idx}">
 											<li class="paginate_button page-item">
-												<a href="list${pageMaker.makeQuery(idx)}" aria-controls="dataTable" tabindex="0" data-dt-idx="${idx}" class="page-link">${idx}</a>
+												<a href="movielist${pageMaker.makeQuery(idx)}" aria-controls="dataTable" tabindex="0" data-dt-idx="${idx}" class="page-link">${idx}</a>
 											</li>
 										</c:when>
 									</c:choose>
 								</c:forEach>
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 									<li class="paginate_button page-item next" id="dataTable_next">
-										<a href="list${pageMaker.makeQuery(pageMaker.endPage + 1)}" aria-controls="dataTable" data-dt-idx="${pageMaker.endPage}" tabindex="0"  class="page-link" onclick="addClassName()">
+										<a href="movielist${pageMaker.makeQuery(pageMaker.endPage + 1)}" aria-controls="dataTable" data-dt-idx="${pageMaker.endPage}" tabindex="0"  class="page-link" onclick="addClassName()">
 											<i class="fas fa-angle-double-right"></i>
 										</a>
 									</li>

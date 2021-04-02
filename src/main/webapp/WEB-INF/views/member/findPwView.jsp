@@ -26,7 +26,7 @@ $(document).ready(function(){
 						<div class="col-lg-5">
 							<div class="card shadow-lg border-0 rounded-lg mt-5">
 								<div class="card-header">
-									<h3 class="text-center font-weight-light my-4">아이디 찾기</h3>
+									<h3 class="text-center font-weight-light my-4">비밀번호 찾기</h3>
 								</div>
 								<div class="card-body">
 									<form action="/member/findPw" method="post" id="regForm">
