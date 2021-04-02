@@ -164,7 +164,7 @@
 					&nbsp;&nbsp;
 					<button type="submit" class="list_btn">목록</button>
 					&nbsp;&nbsp;	
-					<button type = "submit" class = "btnScrap">스크랩</button>
+					<button type = "submit" class = "btnScrap">북마크</button>
 				</div>
 			</div>
 				
@@ -195,11 +195,11 @@
 					  <div>
 					    <!--<label for="user_id">댓글 작성자</label><input type="text" id="user_id" name="user_id" value="${login.userId}" readonly/>
 					    <br/>-->
-					    <label for="comment_content"></label><input type="text" id="comment_content" name="comment_content" style="width:1000px; height:50px;"placeholder="무플 멈춰!" />
+					    <label for="comment_content">&nbsp;&nbsp;</label><textarea id="comment_content" name="comment_content" style="width:1000px; height:50px;"placeholder="무플 멈춰!" ></textarea>
 					  </div>
 					  <div>
 					  <br/>
-					 	 <button type="button" class="replyWriteBtn">작성</button>
+					 	 &nbsp;&nbsp;<button type="button" class="replyWriteBtn">작성</button>
 					  </div>
 				</form>
 			
