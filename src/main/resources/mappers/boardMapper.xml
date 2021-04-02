@@ -102,5 +102,12 @@
 		set total_push = total_push+1 
 		where review_id = #{review_id}
 	</update>
+	
+	<select id="myList" parameterType="string" resultType="com.board.domain.RboardVO">
+	select
+		*
+		from
+		re_board where USER_ID = #{user_id}
+	</select>
 
 </mapper>

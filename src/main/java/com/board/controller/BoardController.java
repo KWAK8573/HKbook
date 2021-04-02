@@ -303,4 +303,15 @@ public class BoardController {
 			
 			return "redirect:/board/readView";
 		}
+		
+		@RequestMapping(value = "/myList", method = RequestMethod.GET)
+		public String myList(Model model, HttpSession httpsession) throws Exception{
+			logger.info("리스트 조회");
+			UserVO login = (UserVO) httpsession.getAttribute("login");
+			String userId =  login.getUserId();
+			model.addAttribute("myList", service.myList(userId));
+
+			return "board/myList";
+		}
+		
 }
