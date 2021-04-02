@@ -1,44 +1,52 @@
 package com.board.domain;
 
 public class ScrapVO {
+	private int scrapId;
+	private String userId;
+	private String scrapTitle;
+	private String scrapAd;
 	
-	private int scrap_Id;
-	private String scrap_Title;
-	private String scrap_Address;
-	private String user_Id;
-	public int getScrap_Id() {
-		return scrap_Id;
+	public ScrapVO() {
+		super();
 	}
-	public void setScrap_Id(int scrap_Id) {
-		this.scrap_Id = scrap_Id;
+
+	public ScrapVO(int scrapId, String userId, String scrapTitle, String scrapAd) {
+		super();
+		this.scrapId = scrapId;
+		this.userId = userId;
+		this.scrapTitle = scrapTitle;
+		this.scrapAd = scrapAd;
 	}
-	public String getScrap_Title() {
-		return scrap_Title;
+	
+	public int getScrapId() {
+		return scrapId;
 	}
-	public void setScrap_Title(String scrap_Title) {
-		this.scrap_Title = scrap_Title;
+	public void setScrapId(int scrapId) {
+		this.scrapId = scrapId;
 	}
-	public String getScrap_Address() {
-		return scrap_Address;
+	public String getUserId() {
+		return userId;
 	}
-	public void setScrap_Address(String scrap_Address) {
-		this.scrap_Address = scrap_Address;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getUser_Id() {
-		return user_Id;
+	public String getScrapTitle() {
+		return scrapTitle;
 	}
-	public void setUser_Id(String user_Id) {
-		this.user_Id = user_Id;
+	public void setScrapTitle(String scrapTitle) {
+		this.scrapTitle = scrapTitle;
 	}
+	public String getScrapAd() {
+		return scrapAd;
+	}
+	public void setScrapAd(String scrapAd) {
+		this.scrapAd = scrapAd;
+	}
+	
 	@Override
 	public String toString() {
-		return "Scrap [scrap_Id=" + scrap_Id + ", scrap_Title=" + scrap_Title + ", scrap_Address=" + scrap_Address
-				+ ", user_Id=" + user_Id + "]";
+		return "ScrapVO [scrapId=" + scrapId + ", userId=" + userId + ", scrapTitle=" + scrapTitle + ", scrapAd="
+				+ scrapAd + "]";
 	}
-	
-	
-	
-	
-	
 	
 }

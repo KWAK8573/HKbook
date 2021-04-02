@@ -20,6 +20,7 @@
 			});
 		})
 
+		
 	</script>
 <%@ include file="../include/head.jsp" %>
 
@@ -41,13 +42,15 @@
 
 		<div class="card shadow-lg border-0 rounded-lg">
 					<div class="card-body">
+					<form role="form" method="post" autocomplete="off">
+					</form>
 			<form action="write" method="post" action="/movie_info/write" enctype="multipart/form-data">
 						<c:if test="${login.userId != null}">
 						
 						<div class="form-group">
 							<div class="col-md-2">
 							<label class="small mb-2" for="category_id">영화 카테고리</label>
-							<input type="selectBox" id="category_id" class="form-control py-3" name="category_id" />
+							<input type="select" id="category_id" class="form-control py-3" name="category_id" />
 							</div>
 						</div>
 	
@@ -66,6 +69,9 @@
 							</div>
 						</div>
 					</div>
+					
+
+				
 						
 						<div class="form-group">
 							<label class="small mb-2">영화 소개</label> 

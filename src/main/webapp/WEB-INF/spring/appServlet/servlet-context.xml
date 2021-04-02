@@ -52,7 +52,7 @@
 	
 	<!-- 업로드 패스 설정 --> 
 	<beans:bean class="java.lang.String" id="uploadPath">
-			<beans:constructor-arg value="C:\Users\pc394\git\info\src\main\webapp\resources" />
+			<beans:constructor-arg value="C:\Users\pc355\Desktop\asd\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MVreview\resources" />
 	</beans:bean>
 	
 	<!-- ck에디터 파일 업로드 경로 -->
@@ -68,8 +68,8 @@
 	<beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com" />
 		<beans:property name="port" value="587" /><!-- 465 or 25 -->
-		<beans:property name="username" value="asdfqwe5317@gmail.com" />
-		<beans:property name="password" value="jdshdn!@247f" />
+		<beans:property name="username" value="tjdwls4430@gmail.com" />
+		<beans:property name="password" value="qlqjs!@1223" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
@@ -84,9 +84,9 @@
       <beans:property name="dataSource" ref="dataSource"/>
    </beans:bean>
    
-      <beans:bean class="com.board.dao.ScrapDAOImpl" name="dao2">
+<!--       <beans:bean class="com.board.dao.ScrapDAOImpl" name="dao2">
       <beans:property name="template" ref="template"/>
-</beans:bean>
+</beans:bean>-->
 
 
 </beans:beans>

@@ -44,6 +44,8 @@ import com.board.service.PushService;
 import com.board.service.UserService;
 import com.board.utils.UploadFileUtils;
 
+import net.sf.json.JSONArray;
+
 
 @Controller
 @RequestMapping("/movie_info/*")
@@ -92,7 +94,7 @@ public class Movie_InfoController {
 	
 	// 게시판 글 작성
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(@ModelAttribute Movie_InfoVO movie_InfoVO, MultipartFile file, HttpSession httpsession) throws Exception{
+	public String write(@ModelAttribute Movie_InfoVO movie_InfoVO, MultipartFile file, HttpSession httpsession, Model model) throws Exception{
 		logger.info("write");
 		
 		
@@ -108,7 +110,6 @@ public class Movie_InfoController {
 		
 		movie_InfoVO.setMovie_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		movie_InfoVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
-		
 		
 		service.write(movie_InfoVO);
 		

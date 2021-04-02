@@ -71,7 +71,25 @@
 			        
 			        }
 			    });
+
 		})
+		
+			
+	//스크랩
+	function scrapIn(){
+		var scrapUrl = '/board/readView?review_id=${read.review_id}';
+		$('input[name=scrapAd]').attr('value',scrapUrl);
+		var formObj = $("form[name='scrapForm']");
+		formObj.attr("action", "/movie_info/scrapIn");
+		formObj.attr("method", "post");
+		formObj.submit();
+	}
+
+	//스크랩 확인 문구
+	var msg = "${msg}";
+	if (msg === "scrapOk") {
+	alert ("스크랩되었습니다");
+	}
 	</script>
 	
 <body class="sb-nav-fixed">
@@ -89,6 +107,7 @@
 				</ol>
 			
 		<div class="card shadow-lg border-0 rounded-lg">
+						
 			<div class="card-body">
 					<form name="readForm" role="form" method="post">
 					<input type="hidden" id="review_id" name="review_id" value="${read.review_id}" />
@@ -97,6 +116,19 @@
 					<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 				</form>
+				
+						<form name="scrapForm" role="form" method="post" >
+							<input id="review_id" name="review_id" type="hidden" value="${read.review_id}"/>
+							<input type="hidden" id="scrapTitle" name="scrapTitle" value="${read.review_title}"/>
+							<input type="hidden" id="scrapAd" name="scrapAd" value=""/>
+							<input type="hidden" id="userId" name="userId" value="${login.userId}">
+							<input type="hidden" id="page" name="page" value="${scri.page}"> 
+							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+						</form>
+				
+				
 								<div class="btn-group btn-group-sm" role="group" style="float:right;">
 										<c:if test="${login.userId == read.user_id}">
 											<button type="submit" class="update_btn">수정</button>
@@ -139,7 +171,11 @@
 			<div class="btn-group btn-group-sm" role="group" style="float:right;">
 					<button type = "submit" class = "btnRecommend">추천하기</button>
 					&nbsp;&nbsp;
-					<button type="submit" class="list_btn">목록</button>	
+					<button type="submit" class="list_btn">목록</button>
+					&nbsp;&nbsp;	
+			<c:if test="${not empty login}">
+				<button class="btn btn-primary " type="submit" onclick="scrapIn()">스크랩</button>
+			</c:if>
 				</div>
 			</div>
 				
@@ -170,11 +206,11 @@
 					  <div>
 					    <!--<label for="user_id">댓글 작성자</label><input type="text" id="user_id" name="user_id" value="${login.userId}" readonly/>
 					    <br/>-->
-					    <label for="comment_content"></label><input type="text" id="comment_content" name="comment_content" style="width:1000px; height:50px;"placeholder="무플 멈춰!" />
+					    <label for="comment_content">&nbsp;&nbsp;</label><textarea id="comment_content" name="comment_content" style="width:1000px; height:50px;"placeholder="무플 멈춰!" ></textarea>
 					  </div>
 					  <div>
 					  <br/>
-					 	 <button type="button" class="replyWriteBtn">작성</button>
+					 	 &nbsp;&nbsp;<button type="button" class="replyWriteBtn">작성</button>
 					  </div>
 				</form>
 			

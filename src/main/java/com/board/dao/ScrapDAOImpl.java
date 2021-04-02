@@ -1,86 +1,39 @@
 package com.board.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.PreparedStatementSetter;
+import javax.inject.Inject;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import com.board.domain.ScrapVO;
 
 
-
-public class ScrapDAOImpl implements ScrapDAO{
-
-	JdbcTemplate template;
+@Repository
+public class ScrapDAOImpl implements ScrapDAO {
 	
-	@Autowired
-	public void setTemplate(JdbcTemplate template) {
-		this.template = template;
-	}
+	private static final String namespace = "scrapMapper" ;
 	
-	public ScrapDAOImpl() {
-		// TODO Auto-generated constructor stub
-	}
+	@Inject
+	private SqlSession sqlSession;
 	
+	//스크랩 저장
 	@Override
-	public ArrayList<ScrapVO> listDao() {
-		String query = "select * from scrap order by scrap_Id desc";
-		ArrayList<ScrapVO> dtos = (ArrayList<ScrapVO>) template.query(query, new BeanPropertyRowMapper<ScrapVO>(ScrapVO.class));
-		return dtos;
+	public void scrapIn(ScrapVO scrapVO) throws Exception {
+		sqlSession.insert(namespace + ".scrapIn", scrapVO);
 	}
 	
-	
+	//스크랩 목록
 	@Override
-	public void writeDao(final String scrap_Title, final String scrap_Address, final String user_Id) {
-		System.out.println("writeDao()");
-		
-		this.template.update(new PreparedStatementCreator() {
-			
-			@Override
-			public PreparedStatement createPreparedStatement(Connection con)
-					throws SQLException {
-							
-				
-				String query = "insert into scrap (scrap_Id, scrap_Title, scrap_Address, user_Id) values (scrap_seq.nextval, ?, ?,?)";
-				PreparedStatement pstmt = con.prepareStatement(query);
-				pstmt.setString(1, scrap_Title);
-				pstmt.setString(2, scrap_Address);
-				pstmt.setString(3, user_Id);
-				return pstmt;
-			}
-		});
-		
+	public List<ScrapVO> scrapList(String userId) throws Exception {
+		return sqlSession.selectList(namespace + ".scrapList", userId);
 	}
-
 	
+	//스크랩 삭제
 	@Override
-	public ScrapVO viewDao(String strID) {
-		System.out.println("viewDao()");
-		
-		String query = "select * from scrap where scrap_Id = " + strID;
-		return template.queryForObject(query, new BeanPropertyRowMapper<ScrapVO>(ScrapVO.class));
-	}
-
-	
-	@Override
-	public void deleteDao(final String bId) {
-		System.out.println("deleteDao()");
-		
-		String query = "delete from scrap where scrap_Id = ?";
-		this.template.update(query, new PreparedStatementSetter() {
-			
-			@Override
-			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setInt(1, Integer.parseInt(bId));
-			}
-		});
-		
+	public void scrapDelete(ScrapVO scrapVO) throws Exception {
+		sqlSession.delete(namespace + ".scrapDelete", scrapVO);
 	}
 
 }

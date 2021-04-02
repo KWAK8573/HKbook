@@ -15,15 +15,7 @@ label {display:inline-block; width:70px; padding:5px;}
 <script>
 $(document).ready(function(){
 	var formObj = $("form[name='readForm']");
-		
-	
-	// 수정 
-	$(".scrap_btn").on("click", function(){
-		formObj.attr("action", "/scrap/list");
-		formObj.attr("method", "get");
-		formObj.submit();				
-	})
-	
+			
 	// 수정 
 	$(".update_btn").on("click", function(){
 		formObj.attr("action", "/movie_info/updateView");
@@ -69,6 +61,9 @@ $(document).ready(function(){
 		formObj.attr("method", "post");
 		formObj.submit();
 	}
+	
+
+	
 	//스크랩
 	function scrapIn(){
 		var scrapUrl = '/movie_info/readView?movie_id=${read.movie_id}';
@@ -83,9 +78,8 @@ $(document).ready(function(){
 	var msg = "${msg}";
 	if (msg === "scrapOk") {
 	alert ("스크랩되었습니다");
-	
 	}
-	
+
 	
 </script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
@@ -124,7 +118,6 @@ $(document).ready(function(){
 						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 					</form>
 					
-				
 						<form name="scrapForm" role="form" method="post" >
 							<input id="movie_id" name="movie_id" type="hidden" value="${read.movie_id}"/>
 							<input type="hidden" id="scrapTitle" name="scrapTitle" value="${read.movie_title}"/>
@@ -135,7 +128,7 @@ $(document).ready(function(){
 							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 						</form>
-				
+			
 				
 				
 				<!-- 추천버튼 -->
@@ -151,8 +144,7 @@ $(document).ready(function(){
 						<div class="form-group">
 							<i class="fa fa-heart" style="font-size:16px;color:red"></i> ${push}
 						</div>
-					
-					
+							
 						<div class="form-group">
 							<label class="small mb-1" for="movie_title">영화 제목</label><input type="text" id="movie_title" name="movie_title" value="${read.movie_title}" />
 						</div>
