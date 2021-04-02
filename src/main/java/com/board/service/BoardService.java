@@ -9,6 +9,7 @@ import com.board.domain.SearchCriteria;
 import com.board.domain.RboardVO;
 
 public interface BoardService {
+	
 	public List<RboardVO> list(SearchCriteria scri) throws Exception;
 	
 	public int listCount(SearchCriteria scri) throws Exception;
@@ -28,4 +29,6 @@ public interface BoardService {
 	public void boardHit(int review_id, HttpSession session) throws Exception;
 	
 	public void recommend(int review_id) throws Exception;
+	
+	public List<RboardVO> myList(String userId) throws Exception;
 }

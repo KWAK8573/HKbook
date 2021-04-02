@@ -71,4 +71,9 @@ public class BoardServiceImpl implements BoardService {
 	    dao.recommend(review_id);
 	        
 	       }
+	 
+	 @Override
+		public List<RboardVO> myList(String userId) throws Exception {
+			return dao.myList(userId);
+		}
 }

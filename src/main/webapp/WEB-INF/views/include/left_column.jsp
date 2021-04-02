@@ -24,6 +24,12 @@
 							<i class="fas fa-scroll"></i>
 						</div> 내 스크랩
 					</a>
+					<div class="sb-sidenav-menu-heading">내게시글</div>
+					<a class="nav-link" href="/board/myList">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-scroll"></i>
+						</div> 내 게시글
+					</a>
 				</c:if>
 				
 			</div>

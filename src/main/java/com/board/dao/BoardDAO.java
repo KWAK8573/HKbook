@@ -27,4 +27,5 @@ public interface BoardDAO {
 	
 	public void recommend(int review_id) throws Exception;
 
+	public List<RboardVO> myList(String userId) throws Exception;
 }

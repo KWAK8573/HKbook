@@ -67,4 +67,9 @@ public class BoardDAOImpl implements BoardDAO {
 		        
 		        sql.update("boardMapper.recommend", review_id);
 		    }
+		 
+		 @Override
+			public List<RboardVO> myList(String userId) throws Exception {
+				return sql.selectList("boardMapper.myList", userId);
+			}
 }
